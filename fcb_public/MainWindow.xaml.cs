@@ -200,10 +200,11 @@ namespace fcb_public
 
         private void main_grid_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            //if (PublicClass.dragdrop_up)
-            //{
-            //   if()
-            //}
+            if (PublicClass.dragdrop_up)
+            {
+                IDataObject data;
+              
+            }
         }
 
    
