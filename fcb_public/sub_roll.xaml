@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="fcb_public.sub_roll"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="400" xmlns:my="clr-namespace:fcb_public" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <my:publicDataSet x:Key="publicDataSet" />
+        <CollectionViewSource x:Key="rollViewSource" Source="{Binding Path=roll, Source={StaticResource publicDataSet}}" />
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource rollViewSource}">
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="0,26,0,0" Name="rollDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="400">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Path=title}" Header="title" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="txtColumn" Binding="{Binding Path=txt}" Header="txt" Width="SizeToHeader" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <Label Margin="0,200,0,0" Height="30" Width="60" HorizontalAlignment="Left" >标题</Label>
+        <Label Margin="0,260,0,0" Height="30" Width="60" HorizontalAlignment="Left" >txt</Label>
+        <TextBox Name="title_textbox" Height="30" Width="300" Margin="40,200,0,0" Text="{Binding Path=title, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
+        <TextBox Name="txt_textbox" Height="30" Width="300" Margin="40,265,0,0" Text="{Binding Path=txt, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
+        <Button Name="roll_quedin" Margin="300,330,0,0" HorizontalAlignment="Left" Height="30" Width="30" Click="roll_quedin_Click">添加</Button>
+
+    </Grid>
+</UserControl>

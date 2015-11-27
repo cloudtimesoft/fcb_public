@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="fcb_public.sub_elementset"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="400" xmlns:my="clr-namespace:fcb_public" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <my:publicDataSet x:Key="publicDataSet" />
+        <CollectionViewSource x:Key="element_setViewSource" Source="{Binding Path=element_set, Source={StaticResource publicDataSet}}" />
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource element_setViewSource}" Background="#FFDEA0A0">
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="0,12,0,0" Name="element_setDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="400">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="elset_nameColumn" Binding="{Binding Path=elset_name}" Header="elset name" Width="SizeToHeader" />
+                <DataGridTemplateColumn x:Name="start_timeColumn" Header="start time" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Path=start_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="end_timeColumn" Header="end time" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Path=end_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="status" Width="SizeToHeader" />
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="gridDelete" Height="20" Width="30"  Content="delete" Click="gridDelete_Click">
+                                <!--<Image Source="/PlantManager;component/Images/griddelete.png"></Image>-->
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Margin="0,200,0,0" Height="30" Width="45" HorizontalAlignment="Left" >元素名</Label>
+        <Label Margin="0,305,0,0" Height="30" Width="60" HorizontalAlignment="Left" >开始时间</Label>
+        <Label Margin="0,350,0,0" Height="30" Width="60" HorizontalAlignment="Left" >结束时间</Label>
+        <TextBox Name="elsetname_textbox" Height="30" Width="300" Margin="40,200,0,0" Text="{Binding Path=title, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
+        <DatePicker Name="starttime_textbox" Height="25" Width="300" Margin="80,305,0,0" SelectedDate="{Binding Path=start_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+        <DatePicker Name="endtime_textbox" Height="25" Width="300" Margin="80,350,0,0" SelectedDate="{Binding Path=end_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+        <Button Name="elementset_quedin" Margin="330,450,0,0" HorizontalAlignment="Left" Height="30" Width="30" Click="elementset_quedin_Click">添加</Button>
+    </Grid>
+</UserControl>

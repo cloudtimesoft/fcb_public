@@ -1,0 +1,52 @@
+﻿<Window x:Class="fcb_public.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"  WindowStyle="None" WindowState="Maximized" Loaded="Window_Loaded">
+    <Grid x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove" PreviewMouseUp="main_grid_PreviewMouseUp">
+        <!--2b398b9e-26c8-4905-9799-0571a05d4993.gif-->
+        <Canvas  x:Name="main_canvas"  Height="60" Background="Green" VerticalAlignment="Top" Margin="0,-60,0,0" MouseLeave="main_canvas_MouseLeave">
+            <Button x:Name="element" Width="30" Height="50" Margin="10,0,0,0" Click="element_Click">元素</Button>
+            <Button x:Name="element_set" Width="50" Height="50" Margin="60,0,0,0" Click="element_set_Click">元素集</Button>
+            <Button x:Name="module" Width="30" Height="50" Margin="130,0,0,0" Click="module_Click">模块</Button>
+            <Button x:Name="Background_pic" Width="30" Height="50" Margin="180,0,0,0" Click="Background_pic_Click">背景</Button>
+            <Button x:Name="roll" Width="30" Height="50" Margin="230,0,0,0" Click="roll_Click">滚动</Button>
+            <Button x:Name="show_window" Width="30" Height="50" Margin="280,0,0,0" PreviewMouseLeftButtonDown="show_window_PreviewMouseLeftButtonDown">展示</Button>
+        </Canvas>
+
+        <StackPanel x:Name="submainwindow" Panel.ZIndex="-1" Margin="0,0,0,0">
+            <StackPanel Background="#ffffff"   x:Name="subwindow" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="subwindow_MouseLeftButtonDown" MouseMove="subwindow_MouseMove" MouseUp="subwindow_MouseUp" Margin="240,50,0,0">
+                <StackPanel.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="16" ShadowDepth="0" Opacity="0.5" />
+                </StackPanel.Effect>
+                <StackPanel x:Name="toolbarpanel" Height="28"  >
+
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="/fcb_public;component/image/titlebar_background.png" Stretch="Fill" TileMode="None" />
+                    </StackPanel.Background>
+                    <Button Width="20" Height="20" Margin="4,4,4,4" HorizontalAlignment="Right" x:Name="sub_window_close" Click="sub_window_close_Click" ToolTip="关闭" Padding="0" BorderBrush="White">
+                        <Button.Content>
+                            <Image Source="/fcb_public;component/image/close.png"></Image>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+
+                <Separator Margin="5,2,5,0" />
+                <StackPanel x:Name="subwindow_content">
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        
+        <StackPanel x:Name="show"></StackPanel>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+    </Grid>
+</Window>
