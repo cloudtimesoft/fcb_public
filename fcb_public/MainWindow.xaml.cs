@@ -177,11 +177,12 @@ namespace fcb_public
             sub_show newshow = new sub_show();
             newshow.Width = 700;
             newshow.Height = 800;
-            newshow.HorizontalAlignment = HorizontalAlignment.Center;
-            newshow.Margin = new Thickness(0, 200, 0, 0);
+            //newshow.HorizontalAlignment = HorizontalAlignment.Center;
+            //newshow.Margin = new Thickness(0, 200, 0, 0);
             DataObject data = new DataObject(typeof(sub_show), newshow);
             DragDrop.DoDragDrop(newshow, data, DragDropEffects.Copy);
             PublicClass.dragdrop_up = true;
+          
 
         }
 
@@ -189,23 +190,69 @@ namespace fcb_public
 
         private void show_window_Click(object sender, RoutedEventArgs e)
         {
+            subwindow_content1.Children.Clear();
             sub_show newshow = new sub_show();
-            newshow.Width = 700;
-            newshow.Height = 800;
-            newshow.HorizontalAlignment = HorizontalAlignment.Center;
-            newshow.Margin = new Thickness(0, 200, 0, 0);
-            show.Children.Add(newshow);
-            Panel.SetZIndex(show, 3000);
+            subwindow1.Width = 700;
+            subwindow1.Height = 800;
+            newshow.Name = "show";
+            subwindow1.Opacity = 0.9;
+            //subwindow.HorizontalAlignment = HorizontalAlignment.Center;
+            //newshow.Margin = new Thickness(0, 200, 0, 0);
+            subwindow_content1.Children.Add(newshow);
+            Panel.SetZIndex(submainwindow1, 3000);
         }
 
-        private void main_grid_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+
+        private void main_grid_Drop(object sender, DragEventArgs e)
         {
-            if (PublicClass.dragdrop_up)
+          
+
+            IDataObject data = new DataObject();
+            data = e.Data;
+            sub_show newshow = new sub_show();
+            subwindow1.Width = 700;
+            subwindow1.Height = 800;
+            newshow.Name = "show";
+            subwindow1.Opacity = 0.9;
+            newshow = data.GetData(typeof(sub_show)) as sub_show;
+            subwindow1.Margin = new Thickness(e.GetPosition(main_grid).X, e.GetPosition(main_grid).Y, 0, 0);
+            subwindow_content1.Children.Add(newshow);
+
+           
+
+        }
+
+  
+
+        private void subwindow1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            movepoint = e.GetPosition(null);
+            if (e.GetPosition(subwindow1).X < subwindow1.Width && e.GetPosition(subwindow1).Y < 20)
             {
-                IDataObject data;
-              
+                can_move = true;
             }
         }
+
+        private void subwindow1_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            can_move = false;
+        }
+
+        private void subwindow1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && can_move)
+            {
+                subwindow1.Margin = new Thickness(subwindow1.Margin.Left + e.GetPosition(null).X - movepoint.X, subwindow1.Margin.Top + e.GetPosition(null).Y - movepoint.Y, 0, 0);
+                movepoint = e.GetPosition(null);
+            }
+        }
+
+    
+
+
+
+
+
 
    
 
