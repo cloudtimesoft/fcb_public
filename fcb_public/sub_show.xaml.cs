@@ -29,13 +29,43 @@ namespace fcb_public
         {
 
 
-
+            fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+            fcb_public.publicDataSetTableAdapters.elementTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.elementTableAdapter();
+            System.Windows.Data.CollectionViewSource elementViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("elementViewSource"));
             left_line.Width = bottom_line.ActualWidth / 3;
             right_line.Width = bottom_line.ActualWidth / 3;
             title.Width = bottom_line.ActualWidth / 3;
-            title.Margin = new Thickness(left_line.Width , 0, 0, 0);
-            //title.Content = publicDataSet.element.titleColumn.AllowDBNull;
-            
+            title.Margin = new Thickness(left_line.Width, 0, 0, 0);
+            title.Content = publicDataSet.element.titleColumn.AllowDBNull;
+
+            // 不要在设计时加载数据。
+            // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            // {
+            // 	//在此处加载数据并将结果指派给 CollectionViewSource。
+            // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
+            // 	myCollectionViewSource.Source = your data
+            // }
+            // 不要在设计时加载数据。
+            // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            // {
+            // 	//在此处加载数据并将结果指派给 CollectionViewSource。
+            // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
+            // 	myCollectionViewSource.Source = your data
+            // }
+            // 不要在设计时加载数据。
+            // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            // {
+            // 	//在此处加载数据并将结果指派给 CollectionViewSource。
+            // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
+            // 	myCollectionViewSource.Source = your data
+            // }
+            // 不要在设计时加载数据。
+            // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            // {
+            // 	//在此处加载数据并将结果指派给 CollectionViewSource。
+            // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
+            // 	myCollectionViewSource.Source = your data
+            // }
         }
 
         private void txt_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -117,6 +147,13 @@ namespace fcb_public
             //content.BeginAnimation(StackPanel.MarginProperty, content_margin_animation);
             txt.BeginAnimation(TextBlock.WidthProperty, txt_width_animation);
             txt.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
+        }
+
+        private void txt_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MenuItem newmenu = new MenuItem();
+            newmenu.Header = "元素集";
+            
         }
         
 
