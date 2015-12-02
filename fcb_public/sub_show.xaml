@@ -99,12 +99,9 @@
 
         <Label x:Name="title" VerticalAlignment="Center"></Label>
         
-        <TextBlock Grid.Row="3" Width="700" Height="680" VerticalAlignment="Top" FontSize="18" Foreground="White" Padding="5" x:Name="txt" TextWrapping="Wrap" PreviewMouseUp="txt_PreviewMouseUp" PreviewMouseRightButtonDown="txt_PreviewMouseRightButtonDown">
-            <TextBlock.ContextMenu>
-                 <ContextMenu Name="popMenu" StaysOpen="True">
-                    <MenuItem Name="refleshTree" Header="添加元素集" ></MenuItem>
-                </ContextMenu>
-            </TextBlock.ContextMenu>
+        <TextBlock Grid.Row="3"  Opacity="0.1" Width="700" Height="680" VerticalAlignment="Top" FontSize="18" Foreground="White" Padding="5" x:Name="txt" TextWrapping="Wrap" PreviewMouseUp="txt_PreviewMouseUp">
+           
+            <StackPanel x:Name="txtstackpanel" Background="White" Opacity="0.9"></StackPanel>
         </TextBlock>
     </Grid>
 </UserControl>

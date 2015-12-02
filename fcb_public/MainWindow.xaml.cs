@@ -21,9 +21,13 @@ namespace fcb_public
     /// </summary>
     public partial class MainWindow : Window
     {
+        //private PublicClass _PC;
+        //sub_show newshow = new sub_show();
         public MainWindow()
         {
             InitializeComponent();
+            //_PC = new PublicClass() { addelement = newshow.refleshTree.Name };
+            //this.DataContext = _PC;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -32,8 +36,21 @@ namespace fcb_public
 
             newimage.ImageSource = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "\\image\\" + "background.jpg", UriKind.Absolute));
             main_grid.Background = newimage;
-        }
 
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            // 将数据加载到表 elset_init 中。可以根据需要修改此代码。
+            fcb_public.publicDataSetTableAdapters.elset_initTableAdapter publicDataSetelset_initTableAdapter = new fcb_public.publicDataSetTableAdapters.elset_initTableAdapter();
+            publicDataSetelset_initTableAdapter.Fill(publicDataSet.elset_init);
+            System.Windows.Data.CollectionViewSource elset_initViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("elset_initViewSource")));
+            elset_initViewSource.View.MoveCurrentToFirst();
+            // 将数据加载到表 Initialize 中。可以根据需要修改此代码。
+            fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.InitializeTableAdapter();
+            publicDataSetInitializeTableAdapter.Fill(publicDataSet.Initialize);
+            System.Windows.Data.CollectionViewSource initializeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("initializeViewSource")));
+            initializeViewSource.View.MoveCurrentToFirst();
+        }
+        int showname = 1;
+     
         private void main_grid_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (e.GetPosition(null).Y <= 30 && main_canvas.Margin.Top==-60)
@@ -181,26 +198,26 @@ namespace fcb_public
             //newshow.Margin = new Thickness(0, 200, 0, 0);
             DataObject data = new DataObject(typeof(sub_show), newshow);
             DragDrop.DoDragDrop(newshow, data, DragDropEffects.Copy);
-            PublicClass.dragdrop_up = true;
+            sub_addelement newadd = new sub_addelement();
+           
           
-
         }
 
-
-
-        private void show_window_Click(object sender, RoutedEventArgs e)
+        void newadd_AddElement(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            subwindow_content1.Children.Clear();
-            sub_show newshow = new sub_show();
-            subwindow1.Width = 700;
-            subwindow1.Height = 800;
-            newshow.Name = "show";
-            subwindow1.Opacity = 0.9;
-            //subwindow.HorizontalAlignment = HorizontalAlignment.Center;
-            //newshow.Margin = new Thickness(0, 200, 0, 0);
-            subwindow_content1.Children.Add(newshow);
-            Panel.SetZIndex(submainwindow1, 3000);
+            sub_addelement newadd = new sub_addelement();
+            subwindow.Width = 400;
+            subwindow.Height = 400;
+
+            newadd.Name = "newroll";
+            subwindow.Opacity = 0.9;
+            subwindow_content.Children.Add(newadd);
+            Panel.SetZIndex(submainwindow, 3000);
         }
+
+
+
+
 
 
         private void main_grid_Drop(object sender, DragEventArgs e)
@@ -212,15 +229,76 @@ namespace fcb_public
             sub_show newshow = new sub_show();
             subwindow1.Width = 700;
             subwindow1.Height = 800;
-            newshow.Name = "show";
+            //newshow.Name = "show";
             subwindow1.Opacity = 0.9;
-            newshow = data.GetData(typeof(sub_show)) as sub_show;
+            //newshow = data.GetData(typeof(sub_show)) as sub_show;
             subwindow1.Margin = new Thickness(e.GetPosition(main_grid).X, e.GetPosition(main_grid).Y, 0, 0);
+            //subwindow1.Margin = new Thickness(100,100, 0, 0);
+            newshow.PreviewMouseRightButtonDown += new MouseButtonEventHandler(newshow_PreviewMouseRightButtonDown);
             subwindow_content1.Children.Add(newshow);
 
            
 
         }
+
+        void newshow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+           // UIElement uid = new UIElement();
+           //uid= ContextMenuService.GetPlacementTarget( LogicalTreeHelper.GetParent(sender as MenuItem));
+
+           //Menu newmenu = new Menu();
+           MenuItem newmenuitem = new MenuItem();
+           newmenuitem.Header = "添加元素";
+           newmenuitem.Width = 150;
+           newmenuitem.Height = 30;
+           newmenuitem.Background = Brushes.White;
+           newmenuitem.Click += new RoutedEventHandler(newmenuitem_Click);
+          // newmenu.Items.Add(newmenuitem);
+           main_grid.Children.Add(newmenuitem);
+          
+        }
+
+        void newmenuitem_Click(object sender, RoutedEventArgs e)
+        {
+            subwindow_content.Children.Clear();
+            sub_addelement newadd = new sub_addelement();
+            subwindow.Width = 400;
+            subwindow.Height = 400;
+            newadd.Name = "newadd";
+            subwindow.Opacity = 0.9;
+           
+            subwindow_content.Children.Add(newadd);
+            Panel.SetZIndex(submainwindow, 3000);
+
+
+
+
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            // 将数据加载到表 elset_init 中。可以根据需要修改此代码。
+            fcb_public.publicDataSetTableAdapters.elset_initTableAdapter publicDataSetelset_initTableAdapter = new fcb_public.publicDataSetTableAdapters.elset_initTableAdapter();
+            publicDataSetelset_initTableAdapter.Fill(publicDataSet.elset_init);
+            System.Windows.Data.CollectionViewSource elset_initViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("elset_initViewSource")));
+            elset_initViewSource.View.MoveCurrentToFirst();
+            // 将数据加载到表 Initialize 中。可以根据需要修改此代码。
+            fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.InitializeTableAdapter();
+
+
+
+            var query = from c in publicDataSet.Initialize join t in publicDataSet.elset_init on c.ID equals t.Initialize_ID select c;
+
+            //publicDataSetInitializeTableAdapter.Fill(query);
+            
+            System.Windows.Data.CollectionViewSource initializeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("initializeViewSource")));
+            
+            initializeViewSource.View.MoveCurrentToFirst();
+
+            
+            
+
+
+        }
+
 
   
 
@@ -245,6 +323,11 @@ namespace fcb_public
                 subwindow1.Margin = new Thickness(subwindow1.Margin.Left + e.GetPosition(null).X - movepoint.X, subwindow1.Margin.Top + e.GetPosition(null).Y - movepoint.Y, 0, 0);
                 movepoint = e.GetPosition(null);
             }
+        }
+
+        private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           
         }
 
     

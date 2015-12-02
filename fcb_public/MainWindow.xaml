@@ -1,7 +1,12 @@
 ﻿<Window x:Class="fcb_public.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525"  WindowStyle="None" WindowState="Maximized" Loaded="Window_Loaded">
+        Title="MainWindow" Height="350" Width="525"  WindowStyle="None" WindowState="Maximized" Loaded="Window_Loaded" xmlns:my="clr-namespace:fcb_public">
+    <Window.Resources>
+        <my:publicDataSet x:Key="publicDataSet" />
+        <CollectionViewSource x:Key="elset_initViewSource" Source="{Binding Path=elset_init, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="initializeViewSource" Source="{Binding Path=Initialize, Source={StaticResource publicDataSet}}" />
+    </Window.Resources>
     <Grid x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove"  AllowDrop="True" Drop="main_grid_Drop" >
         
         <!--2b398b9e-26c8-4905-9799-0571a05d4993.gif-->
@@ -39,7 +44,7 @@
 
 
 
-        <StackPanel x:Name="submainwindow1" Panel.ZIndex="-1" Margin="0,0,0,0">
+        <StackPanel x:Name="submainwindow1" Panel.ZIndex="-1" Margin="0,0,0,0" DataContext="{StaticResource elset_initViewSource}">
             <StackPanel   x:Name="subwindow1" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top"  MouseLeftButtonDown="subwindow1_MouseLeftButtonDown" MouseUp="subwindow1_MouseUp" MouseMove="subwindow1_MouseMove">
                 <StackPanel.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="16" ShadowDepth="0" Opacity="0.5" />

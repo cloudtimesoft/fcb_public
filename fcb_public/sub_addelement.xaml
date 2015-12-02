@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="fcb_public.sub_addelement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" xmlns:my="clr-namespace:fcb_public" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <my:publicDataSet x:Key="publicDataSet" />
+        <CollectionViewSource x:Key="element_setViewSource" Source="{Binding Path=element_set, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="elset_initViewSource" Source="{Binding Path=elset_init, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="initializeViewSource" Source="{Binding Path=Initialize, Source={StaticResource publicDataSet}}" />
+    </UserControl.Resources>
+    <Grid Background="White" DataContext="{StaticResource element_setViewSource}">
+        
+        <ListBox x:Name="initlist"></ListBox>
+        
+        
+    </Grid>
+</UserControl>

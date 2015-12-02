@@ -20,10 +20,15 @@ namespace fcb_public
     /// </summary>
     public partial class sub_show : UserControl
     {
+        
         public sub_show()
         {
             InitializeComponent();
+           
         }
+
+      
+
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -149,12 +154,8 @@ namespace fcb_public
             txt.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
         }
 
-        private void txt_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            MenuItem newmenu = new MenuItem();
-            newmenu.Header = "元素集";
-            
-        }
+     
+
         
 
      
