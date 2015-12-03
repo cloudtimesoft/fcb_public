@@ -43,17 +43,17 @@ namespace fcb_public
 
         private void elementset_quedin_Click(object sender, RoutedEventArgs e)
         {
-            fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
-            fcb_public.publicDataSetTableAdapters.element_setTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.element_setTableAdapter();
-            System.Windows.Data.CollectionViewSource element_setViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("element_setViewSource"));
-            if (elementset_quedin.Content.ToString() == "添加")
-            {
-                publicDataSet.element_set.Addelement_setRow(elsetname_textbox.Text, DateTime.Parse(starttime_textbox.Text), DateTime.Parse(endtime_textbox.Text), true);
-                element_setViewSource.View.MoveCurrentToLast();
-                element_setViewSource.View.MoveCurrentToNext();
-                publicDataSetTableAdapters.Update(publicDataSet.element_set);
-                publicDataSet.element_set.AcceptChanges();
-            }
+            //fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+            //fcb_public.publicDataSetTableAdapters.element_setTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.element_setTableAdapter();
+            //System.Windows.Data.CollectionViewSource element_setViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("element_setViewSource"));
+            //if (elementset_quedin.Content.ToString() == "添加")
+            //{
+            //    publicDataSet.element_set.Addelement_setRow(elsetname_textbox.Text, DateTime.Parse(starttime_textbox.Text), DateTime.Parse(endtime_textbox.Text), true);
+            //    element_setViewSource.View.MoveCurrentToLast();
+            //    element_setViewSource.View.MoveCurrentToNext();
+            //    publicDataSetTableAdapters.Update(publicDataSet.element_set);
+            //    publicDataSet.element_set.AcceptChanges();
+            //}
         }
 
         private void gridDelete_Click(object sender, RoutedEventArgs e)

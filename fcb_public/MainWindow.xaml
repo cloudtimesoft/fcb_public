@@ -7,7 +7,7 @@
         <CollectionViewSource x:Key="elset_initViewSource" Source="{Binding Path=elset_init, Source={StaticResource publicDataSet}}" />
         <CollectionViewSource x:Key="initializeViewSource" Source="{Binding Path=Initialize, Source={StaticResource publicDataSet}}" />
     </Window.Resources>
-    <Grid x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove"  AllowDrop="True" Drop="main_grid_Drop" >
+    <Grid x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove"  AllowDrop="True" Drop="main_grid_Drop" PreviewMouseDown="main_grid_PreviewMouseDown" MouseUp="main_grid_MouseUp">
         
         <!--2b398b9e-26c8-4905-9799-0571a05d4993.gif-->
         <Canvas  x:Name="main_canvas"  Height="60" Background="Green" VerticalAlignment="Top" Margin="0,-60,0,0" MouseLeave="main_canvas_MouseLeave">

@@ -9,30 +9,30 @@
         <my:publicDataSet x:Key="publicDataSet" />
         <CollectionViewSource x:Key="elementViewSource" Source="{Binding Path=element, Source={StaticResource publicDataSet}}" />
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="element_grid">
         <GroupBox Header="元素" Height="240" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="476">
             <Grid Height="200" DataContext="{StaticResource elementViewSource}">
                 <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200"  HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="5,0,0,0"  Name="elementDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="450">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
-                        <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Path=title}" Header="title" Width="SizeToHeader" />
-                        <DataGridTextColumn x:Name="contentColumn" Binding="{Binding Path=content}" Header="content" Width="SizeToHeader" />
-                        <DataGridTextColumn x:Name="typeColumn" Binding="{Binding Path=type}" Header="type" Width="SizeToHeader" />
-                        <DataGridTemplateColumn x:Name="start_timeColumn" Header="start time" Width="SizeToHeader">
+                        <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" Visibility="Hidden" />
+                        <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Path=title}" Header="标题" Width="SizeToHeader" />
+                        <DataGridTextColumn x:Name="contentColumn" Binding="{Binding Path=content}" Header="内容" Width="200"  />
+                        <DataGridTextColumn x:Name="typeColumn" Binding="{Binding Path=type}" Header="类型" Width="SizeToHeader" />
+                        <DataGridTemplateColumn x:Name="start_timeColumn" Header="开始时间" Width="SizeToHeader">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DatePicker SelectedDate="{Binding Path=start_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn x:Name="end_timeColumn" Header="end time" Width="SizeToHeader">
+                        <DataGridTemplateColumn x:Name="end_timeColumn" Header="结束时间" Width="SizeToHeader">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DatePicker SelectedDate="{Binding Path=end_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="status" Width="SizeToHeader" />
+                        <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="状态" Width="SizeToHeader" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -61,7 +61,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Label Content="类型:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
-                    <ComboBox  Grid.Column="1" Height="23" HorizontalAlignment="Left" Text="{Binding Path=type, Mode=TwoWay}"  Margin="3,3,0,3" Name="typeComboBox" VerticalAlignment="Center" Width="248">
+                    <ComboBox  Grid.Column="1" Height="23" HorizontalAlignment="Left" Text="{Binding Path=type, Mode=TwoWay}"  Margin="3,3,0,3" Name="typeComboBox" VerticalAlignment="Center" Width="248" SelectionChanged="typeComboBox_SelectionChanged">
                         <ComboBoxItem>文档</ComboBoxItem>
                         <ComboBoxItem>图片</ComboBoxItem>
                         <ComboBoxItem>视频</ComboBoxItem>

@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace fcb_public
 {
@@ -70,6 +71,12 @@ namespace fcb_public
 
             initializeViewSource.View.MoveCurrentToFirst();
          
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            vido.Source = new Uri(Directory.GetCurrentDirectory() + "\\image\\" + "weicheng.mp4", UriKind.Absolute);
+           
         }
     }
 }

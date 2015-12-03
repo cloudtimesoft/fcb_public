@@ -154,6 +154,18 @@ namespace fcb_public
             txt.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
         }
 
+        private void show_grid_MouseMove(object sender, MouseEventArgs e)
+        {
+            //if (e.GetPosition(null).X > PublicClass.show_left - 3 && e.GetPosition(null).X < PublicClass.show_left + 3)
+            //{
+            //    show_grid.Cursor = Cursors.SizeWE;
+            //}
+            //else
+            //{
+            //    show_grid.Cursor = Cursors.Arrow;
+            //}
+        }
+
      
 
         

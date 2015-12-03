@@ -9,5 +9,8 @@ namespace fcb_public
     {
         public static string background_url;//背景图路径
         public  string addelement { get; set; }
+        public static double show_left;
+        public static double show_right;
+        public static double show_bottom;
     }
 }

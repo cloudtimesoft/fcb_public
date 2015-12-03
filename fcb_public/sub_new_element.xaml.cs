@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using System.IO;
 
 namespace fcb_public
 {
@@ -24,7 +26,7 @@ namespace fcb_public
             InitializeComponent();
         }
 
-
+        string openname;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -64,8 +66,8 @@ namespace fcb_public
                 publicDataSetTableAdapters.Update(publicDataSet.element);
                 publicDataSet.element.AcceptChanges();
                 publicDataSetTableAdapters.Fill(publicDataSet.element);
-                
-                
+
+                File.Copy(openname, PublicClass.background_url);
             }
 
             //publicDataSetTableAdapters.Fill(publicDataSet.element);
@@ -84,6 +86,54 @@ namespace fcb_public
                 publicDataSet.element.AcceptChanges();
                 publicDataSetTableAdapters.Fill(publicDataSet.element);
             }
+        }
+
+        private void typeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (typeComboBox.Text == "图片" || typeComboBox.Text == "视频")
+            {
+                contentTextBox.Height = 40;
+                //contentTextBox.Visibility = Visibility.Hidden;
+                Button newbutton = new Button();
+                newbutton.Name = "newbutton";
+                newbutton.Width = 40;
+                newbutton.Height = 30;
+                newbutton.Content = "上传";
+                newbutton.Margin = new Thickness(259, 405, 0, 0);
+                element_grid.Children.Add(newbutton);
+                newbutton.Click += new RoutedEventHandler(newbutton_Click);
+                
+            }
+            else if (typeComboBox.Text == "文档")
+            {
+                contentTextBox.Height = 140;
+            }
+        }
+
+        void newbutton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "选择文件";
+            openFileDialog.Filter = "jpg文件|*.jpg|RTF 文件 | *.rtf|所有文件|*.*";
+            openFileDialog.FileName = string.Empty;
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+            if (openFileDialog.ShowDialog() == true)
+            {
+            }
+
+            string pic_guid = System.Guid.NewGuid().ToString() + System.IO.Path.GetExtension(openFileDialog.SafeFileName);
+            openname = openFileDialog.FileName;
+            PublicClass.background_url = Directory.GetCurrentDirectory() + "\\image\\" + pic_guid;
+            contentTextBox.Text = Directory.GetCurrentDirectory() + "\\image\\" + pic_guid;
+          
+
+
+           
+
+          
+
+
         }
     }
 }

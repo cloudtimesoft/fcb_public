@@ -21,15 +21,16 @@ namespace fcb_public
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private PublicClass _PC;
-        //sub_show newshow = new sub_show();
+       
         public MainWindow()
         {
             InitializeComponent();
-            //_PC = new PublicClass() { addelement = newshow.refleshTree.Name };
-            //this.DataContext = _PC;
+       
         }
-
+        Point old_point;
+        string aa;
+        double weight;
+        double height;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ImageBrush newimage = new ImageBrush();
@@ -49,8 +50,14 @@ namespace fcb_public
             System.Windows.Data.CollectionViewSource initializeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("initializeViewSource")));
             initializeViewSource.View.MoveCurrentToFirst();
         }
-        int showname = 1;
-     
+
+        private void main_grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            old_point = e.GetPosition(null);
+            weight = subwindow1.Width;
+            height = subwindow1.Height;
+            //aa = "123";
+        }
         private void main_grid_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (e.GetPosition(null).Y <= 30 && main_canvas.Margin.Top==-60)
@@ -65,8 +72,50 @@ namespace fcb_public
                 ta.FillBehavior = FillBehavior.Stop;
               
             }
-           
+
+
+            if (e.GetPosition(null).X > PublicClass.show_right - 3 && e.GetPosition(null).X < PublicClass.show_right + 3)
+            {
+                main_grid.Cursor = Cursors.SizeWE;
+                aa = "123";
+                
+            }
+
+          else  if (e.GetPosition(null).Y > PublicClass.show_bottom - 3 && e.GetPosition(null).Y < PublicClass.show_bottom + 3)
+            {
+                main_grid.Cursor = Cursors.SizeNS;
+              aa="456";
+            }
+            else
+            {
+                main_grid.Cursor = Cursors.Arrow;
+
+            }
+
+
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                if (aa == "123")
+                {
+                    subwindow1.Width = e.GetPosition(null).X - old_point.X + weight;
+                }
+                else if (aa == "456")
+                {
+                    subwindow1.Height = e.GetPosition(null).Y - old_point.Y + height;
+                }
+                //subwindow1.Margin = new Thickness(e.GetPosition(null).X, PublicClass.show_bottom - subwindow1.Height, 0, 0);
+            }
+
+
             
+        }
+
+        private void main_grid_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            PublicClass.show_left = subwindow1.Margin.Left;
+            PublicClass.show_right = subwindow1.Margin.Left + subwindow1.Width;
+            PublicClass.show_bottom = subwindow1.Margin.Top + subwindow1.Height-45;
+            aa = "";
         }
 
         private void element_Click(object sender, RoutedEventArgs e)
@@ -158,8 +207,8 @@ namespace fcb_public
         {
             subwindow_content.Children.Clear();
             sub_elementset newelementset = new sub_elementset();
-            subwindow.Width = 400;
-            subwindow.Height = 550;
+            subwindow.Width = 500;
+            subwindow.Height = 640;
             newelementset.Name = "newelementset";
             subwindow.Opacity = 0.9;
             subwindow_content.Children.Add(newelementset);
@@ -238,6 +287,10 @@ namespace fcb_public
             newshow.PreviewMouseRightButtonDown += new MouseButtonEventHandler(newshow_PreviewMouseRightButtonDown);
             subwindow_content1.Children.Add(newshow);
 
+            PublicClass.show_left = subwindow1.Margin.Left;
+            PublicClass.show_right = subwindow1.Margin.Left + subwindow1.Width;
+            PublicClass.show_bottom = subwindow1.Margin.Top + subwindow1.Height-45;
+
            
 
         }
@@ -315,6 +368,9 @@ namespace fcb_public
         private void subwindow1_MouseUp(object sender, MouseButtonEventArgs e)
         {
             can_move = false;
+            PublicClass.show_left = subwindow1.Margin.Left;
+            PublicClass.show_right = subwindow1.Margin.Left + subwindow1.Width;
+            PublicClass.show_bottom = subwindow1.Margin.Top + subwindow1.Height;
         }
 
         private void subwindow1_MouseMove(object sender, MouseEventArgs e)
@@ -326,10 +382,14 @@ namespace fcb_public
             }
         }
 
+
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
            
         }
+
+   
+
 
     
 

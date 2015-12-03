@@ -9,7 +9,7 @@
         <my:publicDataSet x:Key="publicDataSet" />
         <CollectionViewSource x:Key="elementViewSource" Source="{Binding Path=element, Source={StaticResource publicDataSet}}" />
     </UserControl.Resources>
-    <Grid  VerticalAlignment="Top" >
+    <Grid  VerticalAlignment="Top"  x:Name="show_grid" MouseMove="show_grid_MouseMove">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="row0" Height="44"></RowDefinition>
            

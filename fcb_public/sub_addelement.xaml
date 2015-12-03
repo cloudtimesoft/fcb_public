@@ -11,10 +11,10 @@
         <CollectionViewSource x:Key="elset_initViewSource" Source="{Binding Path=elset_init, Source={StaticResource publicDataSet}}" />
         <CollectionViewSource x:Key="initializeViewSource" Source="{Binding Path=Initialize, Source={StaticResource publicDataSet}}" />
     </UserControl.Resources>
-    <Grid Background="White" DataContext="{StaticResource element_setViewSource}">
+    <Grid Background="White" DataContext="{StaticResource element_setViewSource}" Loaded="Grid_Loaded">
         
         <ListBox x:Name="initlist"></ListBox>
-        
+        <MediaElement x:Name="vido"></MediaElement>
         
     </Grid>
 </UserControl>
