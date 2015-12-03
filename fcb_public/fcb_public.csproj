@@ -56,6 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="PublicClass.cs" />
+    <Compile Include="publicDataSet.cs">
+      <DependentUpon>publicDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="publicDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +79,9 @@
     </Compile>
     <Compile Include="sub_initialize.xaml.cs">
       <DependentUpon>sub_initialize.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="sub_new_element.xaml.cs">
+      <DependentUpon>sub_new_element.xaml</DependentUpon>
     </Compile>
     <Compile Include="sub_roll.xaml.cs">
       <DependentUpon>sub_roll.xaml</DependentUpon>
@@ -111,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="sub_initialize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="sub_new_element.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

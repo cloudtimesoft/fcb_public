@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="fcb_public.sub_new_element"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="620" d:DesignWidth="500" xmlns:my="clr-namespace:fcb_public" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <my:publicDataSet x:Key="publicDataSet" />
+        <CollectionViewSource x:Key="elementViewSource" Source="{Binding Path=element, Source={StaticResource publicDataSet}}" />
+    </UserControl.Resources>
+    <Grid>
+        <GroupBox Header="元素" Height="240" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="476">
+            <Grid Height="200" DataContext="{StaticResource elementViewSource}">
+                <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200"  HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="5,0,0,0"  Name="elementDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="450">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
+                        <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Path=title}" Header="title" Width="SizeToHeader" />
+                        <DataGridTextColumn x:Name="contentColumn" Binding="{Binding Path=content}" Header="content" Width="SizeToHeader" />
+                        <DataGridTextColumn x:Name="typeColumn" Binding="{Binding Path=type}" Header="type" Width="SizeToHeader" />
+                        <DataGridTemplateColumn x:Name="start_timeColumn" Header="start time" Width="SizeToHeader">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding Path=start_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="end_timeColumn" Header="end time" Width="SizeToHeader">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker SelectedDate="{Binding Path=end_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="status" Width="SizeToHeader" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="" Height="330" HorizontalAlignment="Left" Margin="12,250,0,0" Name="groupBox2" VerticalAlignment="Top" Width="476">
+            <Grid>
+                <Grid DataContext="{StaticResource elementViewSource}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="grid1" VerticalAlignment="Top" Width="449">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="73" />
+                        <ColumnDefinition Width="53" />
+                        <ColumnDefinition Width="264*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="标题:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="3,3,0,3" Name="titleTextBox" Text="{Binding Path=title, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="397" Grid.ColumnSpan="3" />
+                </Grid>
+                <Grid DataContext="{StaticResource elementViewSource}" HorizontalAlignment="Left" Margin="6,44,0,0" Name="grid2" VerticalAlignment="Top" Width="294">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="类型:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                    <ComboBox  Grid.Column="1" Height="23" HorizontalAlignment="Left" Text="{Binding Path=type, Mode=TwoWay}"  Margin="3,3,0,3" Name="typeComboBox" VerticalAlignment="Center" Width="248">
+                        <ComboBoxItem>文档</ComboBoxItem>
+                        <ComboBoxItem>图片</ComboBoxItem>
+                        <ComboBoxItem>视频</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+                <Grid DataContext="{StaticResource elementViewSource}" HorizontalAlignment="Left" Margin="9,82,0,0" Name="grid4" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="开始时间:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                    <DatePicker Grid.Column="1" Grid.Row="0" Height="25" HorizontalAlignment="Left" Margin="3" Name="start_timeDatePicker" SelectedDate="{Binding Path=start_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="115" />
+                </Grid>
+                <Grid DataContext="{StaticResource elementViewSource}" HorizontalAlignment="Left" Margin="236,82,0,0" Name="grid5" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="结束时间:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                    <DatePicker Grid.Column="1" Grid.Row="0" Height="25" HorizontalAlignment="Left" Margin="3" Name="end_timeDatePicker" SelectedDate="{Binding Path=end_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="115" />
+                </Grid>
+                <Grid DataContext="{StaticResource elementViewSource}" HorizontalAlignment="Left" Margin="380,44,0,0" Name="grid6" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="激活:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                    <CheckBox Content="" Grid.Column="1" Grid.Row="0" Height="16" HorizontalAlignment="Left" IsChecked="{Binding Path=status, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="3" Name="statusCheckBox" VerticalAlignment="Center" />
+                </Grid>
+                <Grid DataContext="{StaticResource elementViewSource}" HorizontalAlignment="Left" Margin="6,120,0,0" Name="grid3" VerticalAlignment="Top" Width="446" Height="151">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="内容:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" Height="141" HorizontalAlignment="Left" Margin="3,4,0,-113" Name="contentTextBox" Text="{Binding Path=content, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="374" MinLines="5" AcceptsReturn="True" TextWrapping="Wrap" />
+                </Grid>
+                
+            </Grid>
+        </GroupBox>
+        <Button Content="新增" x:Name="add_record" Height="23" HorizontalAlignment="Left" Margin="279,585,0,0" VerticalAlignment="Top" Width="75" Click="add_record_Click" />
+        <Button Content="删除" Height="23" HorizontalAlignment="Left" Margin="386,585,0,0" x:Name="delete_record" VerticalAlignment="Top" Width="75" Click="delete_record_Click" />
+    </Grid>
+    
+</UserControl>

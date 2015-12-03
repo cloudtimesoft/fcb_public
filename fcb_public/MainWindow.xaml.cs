@@ -72,9 +72,10 @@ namespace fcb_public
         private void element_Click(object sender, RoutedEventArgs e)
         {
             subwindow_content.Children.Clear();
-            sub_element newelement = new sub_element();
-            subwindow.Width = 400;
-            subwindow.Height = 550;
+            //sub_element newelement = new sub_element();
+            sub_new_element newelement = new sub_new_element();
+            subwindow.Width = 500;
+            subwindow.Height = 640;
             newelement.Name = "newelement";
             subwindow.Opacity = 0.9;
             subwindow_content.Children.Add(newelement);
