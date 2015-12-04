@@ -43,7 +43,7 @@ namespace fcb_public
             //publicDataSet.element =(publicDataSet.elementDataTable) from c in publicDataSet.element where c.ID == 2 select c;
             publicDataSetTableAdapters.Fill(publicDataSet.element);
             System.Windows.Data.CollectionViewSource elementViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("elementViewSource"));
-            typeComboBox.SelectionChanged -= new SelectionChangedEventHandler(typeComboBox_SelectionChanged);
+           // typeComboBox.SelectionChanged -= new SelectionChangedEventHandler(typeComboBox_SelectionChanged);
             elementDataGrid.CanUserAddRows = false;
             typeComboBox.SelectedIndex = 0;
            
@@ -68,7 +68,10 @@ namespace fcb_public
                 publicDataSet.element.AcceptChanges();
                 publicDataSetTableAdapters.Fill(publicDataSet.element);
 
-                //File.Copy(openname, PublicClass.background_url);
+                if (typeComboBox.SelectedIndex !=0)
+                {
+                    File.Copy(openname, PublicClass.background_url);
+                }
             }
 
             //publicDataSetTableAdapters.Fill(publicDataSet.element);
@@ -91,26 +94,41 @@ namespace fcb_public
 
         private void typeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            if (typeComboBox.SelectedIndex == 1 || typeComboBox.SelectedIndex == 2)
+            {
+                contentTextBox.Height = 140;
+                Button newbtn = element_grid.FindName("newbutton") as Button;
+                if (newbtn != null)
+                {
+                    element_grid.Children.Remove(newbtn);
+                    element_grid.UnregisterName("newbutton");
+                }
+
+            }
+            if (typeComboBox.SelectedIndex == 1 || typeComboBox.SelectedIndex == 2 )
             {
                 contentTextBox.Height = 40;
                 //contentTextBox.Visibility = Visibility.Hidden;
                 Button newbutton = new Button();
-                newbutton.Name = "newbutton";
+                //newbutton.Name = "newbutton";
                 newbutton.Width = 40;
                 newbutton.Height = 30;
                 newbutton.Content = "上传";
                 newbutton.Margin = new Thickness(259, 405, 0, 0);
                 element_grid.Children.Add(newbutton);
+                element_grid.RegisterName("newbutton", newbutton);
                 newbutton.Click += new RoutedEventHandler(newbutton_Click);
                 
             }
-            else if (typeComboBox.SelectedIndex == 0)
+            else
             {
                 contentTextBox.Height = 140;
                 Button newbtn = element_grid.FindName("newbutton") as Button;
-                newbtn.Visibility = Visibility.Hidden;
+                if (newbtn != null)
+                {
+                    element_grid.Children.Remove(newbtn);
+                    element_grid.UnregisterName("newbutton");
+                }
+
             }
         }
 
@@ -142,7 +160,7 @@ namespace fcb_public
 
         private void typeComboBox_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            typeComboBox.SelectionChanged+=new SelectionChangedEventHandler(typeComboBox_SelectionChanged);
+            //typeComboBox.SelectionChanged+=new SelectionChangedEventHandler(typeComboBox_SelectionChanged);
         }
     }
 }

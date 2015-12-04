@@ -23,7 +23,7 @@ namespace fcb_public
         {
             InitializeComponent();
         }
-
+        int index=1;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
@@ -69,6 +69,7 @@ namespace fcb_public
                 publicDataSetelement_setTableAdapter.Fill(publicDataSet.element_set);
                 element_setViewSource.View.MoveCurrentToLast();
                 add_el_elset(int.Parse(iDTextBox.Text));
+                index++;
             }
         }
 
@@ -80,27 +81,35 @@ namespace fcb_public
             List<int> element_ids = (from c in publicDataSet.element where !el_set_ids.Contains(c.ID) select c.ID).ToList();
 
             var element_list = from c in publicDataSet.element where element_ids.Contains(c.ID) select c;
+            slist.Items.Clear();
             foreach (var t in element_list)
             {
+
                 TextBlock idtxt = new TextBlock();
                 idtxt.Text = t.ID.ToString();
+                idtxt.Name = "idtxt";
                 idtxt.Width = 1;
                 idtxt.Opacity = 0;
                 TextBlock nametxt = new TextBlock();
                 nametxt.Text = t.title;
                 StackPanel newstack = new StackPanel();
+
                 newstack.Orientation = Orientation.Horizontal;
+                //newstack.Name = "asd";
                 newstack.Children.Add(idtxt);
-                idtxt.RegisterName("idtxt", idtxt);
+                
                 newstack.Children.Add(nametxt);
+                //newstack.RegisterName("idtxt", idtxt);
                 slist.Items.Add(newstack);
             }
 
             var Delement_list = from c in publicDataSet.element where !element_ids.Contains(c.ID) select c;
+            dlist.Items.Clear();
             foreach (var t in Delement_list)
             {
                 TextBlock idtxt = new TextBlock();
                 idtxt.Text = t.ID.ToString();
+                idtxt.Name = "idtxt";
                 idtxt.Width = 1;
                 idtxt.Opacity = 0;
                 TextBlock nametxt = new TextBlock();
@@ -108,9 +117,9 @@ namespace fcb_public
                 StackPanel newstack = new StackPanel();
                 newstack.Orientation = Orientation.Horizontal;
                 newstack.Children.Add(idtxt);
-                newstack.RegisterName("idtxt", idtxt);
+                //this.RegisterName("idtxt1", idtxt);
                 newstack.Children.Add(nametxt);
-                newstack.RegisterName("nametxt", nametxt);
+                //this.RegisterName("nametxt1", nametxt);
                 dlist.Items.Add(newstack);
             }
 
@@ -119,13 +128,76 @@ namespace fcb_public
         private void move_to_d_Click(object sender, RoutedEventArgs e)
         {
             fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.el_elsetTableAdapter publicDataSetel_elsetTableAdapter = new fcb_public.publicDataSetTableAdapters.el_elsetTableAdapter();
             StackPanel newstack = (StackPanel)slist.SelectedItem;
             if (newstack != null)
             {
-                TextBlock newblock = newstack.FindName("idtxt") as TextBlock;
-                int element_id = int.Parse(newblock.Text);
-                publicDataSet.el_elset.Addel_elsetRow(element_id, int.Parse(iDTextBox.Text));
+                foreach (var t in newstack.Children)
+                {
+                    TextBlock newtxt = t as TextBlock;
+                    if (newtxt.Name == "idtxt")
+                    {
+                        int element_id = int.Parse(newtxt.Text);
+                        publicDataSet.el_elset.Addel_elsetRow(element_id, int.Parse(iDTextBox.Text));
+                        publicDataSetel_elsetTableAdapter.Update(publicDataSet.el_elset);
+                        publicDataSet.el_elset.AcceptChanges();
+                        publicDataSetel_elsetTableAdapter.Fill(publicDataSet.el_elset);
+                        add_el_elset(int.Parse(iDTextBox.Text));
+                        break;
+                    }
+
+
+
+
+                }
+                //TextBlock newblock = newstack.FindName("idtxt") as TextBlock;
+
+                
+                
+            }
+        }
+
+        private void element_setDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (iDTextBox.Text != "")
+            {
                 add_el_elset(int.Parse(iDTextBox.Text));
+            }
+        }
+
+        private void move_to_s_Click(object sender, RoutedEventArgs e)
+        {
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.el_elsetTableAdapter publicDataSetel_elsetTableAdapter = new fcb_public.publicDataSetTableAdapters.el_elsetTableAdapter();
+            StackPanel newstack = (StackPanel)dlist.SelectedItem;
+            if (newstack != null)
+            {
+                foreach (var t in newstack.Children)
+                {
+                    TextBlock newtxt = t as TextBlock;
+                    if (newtxt.Name == "idtxt")
+                    {
+                        int element_id = int.Parse(newtxt.Text);
+                        //publicDataSet.el_elset.Addel_elsetRow(element_id, int.Parse(iDTextBox.Text));
+                        //publicDataSet.el_elsetRow del_row = (publicDataSet.el_elsetRow)from c in publicDataSet.el_elset where c.element_ID == int.Parse(newtxt.Text) && c.element_set_ID == int.Parse(iDTextBox.Text) select c;
+                        List<int> el_elset_id = (from c in publicDataSet.el_elset where c.element_ID == int.Parse(newtxt.Text) && c.element_set_ID == int.Parse(iDTextBox.Text) select c.ID).ToList();
+                        //publicDataSet.el_elset.Rows[el_elset_id[0]].Delete();
+                        publicDataSet.el_elset.FindByID(el_elset_id[0]).Delete();
+                        publicDataSetel_elsetTableAdapter.Update(publicDataSet.el_elset);
+                        publicDataSet.el_elset.AcceptChanges();
+                        publicDataSetel_elsetTableAdapter.Fill(publicDataSet.el_elset);
+                        add_el_elset(int.Parse(iDTextBox.Text));
+                        break;
+                    }
+
+
+
+
+                }
+                //TextBlock newblock = newstack.FindName("idtxt") as TextBlock;
+
+
+
             }
         }
     }

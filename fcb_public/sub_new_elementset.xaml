@@ -12,7 +12,7 @@
         <CollectionViewSource x:Key="elementViewSource" Source="{Binding Path=element, Source={StaticResource publicDataSet}}" />
     </UserControl.Resources>
     <Grid DataContext="{StaticResource element_setViewSource}">
-        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="12,12,0,0" Name="element_setDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="476">
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="12,12,0,0" Name="element_setDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="476" SelectionChanged="element_setDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
                 <DataGridTextColumn x:Name="elset_nameColumn" Binding="{Binding Path=elset_name}" Header="elset name" Width="SizeToHeader" />
@@ -36,7 +36,7 @@
         <ListBox Height="170" HorizontalAlignment="Left" Margin="12,304,0,0" Name="slist" VerticalAlignment="Top" Width="212" />
         <ListBox Height="170" HorizontalAlignment="Left" Margin="259,304,0,0" Name="dlist" VerticalAlignment="Top" Width="229" />
         <Button Content=">" Height="23" HorizontalAlignment="Left" Margin="230,332,0,0" Name="move_to_d" VerticalAlignment="Top" Width="23" Click="move_to_d_Click" />
-        <Button Content="&lt;" Height="23" HorizontalAlignment="Left" Margin="230,370,0,0" Name="move_to_s" VerticalAlignment="Top" Width="23" />
+        <Button Content="&lt;" Height="23" HorizontalAlignment="Left" Margin="230,370,0,0" Name="move_to_s" VerticalAlignment="Top" Width="23" Click="move_to_s_Click" />
         <Grid HorizontalAlignment="Left" Margin="12,218,0,0" Name="grid1" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
