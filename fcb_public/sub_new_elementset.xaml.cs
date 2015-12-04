@@ -121,7 +121,7 @@ namespace fcb_public
             StackPanel newstack = (StackPanel)slist.SelectedItem;
             if (newstack != null)
             {
-                TextBlock newblock = (TextBlock)newstack.FindName("idtxt");
+                TextBlock newblock = newstack.FindName("idtxt") as TextBlock;
                 int element_id = int.Parse(newblock.Text);
                 publicDataSet.el_elset.Addel_elsetRow(element_id, int.Parse(iDTextBox.Text));
                 add_el_elset(int.Parse(iDTextBox.Text));

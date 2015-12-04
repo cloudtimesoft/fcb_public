@@ -31,6 +31,7 @@ namespace fcb_public
         string aa;
         double weight;
         double height;
+        bool can_moves=false;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ImageBrush newimage = new ImageBrush();
@@ -59,7 +60,11 @@ namespace fcb_public
             old_point = e.GetPosition(null);
             weight = subwindow1.Width;
             height = subwindow1.Height;
-            //aa = "123";
+            if (aa == "123")
+            {
+                can_moves = true;
+            }
+           
         }
         private void main_grid_PreviewMouseMove(object sender, MouseEventArgs e)
         {
@@ -92,23 +97,25 @@ namespace fcb_public
             else
             {
                 main_grid.Cursor = Cursors.Arrow;
+                aa = "";
 
             }
 
 
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (aa == "123")
+                if (can_moves)
                 {
                     subwindow1.Width = e.GetPosition(null).X - old_point.X + weight;
                 }
-                else if (aa == "456")
+                if (aa == "456")
                 {
-                    subwindow1.Height = e.GetPosition(null).Y - old_point.Y + height;
+                    //subwindow1.Height = e.GetPosition(null).Y - old_point.Y + height;
+                    subwindow1.Height--;
                 }
                 //subwindow1.Margin = new Thickness(e.GetPosition(null).X, PublicClass.show_bottom - subwindow1.Height, 0, 0);
             }
-
+          
 
             
         }
@@ -118,7 +125,10 @@ namespace fcb_public
             PublicClass.show_left = subwindow1.Margin.Left;
             PublicClass.show_right = subwindow1.Margin.Left + subwindow1.Width;
             PublicClass.show_bottom = subwindow1.Margin.Top + subwindow1.Height-45;
+            //subwindow1.Background = Brushes.White;
             aa = "";
+
+            can_moves = false;
         }
 
         private void element_Click(object sender, RoutedEventArgs e)

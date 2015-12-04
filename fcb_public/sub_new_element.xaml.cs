@@ -67,7 +67,7 @@ namespace fcb_public
                 publicDataSet.element.AcceptChanges();
                 publicDataSetTableAdapters.Fill(publicDataSet.element);
 
-                File.Copy(openname, PublicClass.background_url);
+                //File.Copy(openname, PublicClass.background_url);
             }
 
             //publicDataSetTableAdapters.Fill(publicDataSet.element);
