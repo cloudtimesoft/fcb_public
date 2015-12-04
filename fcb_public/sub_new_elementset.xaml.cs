@@ -91,7 +91,7 @@ namespace fcb_public
                 StackPanel newstack = new StackPanel();
                 newstack.Orientation = Orientation.Horizontal;
                 newstack.Children.Add(idtxt);
-                idtxt.RegisterName("idtxt1", idtxt);
+                idtxt.RegisterName("idtxt", idtxt);
                 newstack.Children.Add(nametxt);
                 slist.Items.Add(newstack);
             }
