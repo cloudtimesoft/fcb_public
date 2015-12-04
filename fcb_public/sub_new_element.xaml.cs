@@ -43,9 +43,10 @@ namespace fcb_public
             //publicDataSet.element =(publicDataSet.elementDataTable) from c in publicDataSet.element where c.ID == 2 select c;
             publicDataSetTableAdapters.Fill(publicDataSet.element);
             System.Windows.Data.CollectionViewSource elementViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("elementViewSource"));
-            
+            typeComboBox.SelectionChanged -= new SelectionChangedEventHandler(typeComboBox_SelectionChanged);
             elementDataGrid.CanUserAddRows = false;
             typeComboBox.SelectedIndex = 0;
+           
         }
 
         private void add_record_Click(object sender, RoutedEventArgs e)
@@ -90,6 +91,7 @@ namespace fcb_public
 
         private void typeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             if (typeComboBox.SelectedIndex == 1 || typeComboBox.SelectedIndex == 2)
             {
                 contentTextBox.Height = 40;
@@ -107,6 +109,8 @@ namespace fcb_public
             else if (typeComboBox.SelectedIndex == 0)
             {
                 contentTextBox.Height = 140;
+                Button newbtn = element_grid.FindName("newbutton") as Button;
+                newbtn.Visibility = Visibility.Hidden;
             }
         }
 
@@ -134,6 +138,11 @@ namespace fcb_public
           
 
 
+        }
+
+        private void typeComboBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            typeComboBox.SelectionChanged+=new SelectionChangedEventHandler(typeComboBox_SelectionChanged);
         }
     }
 }
