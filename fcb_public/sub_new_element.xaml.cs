@@ -90,7 +90,7 @@ namespace fcb_public
 
         private void typeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (typeComboBox.Text == "图片" || typeComboBox.Text == "视频")
+            if (typeComboBox.SelectedIndex == 1 || typeComboBox.SelectedIndex == 2)
             {
                 contentTextBox.Height = 40;
                 //contentTextBox.Visibility = Visibility.Hidden;
@@ -104,7 +104,7 @@ namespace fcb_public
                 newbutton.Click += new RoutedEventHandler(newbutton_Click);
                 
             }
-            else if (typeComboBox.Text == "文档")
+            else if (typeComboBox.SelectedIndex == 0)
             {
                 contentTextBox.Height = 140;
             }

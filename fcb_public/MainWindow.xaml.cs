@@ -49,6 +49,9 @@ namespace fcb_public
             publicDataSetInitializeTableAdapter.Fill(publicDataSet.Initialize);
             System.Windows.Data.CollectionViewSource initializeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("initializeViewSource")));
             initializeViewSource.View.MoveCurrentToFirst();
+
+
+
         }
 
         private void main_grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -206,9 +209,9 @@ namespace fcb_public
         private void element_set_Click(object sender, RoutedEventArgs e)
         {
             subwindow_content.Children.Clear();
-            sub_elementset newelementset = new sub_elementset();
+            sub_new_elementset newelementset = new sub_new_elementset();
             subwindow.Width = 500;
-            subwindow.Height = 640;
+            subwindow.Height = 560;
             newelementset.Name = "newelementset";
             subwindow.Opacity = 0.9;
             subwindow_content.Children.Add(newelementset);

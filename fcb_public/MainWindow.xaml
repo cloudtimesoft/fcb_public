@@ -6,6 +6,8 @@
         <my:publicDataSet x:Key="publicDataSet" />
         <CollectionViewSource x:Key="elset_initViewSource" Source="{Binding Path=elset_init, Source={StaticResource publicDataSet}}" />
         <CollectionViewSource x:Key="initializeViewSource" Source="{Binding Path=Initialize, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="element_setViewSource" Source="{Binding Path=element_set, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="el_elsetViewSource" Source="{Binding Path=el_elset, Source={StaticResource publicDataSet}}" />
     </Window.Resources>
     <Grid x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove"  AllowDrop="True" Drop="main_grid_Drop" PreviewMouseDown="main_grid_PreviewMouseDown" MouseUp="main_grid_MouseUp">
         
