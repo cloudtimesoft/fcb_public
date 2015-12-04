@@ -80,22 +80,28 @@ namespace fcb_public
             List<int> element_ids = (from c in publicDataSet.element where !el_set_ids.Contains(c.ID) select c.ID).ToList();
 
             var element_list = from c in publicDataSet.element where element_ids.Contains(c.ID) select c;
+            slist.Items.Clear();
             foreach (var t in element_list)
             {
                 TextBlock idtxt = new TextBlock();
                 idtxt.Text = t.ID.ToString();
                 idtxt.Width = 1;
                 idtxt.Opacity = 0;
+                //idtxt.Name = "idtxt";
                 TextBlock nametxt = new TextBlock();
                 nametxt.Text = t.title;
+                //nametxt.Name = "nametxt";
                 StackPanel newstack = new StackPanel();
                 newstack.Orientation = Orientation.Horizontal;
                 newstack.Children.Add(idtxt);
+                newstack.RegisterName("idtxt", idtxt);
                 newstack.Children.Add(nametxt);
+                newstack.RegisterName("nametxt", nametxt);
                 slist.Items.Add(newstack);
             }
 
             var Delement_list = from c in publicDataSet.element where !element_ids.Contains(c.ID) select c;
+            
             foreach (var t in Delement_list)
             {
                 TextBlock idtxt = new TextBlock();
