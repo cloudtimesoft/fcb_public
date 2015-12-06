@@ -34,10 +34,10 @@ namespace fcb_public
         bool can_moves=false;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ImageBrush newimage = new ImageBrush();
+            //ImageBrush newimage = new ImageBrush();
 
-            newimage.ImageSource = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "\\image\\" + "background.jpg", UriKind.Absolute));
-            main_grid.Background = newimage;
+            //newimage.ImageSource = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "\\image\\" + "background.jpg", UriKind.Absolute));
+            //main_grid.Background = newimage;
 
             fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
             // 将数据加载到表 elset_init 中。可以根据需要修改此代码。
@@ -50,8 +50,21 @@ namespace fcb_public
             publicDataSetInitializeTableAdapter.Fill(publicDataSet.Initialize);
             System.Windows.Data.CollectionViewSource initializeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("initializeViewSource")));
             initializeViewSource.View.MoveCurrentToFirst();
+            // 将数据加载到表 background_pic 中。可以根据需要修改此代码。
+            fcb_public.publicDataSetTableAdapters.background_picTableAdapter publicDataSetbackground_picTableAdapter = new fcb_public.publicDataSetTableAdapters.background_picTableAdapter();
+            publicDataSetbackground_picTableAdapter.Fill(publicDataSet.background_pic);
+            System.Windows.Data.CollectionViewSource background_picViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("background_picViewSource")));
+            background_picViewSource.View.MoveCurrentToFirst();
 
+            var default_background = from c in publicDataSet.background_pic where c._default == "1" select c;
+            foreach (var t in default_background)
+            {
+                PublicClass.background_url = Directory.GetCurrentDirectory() + "\\image\\" + t.url;
+                ImageBrush newimage = new ImageBrush();
 
+                newimage.ImageSource = new BitmapImage(new Uri(PublicClass.background_url, UriKind.Absolute));
+                main_grid.Background = newimage;
+            }
 
         }
 
@@ -157,10 +170,10 @@ namespace fcb_public
         private void Background_pic_Click(object sender, RoutedEventArgs e)
         {
             subwindow_content.Children.Clear();
-            sub_background newbackground = new sub_background();
-            subwindow.Width = 300;
-            subwindow.Height = 320;
-            newbackground.BackGround += new RoutedPropertyChangedEventHandler<object>(newbackground_BackGround);
+            sub_new_background newbackground = new sub_new_background();
+            subwindow.Width = 720;
+            subwindow.Height = 350;
+            newbackground.NewBackGround += new RoutedPropertyChangedEventHandler<object>(newbackground_NewBackGround);
             newbackground.Name = "newbackground";
             subwindow.Opacity = 0.9;
             subwindow_content.Children.Add(newbackground);
@@ -168,16 +181,13 @@ namespace fcb_public
            // Panel.SetZIndex(subwindow, 1);
         }
 
-        void newbackground_BackGround(object sender, RoutedPropertyChangedEventArgs<object> e)
+        void newbackground_NewBackGround(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-          
-                ImageBrush newimage = new ImageBrush();
-               
-                newimage.ImageSource = new BitmapImage(new Uri(PublicClass.background_url, UriKind.Absolute));
-                main_grid.Background = newimage;
+            ImageBrush newimage = new ImageBrush();
+
+            newimage.ImageSource = new BitmapImage(new Uri(PublicClass.background_url, UriKind.Absolute));
+            main_grid.Background = newimage;
            
-            
-            
         }
 
 

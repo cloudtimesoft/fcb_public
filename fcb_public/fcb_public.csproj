@@ -80,6 +80,9 @@
     <Compile Include="sub_initialize.xaml.cs">
       <DependentUpon>sub_initialize.xaml</DependentUpon>
     </Compile>
+    <Compile Include="sub_new_background.xaml.cs">
+      <DependentUpon>sub_new_background.xaml</DependentUpon>
+    </Compile>
     <Compile Include="sub_new_element.xaml.cs">
       <DependentUpon>sub_new_element.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="sub_initialize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="sub_new_background.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

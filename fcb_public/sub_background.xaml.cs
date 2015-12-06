@@ -89,18 +89,21 @@ namespace fcb_public
             openFileDialog.FileName = string.Empty;
             openFileDialog.FilterIndex = 1;
             openFileDialog.RestoreDirectory = true;
+           
             if (openFileDialog.ShowDialog() == true)
             {
+
+               
+               
             }
             
-                string pic_guid = System.Guid.NewGuid().ToString() + System.IO.Path.GetExtension(openFileDialog.SafeFileName);
-                string aa = openFileDialog.FileName;
-                 PublicClass.background_url = Directory.GetCurrentDirectory() + "\\image\\" + pic_guid;
-                File.Copy(aa, PublicClass.background_url);
           
            // bbb.Source = new BitmapImage(new Uri(filename, UriKind.Absolute));
-            
 
+            string pic_guid = System.Guid.NewGuid().ToString() + System.IO.Path.GetExtension(openFileDialog.SafeFileName);
+            string aa = openFileDialog.FileName;
+            PublicClass.background_url = Directory.GetCurrentDirectory() + "\\image\\" + pic_guid;
+            File.Copy(aa, PublicClass.background_url);
 
             fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
             fcb_public.publicDataSetTableAdapters.background_picTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.background_picTableAdapter();
@@ -120,21 +123,32 @@ namespace fcb_public
                     newimage.Width = 50;
                     newimage.Height = 40;
                     newimage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "\\image\\" + t.url, UriKind.Absolute));
-                    listbox.Items.Add(newimage);
+                    //listbox.Items.Add(newimage);
                    
                    
                 }
                // listbox.LostFocus += new RoutedEventHandler(listbox_LostFocus);
-                listbox.MouseDown += new MouseButtonEventHandler(listbox_MouseDown);
+                //listbox.MouseDown += new MouseButtonEventHandler(listbox_MouseDown);
+                //if (listbox != null)
+                //{
+                //    listbox.SelectionChanged += new SelectionChangedEventHandler(listbox_SelectionChanged);
+                //}
             
         }
 
-        void listbox_MouseDown(object sender, MouseButtonEventArgs e)
+        void listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+            fcb_public.publicDataSetTableAdapters.background_picTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.background_picTableAdapter();
+            System.Windows.Data.CollectionViewSource background_picViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("background_picViewSource"));
+            //int listboxindex = listbox.SelectedIndex;
+            //PublicClass.background_url = Directory.GetCurrentDirectory() + "\\image\\" + publicDataSet.background_pic.FindByID(listboxindex).url;
             RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(this, e);
             args.RoutedEvent = sub_background.BackGroundEvent;
             this.RaiseEvent(args);
         }
+
+      
        
 
 
