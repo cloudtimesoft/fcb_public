@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="fcb_public.sub_new_show"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded" xmlns:my="clr-namespace:fcb_public">
+    <UserControl.Resources>
+        <my:publicDataSet x:Key="publicDataSet" />
+        <CollectionViewSource x:Key="element_setViewSource" Source="{Binding Path=element_set, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="elementViewSource" Source="{Binding Path=element, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="el_elsetViewSource" Source="{Binding Path=el_elset, Source={StaticResource publicDataSet}}" />
+    </UserControl.Resources>
+    <Grid>
+        
+        <DockPanel >
+            <DockPanel DockPanel.Dock="Top" Height="44" >
+                <DockPanel.Background>
+                    <ImageBrush ImageSource="/fcb_public;component/image/title_background.png" />
+                </DockPanel.Background>
+                <Image DockPanel.Dock="Left" Source="/fcb_public;component/image/title_left_border_line.png" Width="1" SnapsToDevicePixels="True" Stretch="Fill" Opacity="0.6"></Image>
+                <Image DockPanel.Dock="Right" Source="/fcb_public;component/image/title_right_border_line.png" Width="1" SnapsToDevicePixels="True" Stretch="Fill" Opacity="0.6"></Image>
+                <Image DockPanel.Dock="Bottom" Source="/fcb_public;component/image/title_bottom_border_line.png" Height="4" Stretch="Fill" Opacity="0.5"></Image>
+                <!--<Label DockPanel.Dock="Bottom" Height="3">
+                    <Label.Background>
+                        <ImageBrush ImageSource="/fcb_public;component/image/title_bottom_border_line.png" />
+                    </Label.Background>
+                </Label>-->
+                    <TextBlock HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Center" Foreground="White" x:Name="big_title">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="1"></DropShadowEffect>
+                </TextBlock.Effect>
+                        </TextBlock>
+            </DockPanel>
+            <Label DockPanel.Dock="Top" Height="10"></Label>
+            <Image DockPanel.Dock="Top" Source="/fcb_public;component/image/title_bottom_border_line.png" Stretch="Fill" Height="1" Opacity="0.4"></Image>
+            <Image DockPanel.Dock="Left" Source="/fcb_public;component/image/title_left_line.png" Stretch="Fill" Width="0.6" Opacity="0.4"></Image>
+            <Image DockPanel.Dock="Right" Source="/fcb_public;component/image/title_right_line.png" Stretch="Fill" Width="0.6" Opacity="0.4"></Image>
+            <Image DockPanel.Dock="Bottom" Source="/fcb_public;component/image/title_bottom_border_line.png" Stretch="Fill" Height="1" Opacity="0.4"></Image>
+            <StackPanel ClipToBounds="True">
+                <StackPanel x:Name="content_stackpanel" >
+            <TextBlock x:Name="small_title" HorizontalAlignment="Center" FontSize="16" Padding="5" TextWrapping="Wrap" Foreground="White">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="1"></DropShadowEffect>
+                </TextBlock.Effect>
+                
+                </TextBlock>
+            <TextBlock x:Name="text_content" Background="#10FFFFFF" TextWrapping="Wrap" xml:space="preserve" Padding="10" Foreground="White">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="2" Opacity="1"></DropShadowEffect>
+                </TextBlock.Effect>
+                
+                </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

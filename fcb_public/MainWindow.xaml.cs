@@ -124,6 +124,7 @@ namespace fcb_public
                 if (aa == "456")
                 {
                     //subwindow1.Height = e.GetPosition(null).Y - old_point.Y + height;
+                    
                     subwindow1.Height--;
                 }
                 //subwindow1.Margin = new Thickness(e.GetPosition(null).X, PublicClass.show_bottom - subwindow1.Height, 0, 0);
@@ -223,7 +224,32 @@ namespace fcb_public
         {
             Panel.SetZIndex(submainwindow, -1);
             subwindow.Opacity = 0;
-           
+
+            mode_show();
+        }
+
+        private void mode_show()
+        {
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.InitializeTableAdapter();
+            publicDataSetInitializeTableAdapter.Fill(publicDataSet.Initialize);
+            foreach (var t in publicDataSet.Initialize)
+            {
+                sub_new_show del_show = main_grid.FindName("s" + t.in_name) as sub_new_show;
+                if (del_show != null)
+                {
+                    main_grid.Children.Remove(del_show);
+                    main_grid.UnregisterName("s" + t.in_name);
+                }
+                sub_new_show newshow = new sub_new_show();
+                newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+                newshow.Width = t.mar_weight;
+                newshow.Height = t.mar_hight;
+                newshow.elset_id = int.Parse(t.in_name);
+                main_grid.Children.Add(newshow);
+                main_grid.RegisterName("s" + t.in_name, newshow);
+
+            }
         }
 
         private void element_set_Click(object sender, RoutedEventArgs e)
@@ -236,6 +262,10 @@ namespace fcb_public
             subwindow.Opacity = 0.9;
             subwindow_content.Children.Add(newelementset);
             Panel.SetZIndex(submainwindow, 3000);
+
+
+
+
         }
 
         private void module_Click(object sender, RoutedEventArgs e)
@@ -409,6 +439,35 @@ namespace fcb_public
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
            
+        }
+
+        private void test_show_Click(object sender, RoutedEventArgs e)
+        {
+            //sub_new_show newshow = new sub_new_show();
+            //newshow.Width = 400;
+            //newshow.Height = 500;
+            
+            //newshow.Margin = new Thickness(100, 100, 0, 0);
+            ////submainwindow.Children.Add(newshow);
+            ////subwindow_content1.Children.Add(newshow);
+            
+            //main_grid.Children.Add(newshow);
+
+
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            foreach (var t in publicDataSet.Initialize)
+            {
+                sub_new_show newshow = new sub_new_show();
+                newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+                newshow.Width = t.mar_weight;
+                newshow.Height = t.mar_hight;
+                main_grid.Children.Add(newshow);
+                main_grid.RegisterName("s" + t.in_name, newshow);
+
+            }
+
+
+
         }
 
    

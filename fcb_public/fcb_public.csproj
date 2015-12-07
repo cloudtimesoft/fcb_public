@@ -89,6 +89,9 @@
     <Compile Include="sub_new_elementset.xaml.cs">
       <DependentUpon>sub_new_elementset.xaml</DependentUpon>
     </Compile>
+    <Compile Include="sub_new_show.xaml.cs">
+      <DependentUpon>sub_new_show.xaml</DependentUpon>
+    </Compile>
     <Compile Include="sub_roll.xaml.cs">
       <DependentUpon>sub_roll.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="sub_new_elementset.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="sub_new_show.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

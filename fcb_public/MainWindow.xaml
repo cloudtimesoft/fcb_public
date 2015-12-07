@@ -10,7 +10,7 @@
         <CollectionViewSource x:Key="el_elsetViewSource" Source="{Binding Path=el_elset, Source={StaticResource publicDataSet}}" />
         <CollectionViewSource x:Key="background_picViewSource" Source="{Binding Path=background_pic, Source={StaticResource publicDataSet}}" />
     </Window.Resources>
-    <Grid x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove"  AllowDrop="True" Drop="main_grid_Drop" PreviewMouseDown="main_grid_PreviewMouseDown" MouseUp="main_grid_MouseUp">
+    <Grid x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove" AllowDrop="True" Drop="main_grid_Drop" PreviewMouseDown="main_grid_PreviewMouseDown" MouseUp="main_grid_MouseUp">
         
         <!--2b398b9e-26c8-4905-9799-0571a05d4993.gif-->
         <Canvas  x:Name="main_canvas"  Height="60" Background="Green" VerticalAlignment="Top" Margin="0,-60,0,0" MouseLeave="main_canvas_MouseLeave">
@@ -20,6 +20,7 @@
             <Button x:Name="Background_pic" Width="30" Height="50" Margin="180,0,0,0" Click="Background_pic_Click">背景</Button>
             <Button x:Name="roll" Width="30" Height="50" Margin="230,0,0,0" Click="roll_Click">滚动</Button>
             <Button x:Name="show_window" Width="30" Height="50" Margin="280,0,0,0" PreviewMouseLeftButtonDown="show_window_PreviewMouseLeftButtonDown">展示</Button>
+            <Button x:Name="test_show" Content="test_show" Click="test_show_Click" Canvas.Left="335" Canvas.Top="28"></Button>
         </Canvas>
 
         <StackPanel x:Name="submainwindow" Panel.ZIndex="-1" Margin="0,0,0,0">

@@ -63,15 +63,17 @@ namespace fcb_public
             else
             {
                 add_record.Content = "新增";
+
+
+                if (typeComboBox.Text !="文档")
+                {
+                    string t = typeComboBox.Text;
+                    File.Copy(openname, PublicClass.background_url);
+                }
                 publicDataSet.element.AddelementRow(titleTextBox.Text, contentTextBox.Text, typeComboBox.Text, DateTime.Parse(start_timeDatePicker.Text), DateTime.Parse(end_timeDatePicker.Text), (bool)statusCheckBox.IsChecked);
                 publicDataSetTableAdapters.Update(publicDataSet.element);
                 publicDataSet.element.AcceptChanges();
                 publicDataSetTableAdapters.Fill(publicDataSet.element);
-
-                if (typeComboBox.SelectedIndex !=0)
-                {
-                    File.Copy(openname, PublicClass.background_url);
-                }
             }
 
             //publicDataSetTableAdapters.Fill(publicDataSet.element);
@@ -106,7 +108,7 @@ namespace fcb_public
             }
             if (typeComboBox.SelectedIndex == 1 || typeComboBox.SelectedIndex == 2 )
             {
-                contentTextBox.Height = 40;
+                contentTextBox.Height = 26;
                 //contentTextBox.Visibility = Visibility.Hidden;
                 Button newbutton = new Button();
                 //newbutton.Name = "newbutton";

@@ -10,6 +10,7 @@
         <CollectionViewSource x:Key="element_setViewSource" Source="{Binding Path=element_set, Source={StaticResource publicDataSet}}" />
         <CollectionViewSource x:Key="el_elsetViewSource" Source="{Binding Path=el_elset, Source={StaticResource publicDataSet}}" />
         <CollectionViewSource x:Key="elementViewSource" Source="{Binding Path=element, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="initializeViewSource" Source="{Binding Path=Initialize, Source={StaticResource publicDataSet}}" />
     </UserControl.Resources>
     <Grid DataContext="{StaticResource element_setViewSource}">
         <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="12,12,0,0" Name="element_setDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="476" SelectionChanged="element_setDataGrid_SelectionChanged">
@@ -85,6 +86,6 @@
         <Button Content="删除" Height="23" HorizontalAlignment="Left" Margin="387,491,0,0" Name="del_elset" VerticalAlignment="Top" Width="75" />
 
             <TextBox  Height="23" HorizontalAlignment="Left" Margin="27,492,0,16" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" />
-
+        <Button Content="展示" Height="23" HorizontalAlignment="Left" Margin="178,492,0,0" Name="show" VerticalAlignment="Top" Width="75" Click="show_Click" />
     </Grid>
 </UserControl>

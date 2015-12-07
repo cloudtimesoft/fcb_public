@@ -23,6 +23,15 @@ namespace fcb_public
         {
             InitializeComponent();
         }
+
+        public static readonly RoutedEvent ModeShowEvent = EventManager.RegisterRoutedEvent("ModeShow", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(sub_new_elementset));
+        public event RoutedPropertyChangedEventHandler<object> BackGround
+        {
+            add { AddHandler(ModeShowEvent, value); }
+            remove { RemoveHandler(ModeShowEvent, value); }
+        }
+
+
         int index=1;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -81,7 +90,10 @@ namespace fcb_public
             List<int> element_ids = (from c in publicDataSet.element where !el_set_ids.Contains(c.ID) select c.ID).ToList();
 
             var element_list = from c in publicDataSet.element where element_ids.Contains(c.ID) select c;
-            slist.Items.Clear();
+
+                slist.Items.Clear();
+                //slist.ItemsSource = null;
+
             foreach (var t in element_list)
             {
 
@@ -199,6 +211,36 @@ namespace fcb_public
 
 
             }
+        }
+
+        private void show_Click(object sender, RoutedEventArgs e)
+        {
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.InitializeTableAdapter();
+
+            if (show.Content.ToString() == "展示")
+            {
+                publicDataSet.Initialize.AddInitializeRow(iDTextBox.Text, false, (int)(SystemParameters.PrimaryScreenWidth - 300) / 2, (int)(SystemParameters.PrimaryScreenHeight - 400) / 2, 300, 400);
+                publicDataSetInitializeTableAdapter.Update(publicDataSet.Initialize);
+                publicDataSet.AcceptChanges();
+                show.Content = "取消展示";
+            }
+            else
+            {
+                var del_row = from c in publicDataSet.Initialize where c.in_name == iDTextBox.Text select c;
+                foreach (var t in del_row)
+                {
+                    t.Delete();
+                }
+                publicDataSetInitializeTableAdapter.Update(publicDataSet.Initialize);
+                publicDataSet.AcceptChanges();
+                show.Content = "展示";
+            }
+
+
+            RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(this, e);
+            args.RoutedEvent = sub_new_elementset.ModeShowEvent;
+            this.RaiseEvent(args);
         }
     }
 }
