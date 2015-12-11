@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="fcb_public.test"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="300" xmlns:my="clr-namespace:fcb_public" Loaded="UserControl_Loaded">
+    
+    <UserControl.Resources>
+        <my:publicDataSet x:Key="publicDataSet" />
+        <CollectionViewSource x:Key="elementViewSource" Source="{Binding Path=element, Source={StaticResource publicDataSet}}" />
+        <DataTemplate x:Key="ComboBoxTemplate">
+            <Label Content="{Binding Path=Name}"></Label>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+        <Grid x:Name="text_grid">
+        <StackPanel x:Name="text_stackpanel" Background="Red" >
+            <TextBlock x:Name="textblock">asdada</TextBlock>
+        </StackPanel>
+    </Grid>
+    
+</UserControl>
+   

@@ -23,7 +23,7 @@ namespace fcb_public
         {
             InitializeComponent();
         }
-
+       
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -56,5 +56,9 @@ namespace fcb_public
  
             }
         }
+
+        
+
+
     }
 }

@@ -54,7 +54,7 @@ namespace fcb_public
             System.Windows.Data.CollectionViewSource elementViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("elementViewSource"));
             if (element_quedin.Content.ToString() == "添加")
             {
-                publicDataSet.element.AddelementRow(title_textbox.Text, content_textbox.Text, type_textbox.Text, DateTime.Parse(starttime_textbox.Text), DateTime.Parse(endtime_textbox.Text), true);
+                publicDataSet.element.AddelementRow(title_textbox.Text, content_textbox.Text, type_textbox.Text, DateTime.Parse(starttime_textbox.Text), DateTime.Parse(endtime_textbox.Text), true, 1);
                 elementViewSource.View.MoveCurrentToLast();
                 
                 publicDataSetTableAdapters.Update(publicDataSet.element);

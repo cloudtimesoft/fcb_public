@@ -70,7 +70,7 @@ namespace fcb_public
                     string t = typeComboBox.Text;
                     File.Copy(openname, PublicClass.background_url);
                 }
-                publicDataSet.element.AddelementRow(titleTextBox.Text, contentTextBox.Text, typeComboBox.Text, DateTime.Parse(start_timeDatePicker.Text), DateTime.Parse(end_timeDatePicker.Text), (bool)statusCheckBox.IsChecked);
+                publicDataSet.element.AddelementRow(titleTextBox.Text, contentTextBox.Text, typeComboBox.Text, DateTime.Parse(start_timeDatePicker.Text), DateTime.Parse(end_timeDatePicker.Text), (bool)statusCheckBox.IsChecked,int.Parse(show_timeTextBox.Text));
                 publicDataSetTableAdapters.Update(publicDataSet.element);
                 publicDataSet.element.AcceptChanges();
                 publicDataSetTableAdapters.Fill(publicDataSet.element);

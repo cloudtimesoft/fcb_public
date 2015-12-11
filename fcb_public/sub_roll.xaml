@@ -24,6 +24,7 @@
         <TextBox Name="title_textbox" Height="30" Width="300" Margin="40,200,0,0" Text="{Binding Path=title, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
         <TextBox Name="txt_textbox" Height="30" Width="300" Margin="40,265,0,0" Text="{Binding Path=txt, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
         <Button Name="roll_quedin" Margin="300,330,0,0" HorizontalAlignment="Left" Height="30" Width="30" Click="roll_quedin_Click">添加</Button>
+        <Button Name="show_roll" Margin="250,330,0,0" HorizontalAlignment="Left" Height="30" Width="30">展示</Button>
 
     </Grid>
 </UserControl>

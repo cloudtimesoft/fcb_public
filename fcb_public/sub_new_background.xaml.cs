@@ -166,6 +166,9 @@ namespace fcb_public
                 publicDataSet.AcceptChanges();
                 load_img();
 
+
+                int s = publicDataSet.background_pic.Count;
+                int a;
             }
 
 

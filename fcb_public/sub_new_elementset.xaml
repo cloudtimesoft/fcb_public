@@ -57,8 +57,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label Content="status:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
-            <CheckBox Content="" Grid.Column="1" Grid.Row="0" Height="16" HorizontalAlignment="Left" IsChecked="{Binding Path=status, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="3" Name="statusCheckBox" VerticalAlignment="Center" />
+           
         </Grid>
         <Grid HorizontalAlignment="Left" Margin="12,256,0,0" Name="grid3" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
@@ -68,8 +67,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label Content="start time:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
-            <DatePicker Grid.Column="1" Grid.Row="0" Height="25" HorizontalAlignment="Left" Margin="3" Name="start_timeDatePicker" SelectedDate="{Binding Path=start_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="115" />
+            
         </Grid>
         <Grid HorizontalAlignment="Left" Margin="294,256,0,0" Name="grid4" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
@@ -79,8 +77,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label Content="end time:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
-            <DatePicker Grid.Column="1" Grid.Row="0" Height="25" HorizontalAlignment="Left" Margin="3" Name="end_timeDatePicker" SelectedDate="{Binding Path=end_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="115" />
+           
         </Grid>
         <Button Content="新增" Height="23" HorizontalAlignment="Left" Margin="286,491,0,0" Name="add_elset" VerticalAlignment="Top" Width="75" Click="add_elset_Click" />
         <Button Content="删除" Height="23" HorizontalAlignment="Left" Margin="387,491,0,0" Name="del_elset" VerticalAlignment="Top" Width="75" />

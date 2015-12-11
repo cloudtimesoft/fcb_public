@@ -37,7 +37,8 @@
             <Image DockPanel.Dock="Left" Source="/fcb_public;component/image/title_left_line.png" Stretch="Fill" Width="0.6" Opacity="0.4"></Image>
             <Image DockPanel.Dock="Right" Source="/fcb_public;component/image/title_right_line.png" Stretch="Fill" Width="0.6" Opacity="0.4"></Image>
             <Image DockPanel.Dock="Bottom" Source="/fcb_public;component/image/title_bottom_border_line.png" Stretch="Fill" Height="1" Opacity="0.4"></Image>
-            <StackPanel ClipToBounds="True">
+            <StackPanel ClipToBounds="True" Background="#10FFFFFF">
+
                 <StackPanel x:Name="content_stackpanel" >
             <TextBlock x:Name="small_title" HorizontalAlignment="Center" FontSize="16" Padding="5" TextWrapping="Wrap" Foreground="White">
                 <TextBlock.Effect>
@@ -45,14 +46,16 @@
                 </TextBlock.Effect>
                 
                 </TextBlock>
-            <TextBlock x:Name="text_content" Background="#10FFFFFF" TextWrapping="Wrap" xml:space="preserve" Padding="10" Foreground="White">
+            <TextBlock x:Name="text_content"  TextWrapping="Wrap" xml:space="preserve" Padding="10" Foreground="White">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="Black" Direction="315" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                 </TextBlock.Effect>
-                
                 </TextBlock>
+                    <MediaElement x:Name="show_video"></MediaElement>
+                    <Image x:Name="show_image"></Image>
                 </StackPanel>
             </StackPanel>
         </DockPanel>
+        
     </Grid>
 </UserControl>

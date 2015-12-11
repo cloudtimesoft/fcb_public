@@ -66,13 +66,13 @@ namespace fcb_public
                 element_setViewSource.View.MoveCurrentToNext();
                 add_elset.Content = "保存";
                 elset_nameTextBox.Text = "";
-                statusCheckBox.IsChecked = true;
+             
  
             }
             else
             {
                 add_elset.Content = "新增";
-                publicDataSet.element_set.Addelement_setRow(elset_nameTextBox.Text, DateTime.Parse(start_timeDatePicker.Text), DateTime.Parse(end_timeDatePicker.Text), (bool)statusCheckBox.IsChecked);
+                publicDataSet.element_set.Addelement_setRow(elset_nameTextBox.Text);
                 publicDataSetelement_setTableAdapter.Update(publicDataSet.element_set);
                 publicDataSet.AcceptChanges();
                 publicDataSetelement_setTableAdapter.Fill(publicDataSet.element_set);
@@ -218,7 +218,7 @@ namespace fcb_public
             fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
             fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.InitializeTableAdapter();
 
-            if (show.Content.ToString() == "展示")
+            if (show.Content.ToString() == "展示" && iDTextBox.Text!="")
             {
                 publicDataSet.Initialize.AddInitializeRow(iDTextBox.Text, false, (int)(SystemParameters.PrimaryScreenWidth - 300) / 2, (int)(SystemParameters.PrimaryScreenHeight - 400) / 2, 300, 400);
                 publicDataSetInitializeTableAdapter.Update(publicDataSet.Initialize);

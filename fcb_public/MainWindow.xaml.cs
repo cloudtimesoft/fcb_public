@@ -32,12 +32,18 @@ namespace fcb_public
         double weight;
         double height;
         bool can_moves=false;
+
+        string ctrl_name = "";
+        string process_type = "";
+        Thickness old_margin = new Thickness();
+        double old_width;
+        double old_height;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //ImageBrush newimage = new ImageBrush();
+            //ImageBrush newimages = new ImageBrush();
 
-            //newimage.ImageSource = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "\\image\\" + "background.jpg", UriKind.Absolute));
-            //main_grid.Background = newimage;
+            //newimages.ImageSource = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "\\image\\" + "background.jpg", UriKind.Absolute));
+            //main_grid.Background = newimages;
 
             fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
             // 将数据加载到表 elset_init 中。可以根据需要修改此代码。
@@ -70,12 +76,50 @@ namespace fcb_public
 
         private void main_grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            old_point = e.GetPosition(null);
+            old_point = e.GetPosition(main_grid);
             weight = subwindow1.Width;
             height = subwindow1.Height;
             if (aa == "123")
             {
                 can_moves = true;
+            }
+
+            foreach (var s in main_grid.Children)
+            {
+                sub_new_show newshow = s as sub_new_show;
+                if (newshow != null)
+                {
+                    if (e.GetPosition(main_grid).X > newshow.Margin.Left && e.GetPosition(main_grid).X < newshow.Margin.Left + newshow.Width &&e.GetPosition(main_grid).Y>newshow.Margin.Top&&e.GetPosition(main_grid).Y<newshow.Margin.Top+44)
+                    {
+                        ctrl_name = newshow.Name;
+                        process_type = "move";
+                        old_margin = newshow.Margin;
+                        main_grid.Cursor = Cursors.Hand;
+                    }
+                    else if (e.GetPosition(main_grid).X > newshow.Margin.Left - 5 && e.GetPosition(main_grid).X < newshow.Margin.Left + 5 && e.GetPosition(main_grid).Y > newshow.Margin.Top + 54 && e.GetPosition(main_grid).Y < newshow.Margin.Top + newshow.Height)
+                    {
+                        //main_grid.Cursor = Cursors.ScrollSE;
+                        ctrl_name = newshow.Name;
+                        process_type = "leftmove";
+                        old_margin = newshow.Margin;
+                        old_width = newshow.Width;
+                    }
+                    else if (e.GetPosition(main_grid).X > newshow.Margin.Left + newshow.Width - 5 && e.GetPosition(main_grid).X < newshow.Margin.Left + newshow.Width + 5 && e.GetPosition(main_grid).Y > newshow.Margin.Top + 54 && e.GetPosition(main_grid).Y < newshow.Margin.Top + newshow.Height)
+                    {
+                        ctrl_name = newshow.Name;
+                        process_type = "rightmove";
+                        old_margin = newshow.Margin;
+                        old_width = newshow.Width;
+                    }
+                    else if (e.GetPosition(main_grid).X > newshow.Margin.Left && e.GetPosition(main_grid).X < newshow.Margin.Left + newshow.Width && e.GetPosition(main_grid).Y > newshow.Margin.Top +newshow.Height-5 && e.GetPosition(main_grid).Y < newshow.Margin.Top +newshow.Height+5)
+                    {
+                        ctrl_name = newshow.Name;
+                        process_type = "bottommove";
+                        old_margin = newshow.Margin;
+                        old_height = newshow.Height;
+                        main_grid.Cursor = Cursors.Hand;
+                    }
+                }
             }
            
         }
@@ -93,9 +137,15 @@ namespace fcb_public
                 ta.FillBehavior = FillBehavior.Stop;
               
             }
+            //fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+            //fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.InitializeTableAdapter();
+            //foreach (var s in publicDataSet.Initialize)
+            //{
+            //    PublicClass.show_left = s.mar_hight;
+            //    PublicClass
+            //}
 
-
-            if (e.GetPosition(null).X > PublicClass.show_right - 3 && e.GetPosition(null).X < PublicClass.show_right + 3)
+            if ((e.GetPosition(null).Y > PublicClass.show_bottom - 3 && e.GetPosition(null).Y < PublicClass.show_bottom + 3))
             {
                 main_grid.Cursor = Cursors.SizeWE;
                 aa = "123";
@@ -127,6 +177,29 @@ namespace fcb_public
                     
                     subwindow1.Height--;
                 }
+
+
+                sub_new_show newshow = main_grid.FindName(ctrl_name) as sub_new_show;
+                if (newshow != null && process_type=="move")
+                {
+                    newshow.Margin = new Thickness(old_margin.Left + e.GetPosition(main_grid).X - old_point.X, old_margin.Top + e.GetPosition(main_grid).Y - old_point.Y, 0, 0);
+                }
+                else if (newshow != null && process_type == "leftmove")
+                {
+                    newshow.Width = old_width - (e.GetPosition(main_grid).X - old_margin.Left);
+                    newshow.Margin = new Thickness(old_margin.Left - (old_margin.Left-e.GetPosition(main_grid).X  ), old_margin.Top, 0, 0);
+                }
+                else if (newshow != null && process_type == "rightmove")
+                {
+                    newshow.Width = old_width + (e.GetPosition(main_grid).X-old_point.X);
+                    //newshow.Margin = new Thickness(old_margin.Left - (old_margin.Left - e.GetPosition(main_grid).X), old_margin.Top, 0, 0);
+                }
+                else if (newshow != null && process_type == "bottommove")
+                {
+                    newshow.Height = old_height + (e.GetPosition(main_grid).Y - old_point.Y);
+                    //newshow.Margin = new Thickness(old_margin.Left - (old_margin.Left - e.GetPosition(main_grid).X), old_margin.Top, 0, 0);
+                }
+
                 //subwindow1.Margin = new Thickness(e.GetPosition(null).X, PublicClass.show_bottom - subwindow1.Height, 0, 0);
             }
           
@@ -136,13 +209,30 @@ namespace fcb_public
 
         private void main_grid_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            PublicClass.show_left = subwindow1.Margin.Left;
-            PublicClass.show_right = subwindow1.Margin.Left + subwindow1.Width;
-            PublicClass.show_bottom = subwindow1.Margin.Top + subwindow1.Height-45;
-            //subwindow1.Background = Brushes.White;
-            aa = "";
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.InitializeTableAdapter();
+            publicDataSetInitializeTableAdapter.Fill(publicDataSet.Initialize);
 
+            sub_new_show newshow = main_grid.FindName(ctrl_name) as sub_new_show;
+            if (newshow != null)
+            {
+                var s = from c in publicDataSet.Initialize where c.in_name == ctrl_name.Substring(1,ctrl_name.Length-1) select c;
+                foreach (var t in s)
+                {
+                    t.mar_left = (int)newshow.Margin.Left;
+                    t.mar_top = (int)newshow.Margin.Top;
+                    t.mar_weight = (int)newshow.Width;
+                    t.mar_hight = (int)newshow.Height;
+                }
+                publicDataSetInitializeTableAdapter.Update(publicDataSet.Initialize);
+                publicDataSet.AcceptChanges();
+            }
+
+            ctrl_name = "";
+            process_type = "";
             can_moves = false;
+
+
         }
 
         private void element_Click(object sender, RoutedEventArgs e)
@@ -241,13 +331,21 @@ namespace fcb_public
                     main_grid.Children.Remove(del_show);
                     main_grid.UnregisterName("s" + t.in_name);
                 }
+              
                 sub_new_show newshow = new sub_new_show();
                 newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
                 newshow.Width = t.mar_weight;
                 newshow.Height = t.mar_hight;
+                newshow.Name = "s" + t.in_name;
+               
                 newshow.elset_id = int.Parse(t.in_name);
                 main_grid.Children.Add(newshow);
+                //Panel.SetZIndex(submainwindow1, 3000);
                 main_grid.RegisterName("s" + t.in_name, newshow);
+                
+
+
+           
 
             }
         }
@@ -290,7 +388,9 @@ namespace fcb_public
             subwindow.Opacity = 0.9;
             subwindow_content.Children.Add(newroll);
             Panel.SetZIndex(submainwindow, 3000);
+           
         }
+
 
         private void show_window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -340,9 +440,9 @@ namespace fcb_public
             newshow.PreviewMouseRightButtonDown += new MouseButtonEventHandler(newshow_PreviewMouseRightButtonDown);
             subwindow_content1.Children.Add(newshow);
 
-            PublicClass.show_left = subwindow1.Margin.Left;
-            PublicClass.show_right = subwindow1.Margin.Left + subwindow1.Width;
-            PublicClass.show_bottom = subwindow1.Margin.Top + subwindow1.Height-45;
+            //PublicClass.show_left = subwindow1.Margin.Left;
+            //PublicClass.show_right = subwindow1.Margin.Left + subwindow1.Width;
+            //PublicClass.show_bottom = subwindow1.Margin.Top + subwindow1.Height-45;
 
            
 
@@ -454,17 +554,25 @@ namespace fcb_public
             //main_grid.Children.Add(newshow);
 
 
-            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
-            foreach (var t in publicDataSet.Initialize)
-            {
-                sub_new_show newshow = new sub_new_show();
-                newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
-                newshow.Width = t.mar_weight;
-                newshow.Height = t.mar_hight;
-                main_grid.Children.Add(newshow);
-                main_grid.RegisterName("s" + t.in_name, newshow);
+            //fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            //foreach (var t in publicDataSet.Initialize)
+            //{
+            //    sub_new_show newshow = new sub_new_show();
+            //    newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+            //    newshow.Width = t.mar_weight;
+            //    newshow.Height = t.mar_hight;
+            //    main_grid.Children.Add(newshow);
+            //    main_grid.RegisterName("s" + t.in_name, newshow);
 
-            }
+            //}
+
+
+            test newtest = new test();
+            newtest.Margin = new Thickness(810, 300, 0, 0);
+            newtest.VerticalAlignment = VerticalAlignment.Bottom;
+            newtest.HorizontalAlignment = HorizontalAlignment.Left;
+            newtest.Width = main_grid.Width;
+            main_grid.Children.Add(newtest);
 
 
 

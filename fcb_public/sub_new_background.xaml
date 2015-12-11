@@ -10,12 +10,10 @@
         <CollectionViewSource x:Key="background_picViewSource" Source="{Binding Path=background_pic, Source={StaticResource publicDataSet}}" />
     </UserControl.Resources>
     <Grid DataContext="{StaticResource background_picViewSource}">
-        <GroupBox Margin="5,10,0,0" Height="280"  Width="660" VerticalAlignment="Top" >
+        <GroupBox Margin="5,10,0,0" Height="260"  Width="660" VerticalAlignment="Top" >
             <ScrollViewer x:Name="canvas_scrollv" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
-              
               <Canvas x:Name="background" Width="620" Height="260" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="Yellow">
             </Canvas>
-               
             </ScrollViewer>
         </GroupBox>
         <Button x:Name="upload" Content="上传" Width="80" Height="26" Click="upload_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,280,0,0"></Button>
