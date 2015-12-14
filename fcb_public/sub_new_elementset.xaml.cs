@@ -237,7 +237,7 @@ namespace fcb_public
                 show.Content = "展示";
             }
 
-
+            PublicClass.show = "showelementset";
             RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(this, e);
             args.RoutedEvent = sub_new_elementset.ModeShowEvent;
             this.RaiseEvent(args);

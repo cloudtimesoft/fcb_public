@@ -12,5 +12,7 @@ namespace fcb_public
         public static double show_left;
         public static double show_right;
         public static double show_bottom;
+        public static int roll_index;
+        public static string show;
     }
 }

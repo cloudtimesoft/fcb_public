@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using System.IO;
+using System.Windows.Media.Animation;
 
 namespace fcb_public
 {
@@ -86,7 +87,7 @@ namespace fcb_public
                 init_publicdataset = true;
                // newtimer.Interval = 10000;
             }
-            int s;
+    
             if (element_count > 0)
             {
                 var show_el = from el in publicDataSet.element join el_set in publicDataSet.el_elset on el.ID equals el_set.element_ID where el.status == true where el_set.element_set_ID==elset_id select el;
@@ -162,6 +163,19 @@ namespace fcb_public
 
 
 
+        }
+
+        private void text_content_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ThicknessAnimation txt_margin_animation = new ThicknessAnimation();
+            txt_margin_animation.From = new Thickness(0, 0, 0, 0);
+            txt_margin_animation.To = new Thickness(0, SystemParameters.PrimaryScreenHeight - text_content.ActualHeight - 110, 0, 0);
+            txt_margin_animation.Duration = TimeSpan.FromSeconds(500);
+            text_content.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
+
+
+            text_content.FontSize=36;
+        
         }
 
 

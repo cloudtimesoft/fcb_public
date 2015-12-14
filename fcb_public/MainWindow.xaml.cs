@@ -71,7 +71,7 @@ namespace fcb_public
                 newimage.ImageSource = new BitmapImage(new Uri(PublicClass.background_url, UriKind.Absolute));
                 main_grid.Background = newimage;
             }
-
+            main_canvas.Width = main_grid.ActualWidth;
         }
 
         private void main_grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -320,35 +320,83 @@ namespace fcb_public
 
         private void mode_show()
         {
-            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
-            fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.InitializeTableAdapter();
-            publicDataSetInitializeTableAdapter.Fill(publicDataSet.Initialize);
-            foreach (var t in publicDataSet.Initialize)
+            if (PublicClass.show == "showelementset")
             {
-                sub_new_show del_show = main_grid.FindName("s" + t.in_name) as sub_new_show;
-                if (del_show != null)
+                fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+                fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.InitializeTableAdapter();
+                publicDataSetInitializeTableAdapter.Fill(publicDataSet.Initialize);
+                foreach (var t in publicDataSet.Initialize)
                 {
-                    main_grid.Children.Remove(del_show);
-                    main_grid.UnregisterName("s" + t.in_name);
+                    sub_new_show del_show = main_grid.FindName("s" + t.in_name) as sub_new_show;
+                    if (del_show != null)
+                    {
+                        main_grid.Children.Remove(del_show);
+                        main_grid.UnregisterName("s" + t.in_name);
+                    }
+
+                    sub_new_show newshow = new sub_new_show();
+                    newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+                    newshow.Width = t.mar_weight;
+                    newshow.Height = t.mar_hight;
+                    newshow.Name = "s" + t.in_name;
+
+                    newshow.elset_id = int.Parse(t.in_name);
+                    main_grid.Children.Add(newshow);
+                    //Panel.SetZIndex(submainwindow1, 3000);
+                    main_grid.RegisterName("s" + t.in_name, newshow);
+
                 }
-              
-                sub_new_show newshow = new sub_new_show();
-                newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
-                newshow.Width = t.mar_weight;
-                newshow.Height = t.mar_hight;
-                newshow.Name = "s" + t.in_name;
+            }
+
+            if (PublicClass.show == "showroll")
+            {
+
+
+                TextBlock newtextblock = new TextBlock();
+
+                fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+                fcb_public.publicDataSetTableAdapters.rollTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.rollTableAdapter();
+                publicDataSetTableAdapters.Fill(publicDataSet.roll);
+
+                newtextblock.Text = publicDataSet.roll.FindByID(PublicClass.roll_index).txt;
+                newtextblock.FontSize = 30;
+                newtextblock.FontWeight = FontWeights.Black;
+                newtextblock.VerticalAlignment = VerticalAlignment.Center;
+                StackPanel newstackpanel = new StackPanel();
+
+                newstackpanel.Width = main_grid.ActualWidth;
+                newstackpanel.Height = 36;
+                newstackpanel.Background = Brushes.Green;
+                //newstackpanel.HorizontalAlignment = HorizontalAlignment.Left;
+                newstackpanel.VerticalAlignment = VerticalAlignment.Bottom;
+                newstackpanel.Orientation = Orientation.Vertical;
+                //newtextblock.Text ="saddddddddddaaaaaaaaaaaaaaaaaaaaaaaa";
+                newstackpanel.Children.Add(newtextblock);
+                big_grid.Children.Add(newstackpanel);
+
+
+
+                //TextBlock newtextblock = sender as TextBlock;
                
-                newshow.elset_id = int.Parse(t.in_name);
-                main_grid.Children.Add(newshow);
-                //Panel.SetZIndex(submainwindow1, 3000);
-                main_grid.RegisterName("s" + t.in_name, newshow);
-                
 
 
-           
+
+               
+                    ThicknessAnimation txt_margin_animation = new ThicknessAnimation();
+                    txt_margin_animation.From = new Thickness(SystemParameters.PrimaryScreenHeight - newtextblock.ActualWidth - 110, 0, 0, 0);
+                    txt_margin_animation.To = new Thickness(0, 0, 0, 0);
+                    txt_margin_animation.Duration = TimeSpan.FromSeconds(100);
+                    newtextblock.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
+               
+
+
+
 
             }
+            
         }
+
+     
 
         private void element_set_Click(object sender, RoutedEventArgs e)
         {
@@ -567,14 +615,23 @@ namespace fcb_public
             //}
 
 
-            test newtest = new test();
-            newtest.Margin = new Thickness(810, 300, 0, 0);
-            newtest.VerticalAlignment = VerticalAlignment.Bottom;
-            newtest.HorizontalAlignment = HorizontalAlignment.Left;
-            newtest.Width = main_grid.Width;
-            main_grid.Children.Add(newtest);
+            //test newtest = new test();
+            //newtest.Margin = new Thickness(810, 300, 0, 0);
+            //newtest.VerticalAlignment = VerticalAlignment.Bottom;
+            //newtest.HorizontalAlignment = HorizontalAlignment.Left;
+            //newtest.VerticalAlignment = VerticalAlignment.Bottom;
+            
+            //newtest.Width = main_grid.ActualWidth;
+            //main_grid.Children.Add(newtest);
 
 
+          
+
+
+        }
+
+        private void big_grid_MouseMove(object sender, MouseEventArgs e)
+        {
 
         }
 

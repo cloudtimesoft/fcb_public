@@ -17,21 +17,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
                 <DataGridTextColumn x:Name="elset_nameColumn" Binding="{Binding Path=elset_name}" Header="elset name" Width="SizeToHeader" />
-                <DataGridTemplateColumn x:Name="start_timeColumn" Header="start time" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Path=start_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="end_timeColumn" Header="end time" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Path=end_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="status" Width="SizeToHeader" />
             </DataGrid.Columns>
         </DataGrid>
         <ListBox Height="170" HorizontalAlignment="Left" Margin="12,304,0,0" Name="slist" VerticalAlignment="Top" Width="212" />

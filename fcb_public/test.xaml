@@ -15,7 +15,7 @@
         </DataTemplate>
     </UserControl.Resources>
     
-        <Grid x:Name="text_grid">
+        <Grid x:Name="text_grid" >
         <StackPanel x:Name="text_stackpanel" Background="Red" >
             <TextBlock x:Name="textblock">asdada</TextBlock>
         </StackPanel>

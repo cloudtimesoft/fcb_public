@@ -47,13 +47,24 @@ namespace fcb_public
         {
             fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
             fcb_public.publicDataSetTableAdapters.rollTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.rollTableAdapter();
+            
             System.Windows.Data.CollectionViewSource initializeViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("rollViewSource"));
             if (roll_quedin.Content.ToString() == "添加")
             {
                 publicDataSet.roll.AddrollRow(title_textbox.Text, txt_textbox.Text);
                 publicDataSetTableAdapters.Update(publicDataSet.roll);
                 publicDataSet.roll.AcceptChanges();
+                publicDataSetTableAdapters.Fill(publicDataSet.roll);
  
+            }
+        }
+
+        private void show_roll_Click(object sender, RoutedEventArgs e)
+        {
+            if (iDTextBox.Text != null)
+            {
+                PublicClass.roll_index = int.Parse(iDTextBox.Text);
+                PublicClass.show = "showroll";
             }
         }
 

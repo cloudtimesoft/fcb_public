@@ -46,7 +46,7 @@
                 </TextBlock.Effect>
                 
                 </TextBlock>
-            <TextBlock x:Name="text_content"  TextWrapping="Wrap" xml:space="preserve" Padding="10" Foreground="White">
+            <TextBlock x:Name="text_content"  TextWrapping="Wrap" xml:space="preserve" Padding="10" Foreground="White" PreviewMouseUp="text_content_PreviewMouseUp">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="Black" Direction="315" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                 </TextBlock.Effect>
