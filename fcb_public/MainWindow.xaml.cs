@@ -360,26 +360,26 @@ namespace fcb_public
 
                 //newtextblock.Text = publicDataSet.roll.FindByID(PublicClass.roll_index).txt;
                 var select = from c in publicDataSet.roll where c.status == true select c;
-                int s1 = select.Count();
-                int step = 0;
-                int temp_step = 0;
-                if (s1 > 0)
-                {
-                    foreach (var s in select)
-                    {
-                        if (step == temp_step)
-                        {
-                            newtextblock.Text += s.txt;
+                //int s1 = select.Count();
+                //int step = 0;
+                //int temp_step = 0;
+                //if (s1 > 0)
+                //{
+                //    foreach (var s in select)
+                //    {
+                //        if (step == temp_step)
+                //        {
+                //            newtextblock.Text = s.txt;
                            
-                        }
-                        temp_step++;
-                    }
-                    step++;
-                }
-                if (step > s1)
-                {
-                    step = 0;
-                }
+                //        }
+                //        temp_step++;
+                //    }
+                //    step++;
+                //}
+                //if (step > s1)
+                //{
+                //    step = 0;
+                //}
 
                 newtextblock.FontSize = 30;
                 
