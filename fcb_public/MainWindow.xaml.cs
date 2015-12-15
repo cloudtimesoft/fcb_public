@@ -358,10 +358,36 @@ namespace fcb_public
                 fcb_public.publicDataSetTableAdapters.rollTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.rollTableAdapter();
                 publicDataSetTableAdapters.Fill(publicDataSet.roll);
 
-                newtextblock.Text = publicDataSet.roll.FindByID(PublicClass.roll_index).txt;
+                //newtextblock.Text = publicDataSet.roll.FindByID(PublicClass.roll_index).txt;
+                var select = from c in publicDataSet.roll where c.status == true select c;
+                int s1 = select.Count();
+                int step = 0;
+                int temp_step = 0;
+                if (s1 > 0)
+                {
+                    foreach (var s in select)
+                    {
+                        if (step == temp_step)
+                        {
+                            newtextblock.Text += s.txt;
+                           
+                        }
+                        temp_step++;
+                    }
+                    step++;
+                }
+                if (step > s1)
+                {
+                    step = 0;
+                }
+
                 newtextblock.FontSize = 30;
+                
+                //newtextblock.Width = newtextblock.Text.Length*20;
+                newtextblock.Background = Brushes.AliceBlue;
                 newtextblock.FontWeight = FontWeights.Black;
-                newtextblock.VerticalAlignment = VerticalAlignment.Center;
+                newtextblock.TextWrapping = TextWrapping.NoWrap;
+                //newtextblock.VerticalAlignment = VerticalAlignment.Center;
                 StackPanel newstackpanel = new StackPanel();
 
                 newstackpanel.Width = main_grid.ActualWidth;
@@ -369,7 +395,7 @@ namespace fcb_public
                 newstackpanel.Background = Brushes.Green;
                 //newstackpanel.HorizontalAlignment = HorizontalAlignment.Left;
                 newstackpanel.VerticalAlignment = VerticalAlignment.Bottom;
-                newstackpanel.Orientation = Orientation.Vertical;
+                //newstackpanel.Orientation = Orientation.Vertical;
                 //newtextblock.Text ="saddddddddddaaaaaaaaaaaaaaaaaaaaaaaa";
                 newstackpanel.Children.Add(newtextblock);
                 big_grid.Children.Add(newstackpanel);
@@ -377,15 +403,21 @@ namespace fcb_public
 
 
                 //TextBlock newtextblock = sender as TextBlock;
-               
+
+                t1.Text = "aaa";
+                t1.UpdateLayout();
+                double tt1 = t1.ActualWidth;
+                t1.Text = "aaaaaaaaaaaaaaaaaa";
+                t1.UpdateLayout();
+                tt1 = t1.ActualWidth;
 
 
-
-               
+                newtextblock.UpdateLayout();
                     ThicknessAnimation txt_margin_animation = new ThicknessAnimation();
-                    txt_margin_animation.From = new Thickness(SystemParameters.PrimaryScreenHeight - newtextblock.ActualWidth - 110, 0, 0, 0);
-                    txt_margin_animation.To = new Thickness(0, 0, 0, 0);
-                    txt_margin_animation.Duration = TimeSpan.FromSeconds(100);
+                    txt_margin_animation.From = new Thickness(SystemParameters.PrimaryScreenWidth, 0, 0, 0);
+                    txt_margin_animation.To = new Thickness(-newtextblock.ActualWidth, 0, 0, 0);
+                    txt_margin_animation.Duration = TimeSpan.FromSeconds(5);
+                    double t = newtextblock.ActualHeight;
                     newtextblock.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
                
 

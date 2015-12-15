@@ -69,8 +69,8 @@
 
 
 
-       
-    </Canvas>
+            <TextBlock x:Name="t1"></TextBlock>
+        </Canvas>
         
     </Grid>
 </Window>

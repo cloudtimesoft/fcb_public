@@ -13,15 +13,16 @@
         <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="141" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="0,26,0,0" Name="rollDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="400">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" Visibility="Hidden" />
-                <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Path=title}" Header="标题" Width="SizeToHeader" />
-                <DataGridTextColumn x:Name="txtColumn" Binding="{Binding Path=txt}" Header="内容" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Path=title}" Header="标题" Width="100" />
+                <DataGridTextColumn x:Name="txtColumn" Binding="{Binding Path=txt}" Header="内容" Width="250" />
+                <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="状态" Width="SizeToHeader" />
             </DataGrid.Columns>
         </DataGrid>
 
 
         <Label Margin="0,181,0,139" Height="30" Width="60" HorizontalAlignment="Left" >标题</Label>
         <Label Margin="0,231,0,89" Height="30" Width="60" HorizontalAlignment="Left" >内容</Label>
-        <TextBox Name="title_textbox" Height="30" Width="300" Margin="66,183,34,137" Text="{Binding Path=title, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
+        <TextBox Name="title_textbox" Height="30" Margin="66,183,129,137" Text="{Binding Path=title, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
         <TextBox Name="txt_textbox" Width="300" Margin="66,232,34,47" Text="{Binding Path=txt, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}"></TextBox>
         <Button Name="roll_quedin" Margin="319,320,0,0" HorizontalAlignment="Left" Height="30" Width="30" Click="roll_quedin_Click">添加</Button>
         <Button Name="show_roll" Margin="241,320,0,0" HorizontalAlignment="Left" Height="30" Width="30" Click="show_roll_Click">展示</Button>
@@ -34,6 +35,17 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBox Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="1,3,0,6" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" />
+        </Grid>
+        <Grid HorizontalAlignment="Left" Margin="290,181,0,0" Name="grid2" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Content="status:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <CheckBox Content="" Grid.Column="1" Grid.Row="0" Height="16" HorizontalAlignment="Left" IsChecked="{Binding Path=status, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="3" Name="statusCheckBox" VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </UserControl>
