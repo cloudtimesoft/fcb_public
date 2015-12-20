@@ -4,19 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="260" d:DesignWidth="620" xmlns:my="clr-namespace:fcb_public" Loaded="UserControl_Loaded">
+             d:DesignHeight="327" d:DesignWidth="620" xmlns:my="clr-namespace:fcb_public" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <my:publicDataSet x:Key="publicDataSet" />
         <CollectionViewSource x:Key="background_picViewSource" Source="{Binding Path=background_pic, Source={StaticResource publicDataSet}}" />
     </UserControl.Resources>
-    <Grid DataContext="{StaticResource background_picViewSource}">
-        <GroupBox Margin="5,10,0,0" Height="260"  Width="660" VerticalAlignment="Top" >
-            <ScrollViewer x:Name="canvas_scrollv" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
-              <Canvas x:Name="background" Width="620" Height="260" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="Yellow">
-            </Canvas>
-            </ScrollViewer>
-        </GroupBox>
-        <Button x:Name="upload" Content="上传" Width="80" Height="26" Click="upload_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,280,0,0"></Button>
-    </Grid>
-    
+
+   
+
+            <Grid x:Name="grid_background"  DataContext="{StaticResource background_picViewSource}">
+
+
+        <ScrollViewer Height="217" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer.Content>
+            <Canvas  x:Name="background" VerticalAlignment="Top"></Canvas>
+            </ScrollViewer.Content>
+        </ScrollViewer>
+
+        <Button  x:Name="upload" Content="上传" Width="80" Height="26" Click="upload_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,280,0,0"></Button>           
+            </Grid>
+   
 </UserControl>

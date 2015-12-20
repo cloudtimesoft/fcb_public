@@ -72,6 +72,21 @@ namespace fcb_public
                 main_grid.Background = newimage;
             }
             main_canvas.Width = main_grid.ActualWidth;
+
+            //Color color = new Color();
+
+            //color.A = 0;
+
+            //color.R = 0;
+
+            //color.G = 0;
+
+            //color.B = 0;        
+            //toolbarpanel.Background = new SolidColorBrush(color);
+            //toolbarpanel.Background = new SolidColorBrush(Color.FromArgb(100, 255, 255, 255));
+            main_canvas.Background = new SolidColorBrush(Color.FromArgb(20, 255, 255, 255));
+
+
         }
 
         private void main_grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -262,7 +277,7 @@ namespace fcb_public
         {
             subwindow_content.Children.Clear();
             sub_new_background newbackground = new sub_new_background();
-            subwindow.Width = 720;
+            subwindow.Width = 620;
             subwindow.Height = 350;
             newbackground.NewBackGround += new RoutedPropertyChangedEventHandler<object>(newbackground_NewBackGround);
             newbackground.Name = "newbackground";
@@ -314,6 +329,8 @@ namespace fcb_public
         {
             Panel.SetZIndex(submainwindow, -1);
             subwindow.Opacity = 0;
+            subwindow.Width = 0;
+            subwindow.Height = 0;
 
             mode_show();
         }
@@ -365,15 +382,14 @@ namespace fcb_public
                 //int temp_step = 0;
                 //if (s1 > 0)
                 //{
-                //    foreach (var s in select)
-                //    {
-                //        if (step == temp_step)
-                //        {
-                //            newtextblock.Text = s.txt;
-                           
-                //        }
-                //        temp_step++;
-                //    }
+                foreach (var s in select)
+                {
+                    
+
+                        newtextblock.Text +="      "+ s.txt;
+
+                    
+                }
                 //    step++;
                 //}
                 //if (step > s1)
@@ -382,43 +398,23 @@ namespace fcb_public
                 //}
 
                 newtextblock.FontSize = 30;
-                
-                //newtextblock.Width = newtextblock.Text.Length*20;
                 newtextblock.Background = Brushes.AliceBlue;
-                newtextblock.FontWeight = FontWeights.Black;
                 newtextblock.TextWrapping = TextWrapping.NoWrap;
-                //newtextblock.VerticalAlignment = VerticalAlignment.Center;
                 StackPanel newstackpanel = new StackPanel();
-
                 newstackpanel.Width = main_grid.ActualWidth;
                 newstackpanel.Height = 36;
                 newstackpanel.Background = Brushes.Green;
-                //newstackpanel.HorizontalAlignment = HorizontalAlignment.Left;
                 newstackpanel.VerticalAlignment = VerticalAlignment.Bottom;
-                //newstackpanel.Orientation = Orientation.Vertical;
-                //newtextblock.Text ="saddddddddddaaaaaaaaaaaaaaaaaaaaaaaa";
                 newstackpanel.Children.Add(newtextblock);
                 big_grid.Children.Add(newstackpanel);
-
-
-
-                //TextBlock newtextblock = sender as TextBlock;
-
-                t1.Text = "aaa";
-                t1.UpdateLayout();
-                double tt1 = t1.ActualWidth;
-                t1.Text = "aaaaaaaaaaaaaaaaaa";
-                t1.UpdateLayout();
-                tt1 = t1.ActualWidth;
-
-
                 newtextblock.UpdateLayout();
-                    ThicknessAnimation txt_margin_animation = new ThicknessAnimation();
-                    txt_margin_animation.From = new Thickness(SystemParameters.PrimaryScreenWidth, 0, 0, 0);
-                    txt_margin_animation.To = new Thickness(-newtextblock.ActualWidth, 0, 0, 0);
-                    txt_margin_animation.Duration = TimeSpan.FromSeconds(5);
-                    double t = newtextblock.ActualHeight;
-                    newtextblock.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
+                ThicknessAnimation txt_margin_animation = new ThicknessAnimation();
+                txt_margin_animation.From = new Thickness(SystemParameters.PrimaryScreenWidth, 0, 0, 0);
+                txt_margin_animation.To = new Thickness(-newtextblock.ActualWidth, 0, 0, 0);
+                txt_margin_animation.Duration = TimeSpan.FromSeconds(15);
+                txt_margin_animation.RepeatBehavior = RepeatBehavior.Forever;
+                double t = newtextblock.ActualHeight;
+                newtextblock.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
                
 
 

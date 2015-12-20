@@ -39,7 +39,7 @@ namespace fcb_public
             fcb_public.publicDataSetTableAdapters.rollTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.rollTableAdapter();
             publicDataSetTableAdapters.Fill(publicDataSet.roll);
             System.Windows.Data.CollectionViewSource initializeViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("rollViewSource"));
-
+            rollDataGrid.CanUserAddRows = false;
 
         }
 
@@ -51,7 +51,7 @@ namespace fcb_public
             System.Windows.Data.CollectionViewSource initializeViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("rollViewSource"));
             if (roll_quedin.Content.ToString() == "添加")
             {
-                publicDataSet.roll.AddrollRow(title_textbox.Text, txt_textbox.Text, (bool)statusCheckBox.IsChecked);
+                publicDataSet.roll.AddrollRow(title_textbox.Text, txt_textbox.Text, (bool)statusCheckBox.IsChecked,1);
                 publicDataSetTableAdapters.Update(publicDataSet.roll);
                 publicDataSet.roll.AcceptChanges();
                 publicDataSetTableAdapters.Fill(publicDataSet.roll);
@@ -61,11 +61,31 @@ namespace fcb_public
 
         private void show_roll_Click(object sender, RoutedEventArgs e)
         {
-            //if (iDTextBox.Text != null)
-            //{
-            //    PublicClass.roll_index = int.Parse(iDTextBox.Text);
-            PublicClass.show = "showroll";
-            //}
+           
+                if (show_roll.Content.ToString() == "展示")
+                {
+                    PublicClass.show = "showroll";
+                    show_roll.Content = "取消展示";
+                }
+                else
+                {
+                    PublicClass.show = "";
+                    show_roll.Content = "展示";
+                }
+        }
+
+        private void roll_del_Click(object sender, RoutedEventArgs e)
+        {
+            fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+            fcb_public.publicDataSetTableAdapters.rollTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.rollTableAdapter();
+            if (iDTextBox.Text != "")
+            {
+                int sel_id = int.Parse(iDTextBox.Text);
+                publicDataSet.roll.FindByID(sel_id).Delete();
+                publicDataSetTableAdapters.Update(publicDataSet.roll);
+                publicDataSet.roll.AcceptChanges();
+                publicDataSetTableAdapters.Fill(publicDataSet.roll);
+            }
         }
 
         

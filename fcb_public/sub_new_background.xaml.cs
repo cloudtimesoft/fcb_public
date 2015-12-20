@@ -24,6 +24,7 @@ namespace fcb_public
         public sub_new_background()
         {
             InitializeComponent();
+          
         }
         public static readonly RoutedEvent NewBackGroundEvent = EventManager.RegisterRoutedEvent("NewBackGround", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(sub_background));
         public event RoutedPropertyChangedEventHandler<object> NewBackGround
@@ -88,9 +89,11 @@ namespace fcb_public
                 
                 newbtn.Margin = new Thickness(15+(local_step % 5) * 120, 10+local_step/5*95, 0, 0);
                 background.Children.Add(newbtn);
+                background.Height = 100 + local_step / 5 * 95;
                // canvas_scrollv.ScrollToBottom();
                 local_step++;
             }
+           // scrolls.ScrollToBottom();
         }
 
         void del_btn_Click(object sender, RoutedEventArgs e)
@@ -168,7 +171,7 @@ namespace fcb_public
 
 
                 int s = publicDataSet.background_pic.Count;
-                int a;
+   
             }
 
 
@@ -177,9 +180,5 @@ namespace fcb_public
 
         }
 
-        private void GroupBox_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
-        {
-
-        }
     }
 }

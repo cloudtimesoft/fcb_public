@@ -208,6 +208,30 @@
     <Resource Include="image\title_left_line.png" />
     <Resource Include="image\title_right_border_line.png" />
     <Resource Include="image\title_right_line.png" />
+    <Resource Include="image\99791.gif" />
+    <Resource Include="image\textB.png" />
+    <Resource Include="image\textBullets.png" />
+    <Resource Include="image\textCenter.png" />
+    <Resource Include="image\textClearSytle.png" />
+    <Resource Include="image\textCopy.png" />
+    <Resource Include="image\textCut.png" />
+    <Resource Include="image\textDecrease.png" />
+    <Resource Include="image\textDown.png" />
+    <Resource Include="image\textGrow.png" />
+    <Resource Include="image\textI.png" />
+    <Resource Include="image\textIncrease.png" />
+    <Resource Include="image\textJustify.png" />
+    <Resource Include="image\textLeft.png" />
+    <Resource Include="image\textLock.png" />
+    <Resource Include="image\textNumbering.png" />
+    <Resource Include="image\textPaste.png" />
+    <Resource Include="image\textRedo.png" />
+    <Resource Include="image\textRight.png" />
+    <Resource Include="image\textShrink.png" />
+    <Resource Include="image\textU.png" />
+    <Resource Include="image\textUndo.png" />
+    <Resource Include="image\textUnLock.png" />
+    <Resource Include="image\textUp.png" />
     <Content Include="public.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

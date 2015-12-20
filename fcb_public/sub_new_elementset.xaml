@@ -12,18 +12,20 @@
         <CollectionViewSource x:Key="elementViewSource" Source="{Binding Path=element, Source={StaticResource publicDataSet}}" />
         <CollectionViewSource x:Key="initializeViewSource" Source="{Binding Path=Initialize, Source={StaticResource publicDataSet}}" />
     </UserControl.Resources>
-    <Grid DataContext="{StaticResource element_setViewSource}">
+    <Grid DataContext="{StaticResource element_setViewSource}" Height="531">
+       
         <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="12,12,0,0" Name="element_setDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="476" SelectionChanged="element_setDataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
-                <DataGridTextColumn x:Name="elset_nameColumn" Binding="{Binding Path=elset_name}" Header="elset name" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" Visibility="Hidden" />
+                <DataGridTextColumn x:Name="elset_nameColumn" Binding="{Binding Path=elset_name}" Header="元素集名" Width="465" />
             </DataGrid.Columns>
         </DataGrid>
+       
         <ListBox Height="170" HorizontalAlignment="Left" Margin="12,304,0,0" Name="slist" VerticalAlignment="Top" Width="212" />
         <ListBox Height="170" HorizontalAlignment="Left" Margin="259,304,0,0" Name="dlist" VerticalAlignment="Top" Width="229" />
         <Button Content=">" Height="23" HorizontalAlignment="Left" Margin="230,332,0,0" Name="move_to_d" VerticalAlignment="Top" Width="23" Click="move_to_d_Click" />
         <Button Content="&lt;" Height="23" HorizontalAlignment="Left" Margin="230,370,0,0" Name="move_to_s" VerticalAlignment="Top" Width="23" Click="move_to_s_Click" />
-        <Grid HorizontalAlignment="Left" Margin="12,218,0,0" Name="grid1" VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Left" Margin="75,239,0,0" Name="grid1" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -31,7 +33,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label Content="elset name:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <Label Content="元素集名:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
             <TextBox Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="3,3,0,3" Name="elset_nameTextBox" Text="{Binding Path=elset_name, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="267" />
         </Grid>
         <Grid HorizontalAlignment="Left" Margin="412,218,0,0" Name="grid2" VerticalAlignment="Top">
@@ -65,9 +67,8 @@
            
         </Grid>
         <Button Content="新增" Height="23" HorizontalAlignment="Left" Margin="286,491,0,0" Name="add_elset" VerticalAlignment="Top" Width="75" Click="add_elset_Click" />
-        <Button Content="删除" Height="23" HorizontalAlignment="Left" Margin="387,491,0,0" Name="del_elset" VerticalAlignment="Top" Width="75" />
-
-            <TextBox  Height="23" HorizontalAlignment="Left" Margin="27,492,0,16" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" />
+        <Button Content="删除" Height="23" HorizontalAlignment="Left" Margin="387,491,0,0" Name="del_elset" VerticalAlignment="Top" Width="75" Click="del_elset_Click" />
+        <TextBox  Height="23" HorizontalAlignment="Left" Margin="27,492,0,16" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" Visibility="Hidden" />
         <Button Content="展示" Height="23" HorizontalAlignment="Left" Margin="178,492,0,0" Name="show" VerticalAlignment="Top" Width="75" Click="show_Click" />
     </Grid>
 </UserControl>

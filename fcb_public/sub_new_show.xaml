@@ -46,11 +46,25 @@
                 </TextBlock.Effect>
                 
                 </TextBlock>
-            <TextBlock x:Name="text_content"  TextWrapping="Wrap" xml:space="preserve" Padding="10" Foreground="White" PreviewMouseUp="text_content_PreviewMouseUp">
-                <TextBlock.Effect>
+                    <FlowDocumentReader x:Name="text_content"   Padding="10" IsEnabled="False" IsTwoPageViewEnabled="False" Foreground="White" IsScrollViewEnabled="False">
+                        <FlowDocumentReader.Effect>
+                            <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="1"></DropShadowEffect>
+                        </FlowDocumentReader.Effect>
+               
+                <!--<TextBlock.Effect>
                     <DropShadowEffect Color="Black" Direction="315" ShadowDepth="2" Opacity="1"></DropShadowEffect>
-                </TextBlock.Effect>
-                </TextBlock>
+                </TextBlock.Effect>-->
+                </FlowDocumentReader>
+
+                   
+
+
+
+
+
+
+
+
                     <MediaElement x:Name="show_video"></MediaElement>
                     <Image x:Name="show_image"></Image>
                 </StackPanel>

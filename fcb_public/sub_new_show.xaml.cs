@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using System.Threading;
 using System.IO;
 using System.Windows.Media.Animation;
+using System.Windows.Markup;
+
 
 namespace fcb_public
 {
@@ -112,11 +114,51 @@ namespace fcb_public
                    //10000;
                     if (t.type == "文档")
                     {
+
+                        //FlowDocument newfld = new FlowDocument();
+                        ////FlowDocumentReader a = new FlowDocumentReader();
+                        //TextRange a = new TextRange(newfld.ContentStart, newfld.ContentEnd);
+
+                        //MemoryStream stream = new MemoryStream();
+                        //StreamWriter sw = new StreamWriter(stream);
+                        //sw.Write(t.content);
+                        ////StreamReader r = new StreamReader(stream);
+                       
+                        ////TextBox newtextbox = new TextBox();
+                        ////newtextbox.Text = r.ReadToEnd();
+                        //sw.Flush();
+                        //stream.Seek(0, SeekOrigin.Begin);
+                        //a.Load(stream, DataFormats.Xaml);
+                        //Paragraph para = new Paragraph();
+                        //para.Inlines.Add(a);
+                        //newfld.Blocks.Add(para);
+                        //var a = new TextRange(newfld.ContentStart, newfld.ContentEnd);
+                        //string content = t.content;
+                        //StringReader sr = new StringReader(content);
+                        ////TextBox newtextbox = new TextBox();
+                        ////newtextbox.Text = t.content;
+                        RichTextBox newRTB =new RichTextBox();
+                        TextRange documentTextRange = new TextRange(newRTB.Document.ContentStart, newRTB.Document.ContentEnd);
+                        MemoryStream stream = new MemoryStream();
+                        StreamWriter sw = new StreamWriter(stream);
+                        sw.Write(t.content);
+                        sw.Flush();
+                        stream.Seek(0, SeekOrigin.Begin);
+                        documentTextRange.Load(stream, DataFormats.Xaml);
+                        string xw = XamlWriter.Save(newRTB.Document);
+                       
+                        StringReader sr = new StringReader(xw);
+                        System.Xml.XmlReader xr = System.Xml.XmlReader.Create(sr);
+                        FlowDocument doc = XamlReader.Load(xr) as FlowDocument;
+
+                       
+                          
+                    
                         show_video.Width = 0;
                         show_video.Height = 0;
                         show_image.Width = 0;
                         show_image.Height = 0;
-                        text_content.Text = t.content;
+                        text_content.Document = doc;
                         newtimer.Interval = t.show_time * 1000;
                     }
                    else if (t.type == "图片")
@@ -179,7 +221,11 @@ namespace fcb_public
         }
 
 
+ 
+ 
 
+
+   
 
 
 

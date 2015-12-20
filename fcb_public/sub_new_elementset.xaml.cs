@@ -242,5 +242,33 @@ namespace fcb_public
             args.RoutedEvent = sub_new_elementset.ModeShowEvent;
             this.RaiseEvent(args);
         }
+
+        private void del_elset_Click(object sender, RoutedEventArgs e)
+        {
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.element_setTableAdapter publicDataSetelement_setTableAdapter = new fcb_public.publicDataSetTableAdapters.element_setTableAdapter();
+           // fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.el_elsetTableAdapter publicDataSetel_elsetTableAdapter = new fcb_public.publicDataSetTableAdapters.el_elsetTableAdapter();
+            if (iDTextBox.Text != "")
+            {
+
+                int index=int.Parse(iDTextBox.Text);
+                publicDataSet.element_set.FindByID(index).Delete();
+                publicDataSetelement_setTableAdapter.Update(publicDataSet.element_set);
+                publicDataSet.element_set.AcceptChanges();
+                publicDataSetelement_setTableAdapter.Fill(publicDataSet.element_set);
+
+                var select_id = from c in publicDataSet.el_elset where index == c.element_set_ID select c;
+                foreach (var s in select_id)
+                {
+                    publicDataSet.el_elset.FindByID(s.ID).Delete();
+                }
+                publicDataSetel_elsetTableAdapter.Update(publicDataSet.el_elset);
+                publicDataSet.el_elset.AcceptChanges();
+                publicDataSetel_elsetTableAdapter.Fill(publicDataSet.el_elset);
+
+
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@
     <Canvas x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove" Background="AliceBlue" AllowDrop="True" Drop="main_grid_Drop" PreviewMouseDown="main_grid_PreviewMouseDown" MouseUp="main_grid_MouseUp" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         
         <!--2b398b9e-26c8-4905-9799-0571a05d4993.gif-->
-        <Canvas  x:Name="main_canvas"  Height="60" Background="Green"  VerticalAlignment="Top" Margin="0,-60,0,0" MouseLeave="main_canvas_MouseLeave">
+        <Canvas  x:Name="main_canvas"  Height="60"   VerticalAlignment="Top" Margin="0,-60,0,0" MouseLeave="main_canvas_MouseLeave">
             <Button x:Name="element" Width="30" Height="50" Margin="10,0,0,0" Click="element_Click">元素</Button>
             <Button x:Name="element_set" Width="50" Height="50" Margin="60,0,0,0" Click="element_set_Click">元素集</Button>
             <Button x:Name="module" Width="30" Height="50" Margin="130,0,0,0" Click="module_Click">模块</Button>
@@ -29,11 +29,11 @@
                 <StackPanel.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="16" ShadowDepth="0" Opacity="0.5" />
                 </StackPanel.Effect>
-                <StackPanel x:Name="toolbarpanel" Height="28"  >
+                <StackPanel x:Name="toolbarpanel" Height="28">
 
-                    <StackPanel.Background>
+                    <!--<StackPanel.Background>
                         <ImageBrush ImageSource="/fcb_public;component/image/titlebar_background.png" Stretch="Fill" TileMode="None" />
-                    </StackPanel.Background>
+                    </StackPanel.Background>-->
                     <Button Width="20" Height="20" Margin="4,4,4,4" HorizontalAlignment="Right" x:Name="sub_window_close" Click="sub_window_close_Click" ToolTip="关闭" Padding="0" BorderBrush="White">
                         <Button.Content>
                             <Image Source="/fcb_public;component/image/close.png"></Image>
