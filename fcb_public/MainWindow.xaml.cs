@@ -241,13 +241,17 @@ namespace fcb_public
                 }
                 publicDataSetInitializeTableAdapter.Update(publicDataSet.Initialize);
                 publicDataSet.AcceptChanges();
+
+
+                PublicClass.show_hight = newshow.Height - 50.0;
+                mode_show();
             }
 
             ctrl_name = "";
             process_type = "";
             can_moves = false;
 
-
+           
         }
 
         private void element_Click(object sender, RoutedEventArgs e)

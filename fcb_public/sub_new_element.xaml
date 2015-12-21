@@ -123,7 +123,7 @@
                     <ToolBar Height="30" Margin="0,0,3,0" Name="toolBar1" Grid.Column="2">
                         <Separator></Separator>
                         <ComboBox Name="toolfontname" ToolTip="字体" Width="150" SelectionChanged="toolfontname_SelectionChanged" DropDownClosed="toolfontname_DropDownClosed"></ComboBox>
-                        <ComboBox Name="toolfontsize" ToolTip="字号" Width="50" DropDownClosed="toolfontsize_DropDownClosed"></ComboBox>
+                        <ComboBox Name="toolfontsize" ToolTip="字号" Width="80" DropDownClosed="toolfontsize_DropDownClosed"></ComboBox>
                         <Separator></Separator>
                         <Button x:Name="toolfontGrow" Command="EditingCommands.IncreaseFontSize" CommandTarget="{Binding ElementName=richTextBox1}" ToolTip="增大字体">
                             <Image Source="/fcb_public;component/image/textGrow.png"></Image>

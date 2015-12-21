@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows.Markup;
 
 
 namespace fcb_public
@@ -237,9 +238,18 @@ namespace fcb_public
             ICollection<FontFamily> familyCollection = Fonts.SystemFontFamilies;
             if (familyCollection != null)
             {
-                foreach (FontFamily family in familyCollection)
+                foreach (FontFamily family in Fonts.SystemFontFamilies)
                 {
-                    toolfontname.Items.Add(family);
+                    LanguageSpecificStringDictionary _fontDic = family.FamilyNames;
+                    if (_fontDic.ContainsKey(XmlLanguage.GetLanguage("zh-cn")))
+                    {
+                        string _fontName = null;
+                        if (_fontDic.TryGetValue(XmlLanguage.GetLanguage("zh-cn"), out _fontName))
+                        {
+                            toolfontname.Items.Add(_fontName);
+                        }
+                    }
+                    
                 }
                 toolfontname.SelectedIndex = 0;
             }

@@ -13,7 +13,7 @@
     </UserControl.Resources>
     <Grid>
         
-        <DockPanel >
+        <DockPanel x:Name="main_dockpanel">
             <DockPanel DockPanel.Dock="Top" Height="44" >
                 <DockPanel.Background>
                     <ImageBrush ImageSource="/fcb_public;component/image/title_background.png" />
@@ -46,15 +46,15 @@
                 </TextBlock.Effect>
                 
                 </TextBlock>
-                    <FlowDocumentReader x:Name="text_content"   Padding="10" IsEnabled="False" IsTwoPageViewEnabled="False" Foreground="White" IsScrollViewEnabled="False">
-                        <FlowDocumentReader.Effect>
-                            <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="1"></DropShadowEffect>
-                        </FlowDocumentReader.Effect>
+                    <FlowDocumentScrollViewer x:Name="text_content"   Padding="10" IsEnabled="False"  Foreground="White" IsToolBarVisible="False" VerticalScrollBarVisibility="Hidden">
+                        <FlowDocumentScrollViewer.Effect>
+                            <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="0.5"></DropShadowEffect>
+                        </FlowDocumentScrollViewer.Effect>
                
                 <!--<TextBlock.Effect>
                     <DropShadowEffect Color="Black" Direction="315" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                 </TextBlock.Effect>-->
-                </FlowDocumentReader>
+                    </FlowDocumentScrollViewer>
 
                    
 
