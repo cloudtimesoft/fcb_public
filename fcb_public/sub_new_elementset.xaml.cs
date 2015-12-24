@@ -23,7 +23,7 @@ namespace fcb_public
         {
             InitializeComponent();
         }
-
+ 
         public static readonly RoutedEvent ModeShowEvent = EventManager.RegisterRoutedEvent("ModeShow", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(sub_new_elementset));
         public event RoutedPropertyChangedEventHandler<object> BackGround
         {
@@ -33,6 +33,7 @@ namespace fcb_public
 
 
         int index=1;
+        string type="文档";
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
@@ -66,7 +67,7 @@ namespace fcb_public
                 element_setViewSource.View.MoveCurrentToNext();
                 add_elset.Content = "保存";
                 elset_nameTextBox.Text = "";
-             
+                //typeComboBox.SelectedIndex = 0;
  
             }
             else
@@ -85,11 +86,11 @@ namespace fcb_public
         private void add_el_elset(int cur_id)
         {
             fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
-            
+
             List<int> el_set_ids = (from c in publicDataSet.el_elset where c.element_set_ID == cur_id select c.element_ID).ToList();
             List<int> element_ids = (from c in publicDataSet.element where !el_set_ids.Contains(c.ID) select c.ID).ToList();
 
-            var element_list = from c in publicDataSet.element where element_ids.Contains(c.ID) select c;
+            var element_list = from c in publicDataSet.element where element_ids.Contains(c.ID) where c.type==type select c;
 
                 slist.Items.Clear();
                 //slist.ItemsSource = null;
@@ -150,7 +151,8 @@ namespace fcb_public
                     if (newtxt.Name == "idtxt")
                     {
                         int element_id = int.Parse(newtxt.Text);
-                        publicDataSet.el_elset.Addel_elsetRow(element_id, int.Parse(iDTextBox.Text));
+                        int a=int.Parse(iDTextBox.Text);
+                        publicDataSet.el_elset.Addel_elsetRow(element_id,a );
                         publicDataSetel_elsetTableAdapter.Update(publicDataSet.el_elset);
                         publicDataSet.el_elset.AcceptChanges();
                         publicDataSetel_elsetTableAdapter.Fill(publicDataSet.el_elset);
@@ -270,5 +272,46 @@ namespace fcb_public
 
             }
         }
+
+        private void typeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.el_elsetTableAdapter publicDataSetel_elsetTableAdapter = new fcb_public.publicDataSetTableAdapters.el_elsetTableAdapter();
+            if (iDTextBox.Text != "")
+            {
+                if (typeComboBox.SelectedIndex == 0)
+                {
+                    type = "文档";
+                    add_el_elset(int.Parse(iDTextBox.Text));
+
+                }
+                else if (typeComboBox.SelectedIndex == 1)
+                {
+                    type = "图片";
+                    add_el_elset(int.Parse(iDTextBox.Text));
+                    
+                }
+                else if (typeComboBox.SelectedIndex == 2)
+                {
+                    type = "视频";
+                    add_el_elset(int.Parse(iDTextBox.Text));
+                    
+                }
+                   var select_id = from c in publicDataSet.el_elset where int.Parse(iDTextBox.Text) == c.element_set_ID select c;
+                foreach (var s in select_id)
+                {
+                    publicDataSet.el_elset.FindByID(s.ID).Delete();
+                }
+                publicDataSetel_elsetTableAdapter.Update(publicDataSet.el_elset);
+                publicDataSet.el_elset.AcceptChanges();
+                publicDataSetel_elsetTableAdapter.Fill(publicDataSet.el_elset);
+                dlist.Items.Clear();
+            }
+          
+             
+        
+        }
+
+
     }
 }

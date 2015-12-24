@@ -455,7 +455,7 @@ FROM      roll</CommandText>
   <xs:element name="publicDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="publicDataSet" msprop:Generator_UserDSName="publicDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="background_pic" msprop:Generator_TableClassName="background_picDataTable" msprop:Generator_TableVarName="tablebackground_pic" msprop:Generator_TablePropName="background_pic" msprop:Generator_RowDeletingName="background_picRowDeleting" msprop:Generator_RowChangingName="background_picRowChanging" msprop:Generator_RowEvHandlerName="background_picRowChangeEventHandler" msprop:Generator_RowDeletedName="background_picRowDeleted" msprop:Generator_UserTableName="background_pic" msprop:Generator_RowChangedName="background_picRowChanged" msprop:Generator_RowEvArgName="background_picRowChangeEvent" msprop:Generator_RowClassName="background_picRow">
+        <xs:element name="background_pic" msprop:Generator_TableClassName="background_picDataTable" msprop:Generator_TableVarName="tablebackground_pic" msprop:Generator_RowChangedName="background_picRowChanged" msprop:Generator_TablePropName="background_pic" msprop:Generator_RowDeletingName="background_picRowDeleting" msprop:Generator_RowChangingName="background_picRowChanging" msprop:Generator_RowEvHandlerName="background_picRowChangeEventHandler" msprop:Generator_RowDeletedName="background_picRowDeleted" msprop:Generator_RowClassName="background_picRow" msprop:Generator_UserTableName="background_pic" msprop:Generator_RowEvArgName="background_picRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -476,7 +476,7 @@ FROM      roll</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="el_elset" msprop:Generator_TableClassName="el_elsetDataTable" msprop:Generator_TableVarName="tableel_elset" msprop:Generator_TablePropName="el_elset" msprop:Generator_RowDeletingName="el_elsetRowDeleting" msprop:Generator_RowChangingName="el_elsetRowChanging" msprop:Generator_RowEvHandlerName="el_elsetRowChangeEventHandler" msprop:Generator_RowDeletedName="el_elsetRowDeleted" msprop:Generator_UserTableName="el_elset" msprop:Generator_RowChangedName="el_elsetRowChanged" msprop:Generator_RowEvArgName="el_elsetRowChangeEvent" msprop:Generator_RowClassName="el_elsetRow">
+        <xs:element name="el_elset" msprop:Generator_TableClassName="el_elsetDataTable" msprop:Generator_TableVarName="tableel_elset" msprop:Generator_RowChangedName="el_elsetRowChanged" msprop:Generator_TablePropName="el_elset" msprop:Generator_RowDeletingName="el_elsetRowDeleting" msprop:Generator_RowChangingName="el_elsetRowChanging" msprop:Generator_RowEvHandlerName="el_elsetRowChangeEventHandler" msprop:Generator_RowDeletedName="el_elsetRowDeleted" msprop:Generator_RowClassName="el_elsetRow" msprop:Generator_UserTableName="el_elset" msprop:Generator_RowEvArgName="el_elsetRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -485,7 +485,7 @@ FROM      roll</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="element" msprop:Generator_TableClassName="elementDataTable" msprop:Generator_TableVarName="tableelement" msprop:Generator_TablePropName="element" msprop:Generator_RowDeletingName="elementRowDeleting" msprop:Generator_RowChangingName="elementRowChanging" msprop:Generator_RowEvHandlerName="elementRowChangeEventHandler" msprop:Generator_RowDeletedName="elementRowDeleted" msprop:Generator_UserTableName="element" msprop:Generator_RowChangedName="elementRowChanged" msprop:Generator_RowEvArgName="elementRowChangeEvent" msprop:Generator_RowClassName="elementRow">
+        <xs:element name="element" msprop:Generator_TableClassName="elementDataTable" msprop:Generator_TableVarName="tableelement" msprop:Generator_RowChangedName="elementRowChanged" msprop:Generator_TablePropName="element" msprop:Generator_RowDeletingName="elementRowDeleting" msprop:Generator_RowChangingName="elementRowChanging" msprop:Generator_RowEvHandlerName="elementRowChangeEventHandler" msprop:Generator_RowDeletedName="elementRowDeleted" msprop:Generator_RowClassName="elementRow" msprop:Generator_UserTableName="element" msprop:Generator_RowEvArgName="elementRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -517,7 +517,7 @@ FROM      roll</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="element_set" msprop:Generator_TableClassName="element_setDataTable" msprop:Generator_TableVarName="tableelement_set" msprop:Generator_TablePropName="element_set" msprop:Generator_RowDeletingName="element_setRowDeleting" msprop:Generator_RowChangingName="element_setRowChanging" msprop:Generator_RowEvHandlerName="element_setRowChangeEventHandler" msprop:Generator_RowDeletedName="element_setRowDeleted" msprop:Generator_UserTableName="element_set" msprop:Generator_RowChangedName="element_setRowChanged" msprop:Generator_RowEvArgName="element_setRowChangeEvent" msprop:Generator_RowClassName="element_setRow">
+        <xs:element name="element_set" msprop:Generator_TableClassName="element_setDataTable" msprop:Generator_TableVarName="tableelement_set" msprop:Generator_RowChangedName="element_setRowChanged" msprop:Generator_TablePropName="element_set" msprop:Generator_RowDeletingName="element_setRowDeleting" msprop:Generator_RowChangingName="element_setRowChanging" msprop:Generator_RowEvHandlerName="element_setRowChangeEventHandler" msprop:Generator_RowDeletedName="element_setRowDeleted" msprop:Generator_RowClassName="element_setRow" msprop:Generator_UserTableName="element_set" msprop:Generator_RowEvArgName="element_setRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -531,7 +531,7 @@ FROM      roll</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="elset_init" msprop:Generator_TableClassName="elset_initDataTable" msprop:Generator_TableVarName="tableelset_init" msprop:Generator_TablePropName="elset_init" msprop:Generator_RowDeletingName="elset_initRowDeleting" msprop:Generator_RowChangingName="elset_initRowChanging" msprop:Generator_RowEvHandlerName="elset_initRowChangeEventHandler" msprop:Generator_RowDeletedName="elset_initRowDeleted" msprop:Generator_UserTableName="elset_init" msprop:Generator_RowChangedName="elset_initRowChanged" msprop:Generator_RowEvArgName="elset_initRowChangeEvent" msprop:Generator_RowClassName="elset_initRow">
+        <xs:element name="elset_init" msprop:Generator_TableClassName="elset_initDataTable" msprop:Generator_TableVarName="tableelset_init" msprop:Generator_RowChangedName="elset_initRowChanged" msprop:Generator_TablePropName="elset_init" msprop:Generator_RowDeletingName="elset_initRowDeleting" msprop:Generator_RowChangingName="elset_initRowChanging" msprop:Generator_RowEvHandlerName="elset_initRowChangeEventHandler" msprop:Generator_RowDeletedName="elset_initRowDeleted" msprop:Generator_RowClassName="elset_initRow" msprop:Generator_UserTableName="elset_init" msprop:Generator_RowEvArgName="elset_initRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -540,7 +540,7 @@ FROM      roll</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Initialize" msprop:Generator_TableClassName="InitializeDataTable" msprop:Generator_TableVarName="tableInitialize" msprop:Generator_TablePropName="Initialize" msprop:Generator_RowDeletingName="InitializeRowDeleting" msprop:Generator_RowChangingName="InitializeRowChanging" msprop:Generator_RowEvHandlerName="InitializeRowChangeEventHandler" msprop:Generator_RowDeletedName="InitializeRowDeleted" msprop:Generator_UserTableName="Initialize" msprop:Generator_RowChangedName="InitializeRowChanged" msprop:Generator_RowEvArgName="InitializeRowChangeEvent" msprop:Generator_RowClassName="InitializeRow">
+        <xs:element name="Initialize" msprop:Generator_TableClassName="InitializeDataTable" msprop:Generator_TableVarName="tableInitialize" msprop:Generator_RowChangedName="InitializeRowChanged" msprop:Generator_TablePropName="Initialize" msprop:Generator_RowDeletingName="InitializeRowDeleting" msprop:Generator_RowChangingName="InitializeRowChanging" msprop:Generator_RowEvHandlerName="InitializeRowChangeEventHandler" msprop:Generator_RowDeletedName="InitializeRowDeleted" msprop:Generator_RowClassName="InitializeRow" msprop:Generator_UserTableName="Initialize" msprop:Generator_RowEvArgName="InitializeRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -559,7 +559,7 @@ FROM      roll</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="roll" msprop:Generator_TableClassName="rollDataTable" msprop:Generator_TableVarName="tableroll" msprop:Generator_TablePropName="roll" msprop:Generator_RowDeletingName="rollRowDeleting" msprop:Generator_RowChangingName="rollRowChanging" msprop:Generator_RowEvHandlerName="rollRowChangeEventHandler" msprop:Generator_RowDeletedName="rollRowDeleted" msprop:Generator_UserTableName="roll" msprop:Generator_RowChangedName="rollRowChanged" msprop:Generator_RowEvArgName="rollRowChangeEvent" msprop:Generator_RowClassName="rollRow">
+        <xs:element name="roll" msprop:Generator_TableClassName="rollDataTable" msprop:Generator_TableVarName="tableroll" msprop:Generator_RowChangedName="rollRowChanged" msprop:Generator_TablePropName="roll" msprop:Generator_RowDeletingName="rollRowDeleting" msprop:Generator_RowChangingName="rollRowChanging" msprop:Generator_RowEvHandlerName="rollRowChangeEventHandler" msprop:Generator_RowDeletedName="rollRowDeleted" msprop:Generator_RowClassName="rollRow" msprop:Generator_UserTableName="roll" msprop:Generator_RowEvArgName="rollRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />

@@ -25,7 +25,7 @@
         <ListBox Height="170" HorizontalAlignment="Left" Margin="259,304,0,0" Name="dlist" VerticalAlignment="Top" Width="229" />
         <Button Content=">" Height="23" HorizontalAlignment="Left" Margin="230,332,0,0" Name="move_to_d" VerticalAlignment="Top" Width="23" Click="move_to_d_Click" />
         <Button Content="&lt;" Height="23" HorizontalAlignment="Left" Margin="230,370,0,0" Name="move_to_s" VerticalAlignment="Top" Width="23" Click="move_to_s_Click" />
-        <Grid HorizontalAlignment="Left" Margin="75,239,0,0" Name="grid1" VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Left" Margin="12,238,0,0" Name="grid1" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -70,5 +70,11 @@
         <Button Content="删除" Height="23" HorizontalAlignment="Left" Margin="387,491,0,0" Name="del_elset" VerticalAlignment="Top" Width="75" Click="del_elset_Click" />
         <TextBox  Height="23" HorizontalAlignment="Left" Margin="27,492,0,16" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" Visibility="Hidden" />
         <Button Content="展示" Height="23" HorizontalAlignment="Left" Margin="178,492,0,0" Name="show" VerticalAlignment="Top" Width="75" Click="show_Click" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="405,238,0,270" Name="typeComboBox" VerticalAlignment="Center" Width="83" SelectionChanged="typeComboBox_SelectionChanged" SelectedIndex="0">
+            <ComboBoxItem>文档</ComboBoxItem>
+            <ComboBoxItem>图片</ComboBoxItem>
+            <ComboBoxItem>视频</ComboBoxItem>
+        </ComboBox>
+        <Label Content="类型:" HorizontalAlignment="Left" Margin="362,238,0,267" VerticalAlignment="Center" />
     </Grid>
 </UserControl>

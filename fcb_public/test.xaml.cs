@@ -51,9 +51,9 @@ namespace fcb_public
 
             TimeZoneInfo Paris = TimeZoneInfo.FindSystemTimeZoneById("Romance Standard Time");
             DateTime dt = TimeZoneInfo.ConvertTime(DateTime.Now, Paris);
-
-
-         
+           // Paris.StandardName
+            
+            
 
 
         }
