@@ -148,13 +148,22 @@ namespace fcb_public
                                         newdoc.Padding = new Thickness(10);
                                         newdoc.IsEnabled = false;
                                         newdoc.Foreground = Brushes.White;
+                                       // newdoc.Visibility = Visibility.Hidden;
                                         newdoc.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
                                         newdoc.Margin = new Thickness(0, 0, 0, 0);
                                         content_stackpanel.Children.Add(newdoc);
                                         content_stackpanel.RegisterName("newdoc" + t.ID, newdoc);
-
-
-                                    //}
+                                       // Storyboard newstoryboard = new Storyboard();
+                                       // ThicknessAnimation txt_animation = new ThicknessAnimation();
+                                       // txt_animation.From = new Thickness(0, 0, 0, 0);
+                                       // txt_animation.To = new Thickness(0, -newdoc.ActualHeight, 0, 0);
+                                       //// newdoc.Visibility = Visibility.Visible;
+                                       // txt_animation.Duration = TimeSpan.FromSeconds(t.show_time);
+                                       // Storyboard.SetTargetName(txt_animation, newdoc.Name);
+                                       // Storyboard.SetTargetProperty(txt_animation, new PropertyPath(Grid.OpacityProperty));
+                                       // newstoryboard.Children.Add(txt_animation);
+                                    
+                                        //}
 
 
 
@@ -216,10 +225,23 @@ namespace fcb_public
                             //temp_step++;
                         }
 
+                        //var showel = from el in publicDataSet.element join el_set in publicDataSet.el_elset on el.ID equals el_set.element_ID where el.status == true where el_set.element_set_ID == elset_id select el;
+                        foreach(var s in show_el)
+                        {
+                        Storyboard newstoryboard = new Storyboard();
+                        ThicknessAnimation txt_animation = new ThicknessAnimation();
+                        FlowDocumentScrollViewer new_fld = content_stackpanel.FindName("newdoc" + s.ID) as FlowDocumentScrollViewer;
+                        new_fld.Name = "newdoc" + s.ID;
+                        txt_animation.From = new Thickness(0, 0, 0, 0);
+                        txt_animation.To = new Thickness(0, -new_fld.ActualHeight, 0, 0);
+                        // newdoc.Visibility = Visibility.Visible;
+                        txt_animation.Duration = TimeSpan.FromSeconds(s.show_time);
+                        Storyboard.SetTargetName(txt_animation, new_fld.Name);
+                        Storyboard.SetTargetProperty(txt_animation, new PropertyPath(StackPanel.MarginProperty));
+                        newstoryboard.Children.Add(txt_animation);
+                        newstoryboard.Begin(content_stackpanel);
 
-
-
-
+                        }
 
                         //step++;
                         //if (step > element_count)
