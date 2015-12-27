@@ -32,5 +32,15 @@ namespace fcb_public.Properties {
                 return ((string)(this["publicConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webxml.com.cn/WebServices/WeatherWebService.asmx")]
+        public string fcb_public_cn_com_webxml_www_WeatherWebService {
+            get {
+                return ((string)(this["fcb_public_cn_com_webxml_www_WeatherWebService"]));
+            }
+        }
     }
 }

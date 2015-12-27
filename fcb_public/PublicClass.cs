@@ -15,6 +15,7 @@ namespace fcb_public
        // public static int roll_index;
         public static string show;
         public static double show_hight;
+        public static string city_name;
     }
 
 }

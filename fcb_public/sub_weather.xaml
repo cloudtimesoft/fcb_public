@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="fcb_public.sub_weather"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="400" Loaded="UserControl_Loaded">
+    <Grid >
+        <Label Margin="12,44,0,126" Width="90" Height="30" VerticalContentAlignment="Top" HorizontalAlignment="Left">输入城市名称：</Label>
+        <TextBox x:Name="city_name" Margin="108,44,126,126" Height="30"></TextBox>
+        <Button x:Name="show_weather" Margin="308,44,12,132" Width="80" Height="25" Click="show_weather_Click">显示</Button>
+    </Grid>
+   
+</UserControl>

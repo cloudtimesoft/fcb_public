@@ -135,6 +135,18 @@ namespace fcb_public
                         main_grid.Cursor = Cursors.Hand;
                     }
                 }
+                sub_showweather newweather = s as sub_showweather;
+                if (newweather != null)
+                {
+                    if (e.GetPosition(main_grid).X > newweather.Margin.Left && e.GetPosition(main_grid).X < newweather.Margin.Left + newweather.Width && e.GetPosition(main_grid).Y > newweather.Margin.Top && e.GetPosition(main_grid).Y < newweather.Margin.Top + 200)
+                    {
+                        ctrl_name = newweather.Name;
+                        process_type = "move";
+                        old_margin = newweather.Margin;
+                        //main_grid.Cursor = Cursors.Hand;
+                    }
+                   
+                }
             }
            
         }
@@ -214,7 +226,11 @@ namespace fcb_public
                     newshow.Height = old_height + (e.GetPosition(main_grid).Y - old_point.Y);
                     //newshow.Margin = new Thickness(old_margin.Left - (old_margin.Left - e.GetPosition(main_grid).X), old_margin.Top, 0, 0);
                 }
-
+                sub_showweather newweather = main_grid.FindName(ctrl_name) as sub_showweather;
+                if (newweather != null && process_type == "move")
+                {
+                    newweather.Margin = new Thickness(old_margin.Left + e.GetPosition(main_grid).X - old_point.X, old_margin.Top + e.GetPosition(main_grid).Y - old_point.Y, 0, 0);
+                }
                 //subwindow1.Margin = new Thickness(e.GetPosition(null).X, PublicClass.show_bottom - subwindow1.Height, 0, 0);
             }
           
@@ -226,9 +242,12 @@ namespace fcb_public
         {
             fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
             fcb_public.publicDataSetTableAdapters.InitializeTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.InitializeTableAdapter();
+            fcb_public.publicDataSetTableAdapters.weatherTableAdapter publicDataSetweatherTableAdapter = new fcb_public.publicDataSetTableAdapters.weatherTableAdapter();
+            publicDataSetweatherTableAdapter.Fill(publicDataSet.weather);
             publicDataSetInitializeTableAdapter.Fill(publicDataSet.Initialize);
 
             sub_new_show newshow = main_grid.FindName(ctrl_name) as sub_new_show;
+            sub_showweather newweather = main_grid.FindName(ctrl_name) as sub_showweather;
             if (newshow != null)
             {
                 var s = from c in publicDataSet.Initialize where c.in_name == ctrl_name.Substring(1,ctrl_name.Length-1) select c;
@@ -243,8 +262,22 @@ namespace fcb_public
                 publicDataSet.AcceptChanges();
 
 
-                PublicClass.show_hight = newshow.Height - 50.0;
-                mode_show();
+
+
+                //PublicClass.show_hight = newshow.Height - 50.0;
+                //mode_show();
+            }
+            if (newweather != null)
+            {
+                var s = from c in publicDataSet.weather where c.in_name == ctrl_name.Substring(1, ctrl_name.Length - 1) select c;
+                foreach (var t in s)
+                {
+                    t.mar_left = (int)newweather.Margin.Left;
+                    t.mar_top = (int)newweather.Margin.Top;
+                   
+                }
+                publicDataSetweatherTableAdapter.Update(publicDataSet.weather);
+                publicDataSet.AcceptChanges();
             }
 
             ctrl_name = "";
@@ -424,6 +457,34 @@ namespace fcb_public
 
 
 
+            }
+            if (PublicClass.show == "showweather")
+            {
+                fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+                fcb_public.publicDataSetTableAdapters.weatherTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.weatherTableAdapter();
+                publicDataSetInitializeTableAdapter.Fill(publicDataSet.weather);
+                foreach (var t in publicDataSet.weather)
+                {
+                    sub_showweather del_show = main_grid.FindName("w" + t.in_name) as sub_showweather;
+                    if (del_show != null)
+                    {
+                        main_grid.Children.Remove(del_show);
+                        main_grid.UnregisterName("w" + t.in_name);
+                    }
+
+                    sub_showweather newshow = new sub_showweather();
+                    newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+                    newshow.Name = "w" + t.in_name;
+                    newshow.Width = 250;
+                    newshow.Height = 184;
+                    //newshow.Background = Brushes.White;
+                    //newshow.Opacity = 0.2;
+                   // newshow.elset_id = int.Parse(t.in_name);
+                    main_grid.Children.Add(newshow);
+                    //Panel.SetZIndex(submainwindow1, 3000);
+                    main_grid.RegisterName("w" + t.in_name, newshow);
+
+                }
             }
             
         }
@@ -662,8 +723,20 @@ namespace fcb_public
 
         }
 
-        private void big_grid_MouseMove(object sender, MouseEventArgs e)
+
+
+        private void weather_Click(object sender, RoutedEventArgs e)
         {
+          
+            subwindow_content.Children.Clear();
+            sub_weather newweather = new sub_weather();
+            subwindow.Width = 400;
+            subwindow.Height = 200;
+            newweather.Name = "newweather";
+            subwindow.Opacity = 0.9;
+
+            subwindow_content.Children.Add(newweather);
+            Panel.SetZIndex(submainwindow, 3000);
 
         }
 

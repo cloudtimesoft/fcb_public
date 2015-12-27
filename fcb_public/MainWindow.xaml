@@ -22,7 +22,8 @@
             <Button x:Name="roll" Width="30" Height="50" Margin="230,0,0,0" Click="roll_Click">滚动</Button>
             <Button x:Name="show_window" Width="30" Height="50" Margin="280,0,0,0" PreviewMouseLeftButtonDown="show_window_PreviewMouseLeftButtonDown">展示</Button>
             <Button x:Name="test_show" Content="test_show" Click="test_show_Click" Canvas.Left="335" Canvas.Top="28"></Button>
-        </Canvas>
+                <Button x:Name="weather" Width="30" Height="50" Margin="400,0,0,0" Click="weather_Click">天气</Button>
+            </Canvas>
 
         <StackPanel x:Name="submainwindow" Panel.ZIndex="-1" Margin="0,0,0,0">
             <StackPanel Background="#ffffff"   x:Name="subwindow" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="subwindow_MouseLeftButtonDown" MouseMove="subwindow_MouseMove" MouseUp="subwindow_MouseUp" Margin="240,50,0,0">
@@ -71,6 +72,6 @@
 
             <TextBlock x:Name="t1"></TextBlock>
         </Canvas>
-        
+     
     </Grid>
 </Window>
