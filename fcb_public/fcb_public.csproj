@@ -366,6 +366,7 @@
     <Resource Include="image\weather\tem3.gif" />
     <Resource Include="image\weather\tem4.gif" />
     <Resource Include="image\weather\tem5.gif" />
+    <Resource Include="image\textB.png" />
     <Content Include="public.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

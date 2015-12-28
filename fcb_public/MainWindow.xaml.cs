@@ -260,12 +260,12 @@ namespace fcb_public
                 }
                 publicDataSetInitializeTableAdapter.Update(publicDataSet.Initialize);
                 publicDataSet.AcceptChanges();
+                newshow.init_show();
 
 
 
-
-                //PublicClass.show_hight = newshow.Height - 50.0;
-                //mode_show();
+                PublicClass.show_hight = newshow.Height - 70.0;
+                mode_show();
             }
             if (newweather != null)
             {
@@ -435,12 +435,15 @@ namespace fcb_public
                 //}
 
                 newtextblock.FontSize = 30;
-                newtextblock.Background = Brushes.AliceBlue;
+                newtextblock.Foreground = Brushes.White;
+               // newtextblock.Background = Brushes.AliceBlue;
                 newtextblock.TextWrapping = TextWrapping.NoWrap;
                 StackPanel newstackpanel = new StackPanel();
                 newstackpanel.Width = main_grid.ActualWidth;
                 newstackpanel.Height = 36;
-                newstackpanel.Background = Brushes.Green;
+               
+                //newstackpanel.Background = Brushes.Green;
+               // newstackpanel.Background=new
                 newstackpanel.VerticalAlignment = VerticalAlignment.Bottom;
                 newstackpanel.Children.Add(newtextblock);
                 big_grid.Children.Add(newstackpanel);
@@ -448,7 +451,7 @@ namespace fcb_public
                 ThicknessAnimation txt_margin_animation = new ThicknessAnimation();
                 txt_margin_animation.From = new Thickness(SystemParameters.PrimaryScreenWidth, 0, 0, 0);
                 txt_margin_animation.To = new Thickness(-newtextblock.ActualWidth, 0, 0, 0);
-                txt_margin_animation.Duration = TimeSpan.FromSeconds(15);
+                txt_margin_animation.Duration = TimeSpan.FromSeconds(20);
                 txt_margin_animation.RepeatBehavior = RepeatBehavior.Forever;
                 double t = newtextblock.ActualHeight;
                 newtextblock.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);

@@ -13,7 +13,7 @@
             <RowDefinition Height="25*" />
         </Grid.RowDefinitions>
         <TextBlock x:Name="txtWindAndTemperature" Margin="0" TextWrapping="Wrap" Text="21 ~ 13℃" VerticalAlignment="Center" FontSize="14" Grid.Row="1" Foreground="White" HorizontalAlignment="Left"/>
-        <TextBlock x:Name="weather_zhiliang" HorizontalAlignment="Left" Margin="128,3,0,3" TextWrapping="Wrap" Text="空气质量：" VerticalAlignment="Center" FontSize="14" Grid.Row="1" Foreground="White" Width="144" />
+        <TextBlock x:Name="weather_zhiliang" HorizontalAlignment="Left" Margin="128,3,0,3" TextWrapping="Wrap" Text="空气质量：" VerticalAlignment="Center" FontSize="14" Grid.Row="1" Foreground="White" Width="150" />
         <!--<TextBlock x:Name="txtPM" HorizontalAlignment="Right" Margin="0" TextWrapping="Wrap" Text="175严重污染" VerticalAlignment="Center" FontSize="14" Grid.Row="2" Foreground="White" Width="82" TextAlignment="Center"/>-->
         <Grid Height="70">
             <Grid.ColumnDefinitions>

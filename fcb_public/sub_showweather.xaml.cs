@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using fcb_public.cn.com.webxml.www;
+using System.Timers;
+using System.Threading;
 namespace fcb_public
 {
     /// <summary>
@@ -24,8 +26,14 @@ namespace fcb_public
             InitializeComponent();
         }
 
+        System.Timers.Timer newtime = new System.Timers.Timer();
+        
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            newtime.Interval = 60000;
+            newtime.Elapsed += new ElapsedEventHandler(newtime_Elapsed);
+            newtime.Start();
             if (PublicClass.city_name != "")
             {
                 //WeatherWebService weather = new WeatherWebService();
@@ -44,7 +52,7 @@ namespace fcb_public
                 txtWindAndTemperature.Text = s[12];
                 string img1 = s[15];
                 string img2 = s[16];
-                weather_zhiliang.Text = System.DateTime.Now.ToString();
+                weather_zhiliang.Text = System.DateTime.Now.ToShortDateString() +"  "+ System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
                 if (img1 == img2)
                 {
                     icon2.Visibility = Visibility.Hidden;
@@ -77,6 +85,35 @@ namespace fcb_public
                 //else if(a=="")
                
             }
+        }
+
+        void newtime_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Thread newthread = new Thread(new ThreadStart(() =>
+            {
+                Dispatcher.Invoke(new Action(() =>
+                {
+
+
+
+            weather_zhiliang.Text = System.DateTime.Now.ToShortDateString() +"  "+ System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
+
+
+
+                }));
+
+
+
+            }));
+            newthread.SetApartmentState(ApartmentState.MTA);
+            newthread.IsBackground = true;
+            //newthread.Priority = ThreadPriority.AboveNormal;
+            newthread.Start();
+        }
+
+
+        private void timestep()
+        {
         }
     }
 }
