@@ -4,11 +4,116 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="400" Loaded="UserControl_Loaded">
-    <Grid >
-        <Label Margin="12,44,0,126" Width="90" Height="30" VerticalContentAlignment="Top" HorizontalAlignment="Left">输入城市名称：</Label>
-        <TextBox x:Name="city_name" Margin="108,44,126,126" Height="30"></TextBox>
-        <Button x:Name="show_weather" Margin="308,44,12,132" Width="80" Height="25" Click="show_weather_Click">显示</Button>
+             d:DesignHeight="350" d:DesignWidth="450" Loaded="UserControl_Loaded" xmlns:my="clr-namespace:fcb_public">
+    <UserControl.Resources>
+        <my:publicDataSet x:Key="publicDataSet" />
+        <CollectionViewSource x:Key="weatherViewSource" Source="{Binding Path=weather, Source={StaticResource publicDataSet}}" />
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource weatherViewSource}">
+        
+        <Button x:Name="show_weather" Margin="262,0,0,31" Width="70" Height="25" Click="show_weather_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom">添加</Button>
+        <Button x:Name="del_weather" Margin="0,294,33,31" Width="60" Height="25" Click="show_weather_Click" HorizontalAlignment="Right">删除</Button>
+        <Grid HorizontalAlignment="Left" Margin="351,252,0,0" Name="grid1" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Content="状态:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <CheckBox Content="" Grid.Column="1" Grid.Row="0" Height="16" HorizontalAlignment="Left" IsChecked="{Binding Path=status, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="3" Name="statusCheckBox" VerticalAlignment="Center" />
+        </Grid>
+        <Grid HorizontalAlignment="Left" Margin="12,249,0,0" Name="grid2" VerticalAlignment="Top" Width="198">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Content="城市:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Height="23" Margin="3,3,0,3" Name="in_nameTextBox" Text="{Binding Path=in_name, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="146" />
+        </Grid>
+        <Grid HorizontalAlignment="Left" Margin="40,287,0,0" Name="grid3" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Content="ID:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="0" Height="23" HorizontalAlignment="Left" Margin="3" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" />
+        </Grid>
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="253,253,0,0" Name="gmt" VerticalAlignment="Top" Width="92" SelectionChanged="gmt_SelectionChanged">
+
+            <ComboBoxItem >UTC</ComboBoxItem>
+            <ComboBoxItem >UTC+00:30</ComboBoxItem>
+            <ComboBoxItem >UTC+01:00</ComboBoxItem>
+            <ComboBoxItem >UTC+01:30</ComboBoxItem>
+            <ComboBoxItem >UTC+02:00</ComboBoxItem>
+            <ComboBoxItem >UTC+02:30</ComboBoxItem>
+            <ComboBoxItem >UTC+03:00</ComboBoxItem>
+            <ComboBoxItem >UTC+03:30</ComboBoxItem>
+            <ComboBoxItem >UTC+04:00</ComboBoxItem>
+            <ComboBoxItem >UTC+04:30</ComboBoxItem>
+            <ComboBoxItem >UTC+05:00</ComboBoxItem>
+            <ComboBoxItem >UTC+05:30</ComboBoxItem>
+            <ComboBoxItem >UTC+06:00</ComboBoxItem>
+            <ComboBoxItem >UTC+06:30</ComboBoxItem>
+            <ComboBoxItem >UTC+07:00</ComboBoxItem>
+            <ComboBoxItem >UTC+07:30</ComboBoxItem>
+            <ComboBoxItem >UTC+08:00</ComboBoxItem>
+            <ComboBoxItem >UTC+08:30</ComboBoxItem>
+            <ComboBoxItem >UTC+09:00</ComboBoxItem>
+            <ComboBoxItem >UTC+09:30</ComboBoxItem>
+            <ComboBoxItem >UTC+10:00</ComboBoxItem>
+            <ComboBoxItem >UTC+10:30</ComboBoxItem>
+            <ComboBoxItem >UTC+11:00</ComboBoxItem>
+            <ComboBoxItem >UTC+11:30</ComboBoxItem>
+            <ComboBoxItem >UTC+12:00</ComboBoxItem>
+
+
+            <ComboBoxItem >UTC-00:30</ComboBoxItem>
+            <ComboBoxItem >UTC-01:00</ComboBoxItem>
+            <ComboBoxItem >UTC-01:30</ComboBoxItem>
+            <ComboBoxItem >UTC-02:00</ComboBoxItem>
+            <ComboBoxItem >UTC-02:30</ComboBoxItem>
+            <ComboBoxItem >UTC-03:00</ComboBoxItem>
+            <ComboBoxItem >UTC-03:30</ComboBoxItem>
+            <ComboBoxItem >UTC-04:00</ComboBoxItem>
+            <ComboBoxItem >UTC-04:30</ComboBoxItem>
+            <ComboBoxItem >UTC-05:00</ComboBoxItem>
+            <ComboBoxItem >UTC-05:30</ComboBoxItem>
+            <ComboBoxItem >UTC-06:00</ComboBoxItem>
+            <ComboBoxItem >UTC-06:30</ComboBoxItem>
+            <ComboBoxItem >UTC-07:00</ComboBoxItem>
+            <ComboBoxItem >UTC-07:30</ComboBoxItem>
+            <ComboBoxItem >UTC-08:00</ComboBoxItem>
+            <ComboBoxItem >UTC-08:30</ComboBoxItem>
+            <ComboBoxItem >UTC-09:00</ComboBoxItem>
+            <ComboBoxItem >UTC-09:30</ComboBoxItem>
+            <ComboBoxItem >UTC-10:00</ComboBoxItem>
+            <ComboBoxItem >UTC-10:30</ComboBoxItem>
+            <ComboBoxItem >UTC-11:00</ComboBoxItem>
+            <ComboBoxItem >UTC-11:30</ComboBoxItem>
+            <ComboBoxItem >UTC-12:00</ComboBoxItem>
+
+
+        </ComboBox>
+        <Label Content="时区：" Height="28" HorizontalAlignment="Left" Margin="216,252,0,0" Name="label1" VerticalAlignment="Top" />
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="14,12,0,0" Name="weatherDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="400">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" Visibility="Hidden" />
+                <DataGridTextColumn x:Name="mar_leftColumn" Binding="{Binding Path=mar_left}" Header="mar left" Width="SizeToHeader" Visibility="Hidden" />
+                <DataGridTextColumn x:Name="mar_topColumn" Binding="{Binding Path=mar_top}" Header="mar top" Width="SizeToHeader" Visibility="Hidden" />
+                <DataGridTextColumn x:Name="in_nameColumn" Binding="{Binding Path=in_name}" Header="城市" Width="100" />
+                <DataGridTextColumn x:Name="gmtColumn" Binding="{Binding Path=gmt}" Header="gmt" Width="SizeToHeader" />
+                <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="状态" Width="SizeToHeader" />
+                
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
    
 </UserControl>

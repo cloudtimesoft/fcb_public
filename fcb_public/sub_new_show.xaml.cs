@@ -35,8 +35,10 @@ namespace fcb_public
         public int step = 0;
         public bool init_publicdataset = false;
         ArrayList alist = new ArrayList();
+        int mvindex = 0;
         int anmilistep = 0;
         List<string> titlename = new List<string>();
+        List<string> mvlist = new List<string>();
         //public var show_el;
 
         //System.Timers.Timer newtimer = new System.Timers.Timer();
@@ -112,7 +114,9 @@ namespace fcb_public
                     foreach (var st in show_el_set)
                     {
                         
-                        var sst = from c in publicDataSet.element_set where c.ID == st.element_set_ID select c;
+                        //var sst = from c in publicDataSet.element_set where c.ID == st.element_set_ID select c;
+                        //var sst = from c in publicDataSet.element join el in publicDataSet.el_elset on c.ID equals el.element_ID where el.element_set_ID == elset_id select c;
+                        var sst = from c in publicDataSet.element_set where c.ID == elset_id select c;
                         foreach (var ssst in sst)
                         {
                             big_title.Text = ssst.elset_name;
@@ -123,12 +127,12 @@ namespace fcb_public
                     small_title.Text = t.title;
                     titlename.Add(t.ID + "|" + t.title);
 
-
+                
                     //10000;
                     if (t.type == "文档")
                     {
 
-
+                        small_title.Visibility = Visibility.Hidden;
                         RichTextBox newRTB = new RichTextBox();
                         TextRange documentTextRange = new TextRange(newRTB.Document.ContentStart, newRTB.Document.ContentEnd);
                         MemoryStream stream = new MemoryStream();
@@ -250,98 +254,228 @@ namespace fcb_public
                         //show_video.Width = 0;
                         //show_video.Height = 0;
                         //show_image.Source = new BitmapImage(new Uri(t.content, UriKind.Absolute));
+
+                        //small_title.Text = t.title;
+                        Image delimg = content_stackpanel.FindName("newimage" + t.ID) as Image;
+                        if (delimg != null)
+                        {
+                            content_stackpanel.Children.Remove(delimg);
+                            content_stackpanel.UnregisterName("newimage" + t.ID);
+                        }
+                        content_stackpanel.UpdateLayout();
+                        Image newimage = new Image();
+                        newimage.Opacity = 0;
+                       
+                        newimage.Source = new BitmapImage(new Uri(t.content, UriKind.Absolute));
+                        newimage.Width = content_stackpanel.ActualWidth;
+                        newimage.Height = this.ActualHeight;
+                        //newimage.Width = content_stackpanel.Width;
+                        //newimage.Height = content_stackpanel.Height;
+                        content_stackpanel.Children.Add(newimage);
+                        content_stackpanel.RegisterName("newimage" + t.ID, newimage);
+                       
+                        //Label backlable = new Label();
+                        //small_title.Background = new SolidColorBrush(Color.FromArgb(50, 0, 0, 0));
+                        small_title.Margin = new Thickness(0, content_back.ActualHeight - 150, 0, 0);
+                        //backlable.Height = 200;
+                        small_title.Width = content_stackpanel.ActualWidth;
+                       
+                        //Panel.SetZIndex(backlable, 2);
+                        //content_stackpanel.Children.Add(backlable);
+                        //TextBlock newtextblock = new TextBlock();
+                        
+
                     }
                     else if (t.type == "视频")
                     {
+                        mvlist.Add(t.content);
                         //text_content.Height = 0;
                         //text_content.Width = 0;
                         //show_image.Width = 0;
                         //show_image.Height = 0;
                         //show_video.Source = new Uri(t.content, UriKind.Absolute);
                         // newtimer.Interval = t.show_time * 1000;
+                        small_title.Visibility = Visibility.Hidden;
+                      
+                           
                     }
 
                     //}
                     //temp_step++;
                 }
 
+
+                if (mvlist.Count > 0)
+                {
+                    //foreach (var v in show_el)
+                    //{
+                        //MediaElement delmedia = content_stackpanel.FindName("newmeida" + v.ID) as MediaElement;
+                        //if (delmedia != null)
+                        //{
+                        //    content_stackpanel.Children.Remove(delmedia);
+                        //    content_stackpanel.UnregisterName("newmeida" + v.ID);
+                        //}
+                 
+                        MediaElement newmeida = new MediaElement();
+
+
+                        content_stackpanel.Children.Add(newmeida);
+                        //content_stackpanel.RegisterName("newmeida" + v.ID, newmeida);
+                        newmeida.LoadedBehavior = MediaState.Manual;
+                        newmeida.UnloadedBehavior = MediaState.Manual;
+                     
+                     
+                     
+                        newmeida.MediaEnded += new RoutedEventHandler(newmeida_MediaEnded);
+                        newmeida.Source = new Uri(mvlist[0], UriKind.Absolute);
+                        content_stackpanel.UpdateLayout();
+                        newmeida.Width = content_stackpanel.ActualWidth;
+                        //newmeida.Height = content_stackpanel.ActualHeight;
+                       // newmeida.UpdateLayout();
+                        newmeida.Play();
+                        //newmeida.Loaded += new RoutedEventHandler(newmeida_Loaded);
+                        //newmeida.Unloaded += new RoutedEventHandler(newmeida_Unloaded);
+                        //newmeida.MediaOpened += new RoutedEventHandler(newmeida_MediaOpened);
+                    //}
+                }
+
+
+
+
+
                 //var showel = from el in publicDataSet.element join el_set in publicDataSet.el_elset on el.ID equals el_set.element_ID where el.status == true where el_set.element_set_ID == elset_id select el;
                 //Storyboard newstoryboard = new Storyboard();
                 int startanimation = 0;
                 foreach (var s in show_el)
                 {
-
-                    //ThicknessAnimation txt_animation = new ThicknessAnimation();
-                    FlowDocumentScrollViewer new_fld = content_stackpanel.FindName("newdoc" + s.ID) as FlowDocumentScrollViewer;
-                    new_fld.Name = "newdoc" + s.ID;
-
-                    new_fld.UpdateLayout();
-
-                    Storyboard newstoryboard1 = new Storyboard();
-                    newstoryboard1.Name = "t" + s.ID;
-                    DoubleAnimation newadoubleop = new DoubleAnimation();
-                    newadoubleop.From = 0;
-                    newadoubleop.To = 1;
-                    newadoubleop.Duration = TimeSpan.FromSeconds(5);
-                    newstoryboard1.Children.Add(newadoubleop);
-                    Storyboard.SetTargetName(newadoubleop, new_fld.Name);
-                    Storyboard.SetTargetProperty(newadoubleop, new PropertyPath(OpacityProperty));
-                    newstoryboard1.Completed += new EventHandler(newstoryboard_Completed);
-                    alist.Add(newstoryboard1);
-                    if (startanimation == 0)
+                    if (s.type == "文档")
                     {
-                        newstoryboard1.Begin(content_stackpanel);
-                        startanimation = 1;
-                    }
+                        //ThicknessAnimation txt_animation = new ThicknessAnimation();
+                        FlowDocumentScrollViewer new_fld = content_stackpanel.FindName("newdoc" + s.ID) as FlowDocumentScrollViewer;
+                        new_fld.Name = "newdoc" + s.ID;
 
-                    Storyboard newstoryboard2 = new Storyboard();
-                    newstoryboard2.Name = "m" + s.ID;
-                    ThicknessAnimation txt_animation = new ThicknessAnimation();
-                    txt_animation.From = new Thickness(0, 0, 0, 0);
-                    if (PublicClass.show_hight - new_fld.ActualHeight >= 0)
+                        new_fld.UpdateLayout();
+
+                        Storyboard newstoryboard1 = new Storyboard();
+                        newstoryboard1.Name = "t" + s.ID;
+                        DoubleAnimation newadoubleop = new DoubleAnimation();
+                        newadoubleop.From = 0;
+                        newadoubleop.To = 1;
+                        newadoubleop.Duration = TimeSpan.FromSeconds(5);
+                        newstoryboard1.Children.Add(newadoubleop);
+                        Storyboard.SetTargetName(newadoubleop, new_fld.Name);
+                        Storyboard.SetTargetProperty(newadoubleop, new PropertyPath(OpacityProperty));
+                        newstoryboard1.Completed += new EventHandler(newstoryboard_Completed);
+                        alist.Add(newstoryboard1);
+                        if (startanimation == 0)
+                        {
+                            newstoryboard1.Begin(content_stackpanel);
+                            startanimation = 1;
+                        }
+
+                        Storyboard newstoryboard2 = new Storyboard();
+                        newstoryboard2.Name = "m" + s.ID;
+                        ThicknessAnimation txt_animation = new ThicknessAnimation();
+                        txt_animation.From = new Thickness(0, 0, 0, 0);
+                        if (PublicClass.show_hight - new_fld.ActualHeight >= 0)
+                        {
+                            txt_animation.To = new Thickness(0, 0, 0, 0);
+                        }
+                        else
+                        {
+                            txt_animation.To = new Thickness(0, (PublicClass.show_hight - new_fld.ActualHeight), 0, 0);
+                        }
+                        // newdoc.Visibility = Visibility.Visible;
+                        txt_animation.Duration = TimeSpan.FromSeconds(s.show_time);
+                        newstoryboard2.Children.Add(txt_animation);
+                        Storyboard.SetTargetName(txt_animation, new_fld.Name);
+                        Storyboard.SetTargetProperty(txt_animation, new PropertyPath(MarginProperty));
+                        newstoryboard2.Completed += new EventHandler(newstoryboard_Completed);
+                        alist.Add(newstoryboard2);
+                        //newstoryboard.Stop(content_stackpanel);
+                        //newstoryboard.Begin(content_stackpanel);
+
+                        Storyboard newstoryboard3 = new Storyboard();
+
+                        DoubleAnimation newadouble = new DoubleAnimation();
+                        newadouble.From = 1;
+                        newadouble.To = 0;
+                        newadouble.Duration = TimeSpan.FromSeconds(5);
+                        newstoryboard3.Children.Add(newadouble);
+                        Storyboard.SetTargetName(newadouble, new_fld.Name);
+                        Storyboard.SetTargetProperty(newadouble, new PropertyPath(OpacityProperty));
+                        newstoryboard3.Completed += new EventHandler(newstoryboard_Completed);
+                        alist.Add(newstoryboard3);
+
+
+                        Storyboard newstoryboard4 = new Storyboard();
+                        //newstoryboard2.Name = "m" + s.ID;
+                        ThicknessAnimation txt_animation4 = new ThicknessAnimation();
+                        //txt_animation4.From = new Thickness(0, 0, 0, 0);
+                        txt_animation4.To = new Thickness(0, 0, 0, 0);
+                        // newdoc.Visibility = Visibility.Visible;
+                        txt_animation4.Duration = TimeSpan.FromSeconds(0.1);
+                        newstoryboard4.Children.Add(txt_animation4);
+                        Storyboard.SetTargetName(txt_animation4, new_fld.Name);
+                        Storyboard.SetTargetProperty(txt_animation4, new PropertyPath(MarginProperty));
+                        newstoryboard4.Completed += new EventHandler(newstoryboard_Completed);
+                        alist.Add(newstoryboard4);
+                    }
+                    else if (s.type == "图片")
                     {
-                        txt_animation.To = new Thickness(0, 0, 0, 0);
+                        Image new_img = content_stackpanel.FindName("newimage" + s.ID) as Image;
+                        new_img.Name = "newimage" + s.ID;
+
+                      //  new_img.UpdateLayout();
+
+                        Storyboard newstoryboard_img1 = new Storyboard();
+                        newstoryboard_img1.Name = "t1" + s.ID;
+                        DoubleAnimation newadoubleop = new DoubleAnimation();
+                        newadoubleop.From = 0;
+                        newadoubleop.To = 1;
+                        newadoubleop.Duration = TimeSpan.FromSeconds(0.5);
+                        newstoryboard_img1.Children.Add(newadoubleop);
+                        Storyboard.SetTargetName(newadoubleop, new_img.Name);
+                        Storyboard.SetTargetProperty(newadoubleop, new PropertyPath(OpacityProperty));
+                        newstoryboard_img1.Completed += new EventHandler(newstoryboard_img1_Completed);
+                        alist.Add(newstoryboard_img1);
+                        if (startanimation == 0)
+                        {
+                            newstoryboard_img1.Begin(content_stackpanel);
+                            startanimation = 1;
+                        }
+                        //newstoryboard_img1.Begin(content_stackpanel);
+
+
+
+                        Storyboard newstoryboard_img3 = new Storyboard();
+                        newstoryboard_img3.Name = "t3" + s.ID;
+                        DoubleAnimation newadoubleop3 = new DoubleAnimation();
+                        newadoubleop3.From = 1;
+                        newadoubleop3.To = 1;
+                        newadoubleop3.Duration = TimeSpan.FromSeconds(10);
+                        newstoryboard_img3.Children.Add(newadoubleop3);
+                        Storyboard.SetTargetName(newadoubleop3, new_img.Name);
+                        Storyboard.SetTargetProperty(newadoubleop3, new PropertyPath(OpacityProperty));
+                        newstoryboard_img3.Completed += new EventHandler(newstoryboard_img1_Completed);
+                        alist.Add(newstoryboard_img3);
+
+
+
+                        Storyboard newstoryboard_img2 = new Storyboard();
+                        newstoryboard_img1.Name = "t2" + s.ID;
+                        DoubleAnimation newadoubleop2 = new DoubleAnimation();
+                        newadoubleop2.From = 1;
+                        newadoubleop2.To = 0;
+                        newadoubleop2.Duration = TimeSpan.FromSeconds(0.5);
+                        newstoryboard_img2.Children.Add(newadoubleop2);
+                        Storyboard.SetTargetName(newadoubleop2, new_img.Name);
+                        Storyboard.SetTargetProperty(newadoubleop2, new PropertyPath(OpacityProperty));
+                        newstoryboard_img2.Completed += new EventHandler(newstoryboard_img1_Completed);
+                        alist.Add(newstoryboard_img2);
+                        //newstoryboard_img2.Begin(content_stackpanel);
                     }
-                    else
-                    {
-                        txt_animation.To = new Thickness(0, (PublicClass.show_hight - new_fld.ActualHeight), 0, 0);
-                    }
-                    // newdoc.Visibility = Visibility.Visible;
-                    txt_animation.Duration = TimeSpan.FromSeconds(s.show_time);
-                    newstoryboard2.Children.Add(txt_animation);
-                    Storyboard.SetTargetName(txt_animation, new_fld.Name);
-                    Storyboard.SetTargetProperty(txt_animation, new PropertyPath(MarginProperty));
-                    newstoryboard2.Completed += new EventHandler(newstoryboard_Completed);
-                    alist.Add(newstoryboard2);
-                    //newstoryboard.Stop(content_stackpanel);
-                    //newstoryboard.Begin(content_stackpanel);
-
-                    Storyboard newstoryboard3 = new Storyboard();
-
-                    DoubleAnimation newadouble = new DoubleAnimation();
-                    newadouble.From = 1;
-                    newadouble.To = 0;
-                    newadouble.Duration = TimeSpan.FromSeconds(5);
-                    newstoryboard3.Children.Add(newadouble);
-                    Storyboard.SetTargetName(newadouble, new_fld.Name);
-                    Storyboard.SetTargetProperty(newadouble, new PropertyPath(OpacityProperty));
-                    newstoryboard3.Completed += new EventHandler(newstoryboard_Completed);
-                    alist.Add(newstoryboard3);
-
-
-                    Storyboard newstoryboard4 = new Storyboard();
-                    //newstoryboard2.Name = "m" + s.ID;
-                    ThicknessAnimation txt_animation4 = new ThicknessAnimation();
-                    //txt_animation4.From = new Thickness(0, 0, 0, 0);
-                    txt_animation4.To = new Thickness(0, 0, 0, 0);
-                    // newdoc.Visibility = Visibility.Visible;
-                    txt_animation4.Duration = TimeSpan.FromSeconds(0.1);
-                    newstoryboard4.Children.Add(txt_animation4);
-                    Storyboard.SetTargetName(txt_animation4, new_fld.Name);
-                    Storyboard.SetTargetProperty(txt_animation4, new PropertyPath(MarginProperty));
-                    newstoryboard4.Completed += new EventHandler(newstoryboard_Completed);
-                    alist.Add(newstoryboard4);
-                    //newstoryboard.Begin(content_stackpanel);
+                  
                 }
 
 
@@ -371,6 +505,83 @@ namespace fcb_public
 
 
 
+        }
+
+        void newstoryboard_med1_Completed(object sender, EventArgs e)
+        {
+            if (anmilistep < alist.Count - 1)
+            {
+                anmilistep++;
+            }
+            else
+            {
+                anmilistep = 0;
+            }
+            Storyboard newstor = alist[anmilistep] as Storyboard;
+            newstor.Begin(content_stackpanel);
+        }
+
+        void newmeida_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            Duration a = (sender as MediaElement).NaturalDuration;
+            double b = a.TimeSpan.TotalSeconds;
+        }
+
+        void newmeida_Loaded(object sender, RoutedEventArgs e)
+        {
+            (sender as MediaElement).Play();
+            //Duration a = (sender as MediaElement).NaturalDuration;
+            //double b = a.TimeSpan.TotalSeconds;
+        }
+
+        void newmeida_Unloaded(object sender, RoutedEventArgs e)
+        {
+            {
+                //MediaElement.IsMediaPlay = false;
+                
+                (sender as MediaElement).Stop();
+            }
+        }
+
+        void newmeida_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            ++mvindex;
+            if (mvindex == mvlist.Count)
+            {
+                mvindex = 0;
+            }
+            //MediaElement newmeida2 = sender as MediaElement;
+            (sender as MediaElement).Source = new Uri(mvlist[mvindex], UriKind.Absolute);
+            //(sender as MediaElement).Stop();
+            (sender as MediaElement).Play();
+
+            
+        }
+
+        void newstoryboard_img1_Completed(object sender, EventArgs e)
+        {
+         
+                if (anmilistep < alist.Count - 1)
+                {
+                    anmilistep++;
+                }
+                else
+                {
+                    anmilistep = 0;
+                }
+                Storyboard newstor = alist[anmilistep] as Storyboard;
+               
+                foreach (string t in titlename)
+                {
+                    string[] newtitle = t.Split('|');
+                    if (newstor.Name != null && newstor.Name.Substring(2, newstor.Name.Length - 2) == newtitle[0])
+                    {
+                        small_title.Text = newtitle[1];
+                    }
+                }
+
+                newstor.Begin(content_stackpanel);
+           
         }
 
         
@@ -411,14 +622,14 @@ namespace fcb_public
 
 
             Storyboard newstor = alist[anmilistep] as Storyboard;
-            foreach (string t in titlename)
-            {
-                string[] newtitle = t.Split('|');
-                if (newstor.Name!=null && newstor.Name.Substring(1, newstor.Name.Length-1) == newtitle[0])
-                {
-                    small_title.Text = newtitle[1];
-                }
-            }
+            //foreach (string t in titlename)
+            //{
+            //    string[] newtitle = t.Split('|');
+            //    if (newstor.Name!=null && newstor.Name.Substring(1, newstor.Name.Length-1) == newtitle[0])
+            //    {
+            //        small_title.Text = newtitle[1];
+            //    }
+            //}
             newstor.Begin(content_stackpanel);
         }
 

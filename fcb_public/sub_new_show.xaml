@@ -13,7 +13,8 @@
     </UserControl.Resources>
     <Grid>
         
-        <DockPanel x:Name="main_dockpanel">
+        <DockPanel x:Name="main_dockpanel" Background="#90000000">
+            
             <DockPanel DockPanel.Dock="Top" Height="44" >
                 <DockPanel.Background>
                     <ImageBrush ImageSource="/fcb_public;component/image/title_background.png" />
@@ -37,18 +38,14 @@
             <Image DockPanel.Dock="Left" Source="/fcb_public;component/image/title_left_line.png" Stretch="Fill" Width="0.6" Opacity="0.4"></Image>
             <Image DockPanel.Dock="Right" Source="/fcb_public;component/image/title_right_line.png" Stretch="Fill" Width="0.6" Opacity="0.4"></Image>
             <Image DockPanel.Dock="Bottom" Source="/fcb_public;component/image/title_bottom_border_line.png" Stretch="Fill" Height="1" Opacity="0.4"></Image>
-            <StackPanel  Background="#10FFFFFF" DockPanel.Dock="Top">
-            <TextBlock x:Name="small_title" Height="25"  HorizontalAlignment="Center" FontSize="16" Padding="5" TextWrapping="Wrap" Foreground="White">
-                <TextBlock.Effect>
-                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="1"></DropShadowEffect>
-                </TextBlock.Effect>
-
-            </TextBlock>
-            </StackPanel>
-            <StackPanel ClipToBounds="True" Background="#10FFFFFF">
-
+           
+                
+            
+            <StackPanel ClipToBounds="True" x:Name="content_back" Background="#10FFFFFF">
+              
                 <Canvas x:Name="content_stackpanel">
-          
+                    <TextBlock x:Name="small_title" Height="150" Background="#50000000"  HorizontalAlignment="Center" FontSize="16" Padding="5" TextWrapping="Wrap" Foreground="White" Panel.ZIndex="1">
+                    </TextBlock>
                     <!--<FlowDocumentScrollViewer x:Name="text_content"   Padding="10" IsEnabled="False"  Foreground="White" IsToolBarVisible="False" VerticalScrollBarVisibility="Hidden">
                         <FlowDocumentScrollViewer.Effect>
                             <DropShadowEffect Color="Black" Direction="315" ShadowDepth="3" Opacity="0.5"></DropShadowEffect>

@@ -40,6 +40,7 @@ namespace fcb_public
             publicDataSetTableAdapters.Fill(publicDataSet.roll);
             System.Windows.Data.CollectionViewSource initializeViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("rollViewSource"));
             rollDataGrid.CanUserAddRows = false;
+         // roll_quedin.Content=  System.DateTime.UtcNow.AddHours(-5.5);
 
         }
 

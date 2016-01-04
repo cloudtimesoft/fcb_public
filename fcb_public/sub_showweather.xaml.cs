@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using fcb_public.cn.com.webxml.www;
 using System.Timers;
 using System.Threading;
+
 namespace fcb_public
 {
     /// <summary>
@@ -28,41 +29,44 @@ namespace fcb_public
 
         System.Timers.Timer newtime = new System.Timers.Timer();
         
-
+        public string city_name;
+        public float gmt;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             newtime.Interval = 60000;
             newtime.Elapsed += new ElapsedEventHandler(newtime_Elapsed);
             newtime.Start();
-            if (PublicClass.city_name != "")
+            try
             {
-                //WeatherWebService weather = new WeatherWebService();
+                // WeatherWs weather = new WeatherWebService();
                 WeatherWebService wx = new WeatherWebService();
                 string[] s = new string[23];//声明string数组存放返回结果 
-                 //string[] s1 = new string[23];//声明string数组存放返回结果   
-                string city = PublicClass.city_name;//获得文本框录入的查询城市
-                // s1 = newweather.getRegionCountry();
+                // string[] s1 = new string[23];//声明string数组存放返回结果   
+                string city = city_name;//获得文本框录入的查询城市
+                //s1 = newweather.getRegionCountry();
                 // string city = txt_address.Text;
                 s = wx.getWeatherbyCityName(city);
 
                 txt_address.Text = city;
                 string temp = s[13];
                 txtDate.Text = temp.Substring(6);
-                string a=temp.Substring(6);
+                string a = temp.Substring(6);
                 txtWindAndTemperature.Text = s[12];
                 string img1 = s[15];
                 string img2 = s[16];
-                weather_zhiliang.Text = System.DateTime.Now.ToShortDateString() +"  "+ System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
+                weather_zhiliang.Text = System.DateTime.UtcNow.AddHours(gmt).ToString(); //System.DateTime.Now.ToShortDateString() +"  "+ System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
                 if (img1 == img2)
                 {
                     icon2.Visibility = Visibility.Hidden;
                     icon1.Source = new BitmapImage(new Uri(@"image\weather\" + img1, UriKind.Relative));
                 }
-                else 
+                else
                 {
                     icon1.Source = new BitmapImage(new Uri(@"image\weather\" + img1, UriKind.Relative));
                     icon2.Source = new BitmapImage(new Uri(@"image\weather\" + img2, UriKind.Relative));
                 }
+            }
+            catch { }
                 //int num;
                 //if (a == "晴".Trim())
                 //{
@@ -84,7 +88,7 @@ namespace fcb_public
                 //}
                 //else if(a=="")
                
-            }
+            
         }
 
         void newtime_Elapsed(object sender, ElapsedEventArgs e)
@@ -96,8 +100,8 @@ namespace fcb_public
 
 
 
-            weather_zhiliang.Text = System.DateTime.Now.ToShortDateString() +"  "+ System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
-
+            //weather_zhiliang.Text = System.DateTime.Now.ToShortDateString() +"  "+ System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
+            weather_zhiliang.Text = System.DateTime.UtcNow.AddHours(gmt).ToString();
 
 
                 }));

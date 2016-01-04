@@ -98,6 +98,7 @@ namespace fcb_public
             {
                 can_moves = true;
             }
+          
 
             foreach (var s in main_grid.Children)
             {
@@ -147,7 +148,19 @@ namespace fcb_public
                     }
                    
                 }
+                StackPanel newpanel = FindName("rollstackpanel") as StackPanel;
+                if (newpanel != null)
+                {
+                    if (e.GetPosition(big_grid).Y > newpanel.Margin.Top)
+                    {
+                        ctrl_name = newpanel.Name;
+                        process_type = "move";
+                        old_margin = newpanel.Margin;
+                        big_grid.Cursor = Cursors.Hand;
+                    }
+                }
             }
+
            
         }
         private void main_grid_PreviewMouseMove(object sender, MouseEventArgs e)
@@ -231,7 +244,13 @@ namespace fcb_public
                 {
                     newweather.Margin = new Thickness(old_margin.Left + e.GetPosition(main_grid).X - old_point.X, old_margin.Top + e.GetPosition(main_grid).Y - old_point.Y, 0, 0);
                 }
-                //subwindow1.Margin = new Thickness(e.GetPosition(null).X, PublicClass.show_bottom - subwindow1.Height, 0, 0);
+                StackPanel newpanel = big_grid.FindName("rollstackpanel") as StackPanel;
+                if (newpanel != null && process_type == "move")
+                {
+                    newpanel.Margin = new Thickness(old_margin.Left, old_margin.Top + e.GetPosition(big_grid).Y - old_point.Y, 0, 0);
+                }
+
+
             }
           
 
@@ -438,15 +457,24 @@ namespace fcb_public
                 newtextblock.Foreground = Brushes.White;
                // newtextblock.Background = Brushes.AliceBlue;
                 newtextblock.TextWrapping = TextWrapping.NoWrap;
+                StackPanel delpanel = main_grid.FindName("rollstackpanel") as StackPanel;
+                if (delpanel != null)
+                {
+                    main_grid.Children.Remove(delpanel);
+                    main_grid.UnregisterName("rollstackpanel");
+                }
+
                 StackPanel newstackpanel = new StackPanel();
+                newstackpanel.Name = "rollstackpanel";
                 newstackpanel.Width = main_grid.ActualWidth;
                 newstackpanel.Height = 36;
-               
-                //newstackpanel.Background = Brushes.Green;
+                newstackpanel.Margin = new Thickness(0, SystemParameters.PrimaryScreenHeight-36, 0, 0);
+               // newstackpanel.Background = Brushes.Green;
                // newstackpanel.Background=new
-                newstackpanel.VerticalAlignment = VerticalAlignment.Bottom;
+               // newstackpanel.VerticalAlignment = VerticalAlignment.Bottom;
                 newstackpanel.Children.Add(newtextblock);
-                big_grid.Children.Add(newstackpanel);
+                main_grid.Children.Add(newstackpanel);
+                main_grid.RegisterName("rollstackpanel", newstackpanel);
                 newtextblock.UpdateLayout();
                 ThicknessAnimation txt_margin_animation = new ThicknessAnimation();
                 txt_margin_animation.From = new Thickness(SystemParameters.PrimaryScreenWidth, 0, 0, 0);
@@ -466,27 +494,34 @@ namespace fcb_public
                 fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
                 fcb_public.publicDataSetTableAdapters.weatherTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.weatherTableAdapter();
                 publicDataSetInitializeTableAdapter.Fill(publicDataSet.weather);
-                foreach (var t in publicDataSet.weather)
+                var show_weatherconut = from c in publicDataSet.weather where c.status == true select c;
+                foreach (var t in show_weatherconut)
                 {
-                    sub_showweather del_show = main_grid.FindName("w" + t.in_name) as sub_showweather;
-                    if (del_show != null)
-                    {
-                        main_grid.Children.Remove(del_show);
-                        main_grid.UnregisterName("w" + t.in_name);
-                    }
+                   
+                        sub_showweather del_show = main_grid.FindName("w" + t.in_name) as sub_showweather;
+                        if (del_show != null)
+                        {
+                            main_grid.Children.Remove(del_show);
+                            main_grid.UnregisterName("w" + t.in_name);
+                        }
 
-                    sub_showweather newshow = new sub_showweather();
-                    newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
-                    newshow.Name = "w" + t.in_name;
-                    newshow.Width = 250;
-                    newshow.Height = 184;
-                    //newshow.Background = Brushes.White;
-                    //newshow.Opacity = 0.2;
-                   // newshow.elset_id = int.Parse(t.in_name);
-                    main_grid.Children.Add(newshow);
-                    //Panel.SetZIndex(submainwindow1, 3000);
-                    main_grid.RegisterName("w" + t.in_name, newshow);
+                        sub_showweather newshow = new sub_showweather();
+                        newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+                        newshow.Name = "w" + t.in_name;
+                        newshow.city_name = t.in_name;
+                        newshow.gmt = t.gmt;
+                        newshow.Width = 200;
+                        newshow.Height = 184;
+                        //newshow.Background = Brushes.White;
+                        //newshow.Opacity = 0.2;
+                        // newshow.elset_id = int.Parse(t.in_name);
+                        main_grid.Children.Add(newshow);
+                        //Panel.SetZIndex(submainwindow1, 3000);
+                        main_grid.RegisterName("w" + t.in_name, newshow);
 
+
+
+                    
                 }
             }
             
@@ -733,8 +768,8 @@ namespace fcb_public
           
             subwindow_content.Children.Clear();
             sub_weather newweather = new sub_weather();
-            subwindow.Width = 400;
-            subwindow.Height = 200;
+            subwindow.Width = 450;
+            subwindow.Height = 350;
             newweather.Name = "newweather";
             subwindow.Opacity = 0.9;
 
