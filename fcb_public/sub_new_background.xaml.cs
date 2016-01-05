@@ -65,7 +65,7 @@ namespace fcb_public
                 Button newbtn = new Button();
                 Image newimg = new Image();
                 Image imagebru = new Image();
-                imagebru.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "\\image\\" + "close.png", UriKind.Absolute));
+                imagebru.Source = new BitmapImage(new Uri(@"image\close.png", UriKind.Relative));
                 newimg.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "\\image\\" + t.url, UriKind.Absolute));
                 newimg.Width = 100;
                 newimg.Height = 80;

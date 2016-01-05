@@ -13,7 +13,7 @@
         
         <Button x:Name="show_weather" Margin="262,0,0,31" Width="70" Height="25" Click="show_weather_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom">添加</Button>
         <Button x:Name="del_weather" Margin="0,294,33,31" Width="60" Height="25" Click="show_weather_Click" HorizontalAlignment="Right">删除</Button>
-        <Grid HorizontalAlignment="Left" Margin="351,252,0,0" Name="grid1" VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Left" Margin="348,250,0,0" Name="grid1" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -24,7 +24,7 @@
             <Label Content="状态:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
             <CheckBox Content="" Grid.Column="1" Grid.Row="0" Height="16" HorizontalAlignment="Left" IsChecked="{Binding Path=status, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="3" Name="statusCheckBox" VerticalAlignment="Center" />
         </Grid>
-        <Grid HorizontalAlignment="Left" Margin="12,249,0,0" Name="grid2" VerticalAlignment="Top" Width="198">
+        <Grid HorizontalAlignment="Left" Margin="12,249,0,0" Name="grid2" VerticalAlignment="Top" Width="320">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -33,7 +33,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Label Content="城市:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Height="23" Margin="3,3,0,3" Name="in_nameTextBox" Text="{Binding Path=in_name, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="146" />
+            <TextBox Grid.Column="1" Height="23" Margin="3,3,-122,3" Name="in_nameTextBox" Text="{Binding Path=in_name, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="268" />
         </Grid>
         <Grid HorizontalAlignment="Left" Margin="40,287,0,0" Name="grid3" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
             <Label Content="ID:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
             <TextBox Grid.Column="1" Grid.Row="0" Height="23" HorizontalAlignment="Left" Margin="3" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" />
         </Grid>
-        <ComboBox Height="23" HorizontalAlignment="Left" Margin="253,253,0,0" Name="gmt" VerticalAlignment="Top" Width="92" SelectionChanged="gmt_SelectionChanged">
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="253,253,0,0" Name="gmt" VerticalAlignment="Top" Width="92" SelectionChanged="gmt_SelectionChanged" Visibility="Hidden">
 
             <ComboBoxItem >UTC</ComboBoxItem>
             <ComboBoxItem >UTC+00:30</ComboBoxItem>
@@ -102,14 +102,14 @@
 
 
         </ComboBox>
-        <Label Content="时区：" Height="28" HorizontalAlignment="Left" Margin="216,252,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="时区：" Height="28" HorizontalAlignment="Left" Margin="216,252,0,0" Name="label1" VerticalAlignment="Top" Visibility="Hidden" />
         <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="14,12,0,0" Name="weatherDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="400">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" Visibility="Hidden" />
                 <DataGridTextColumn x:Name="mar_leftColumn" Binding="{Binding Path=mar_left}" Header="mar left" Width="SizeToHeader" Visibility="Hidden" />
                 <DataGridTextColumn x:Name="mar_topColumn" Binding="{Binding Path=mar_top}" Header="mar top" Width="SizeToHeader" Visibility="Hidden" />
                 <DataGridTextColumn x:Name="in_nameColumn" Binding="{Binding Path=in_name}" Header="城市" Width="100" />
-                <DataGridTextColumn x:Name="gmtColumn" Binding="{Binding Path=gmt}" Header="gmt" Width="SizeToHeader" />
+                <!--<DataGridTextColumn x:Name="gmtColumn" Binding="{Binding Path=gmt}" Header="gmt" Width="SizeToHeader" />-->
                 <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="状态" Width="SizeToHeader" />
                 
             </DataGrid.Columns>

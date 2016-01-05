@@ -45,6 +45,9 @@ namespace fcb_public
             // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
             // 	myCollectionViewSource.Source = your data
             // }
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.weatherTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.weatherTableAdapter();
+            publicDataSetInitializeTableAdapter.Fill(publicDataSet.weather);
             weatherDataGrid.CanUserAddRows = false;
         }
 
@@ -56,157 +59,157 @@ namespace fcb_public
             {
               ComboBoxItem item = gmt.SelectedItem as ComboBoxItem;
                 float gmtime=0;
-                string str = item.Content.ToString();
+                //string str = item.Content.ToString();
 
-                switch (str)
-                {
-                    case "UTC":
-                        gmtime = 0;
-                        break;
-                    case"UTC+00:30":
-                        gmtime = 0.5f;
-                        break;
-                    case "UTC+01:00":
-                        gmtime = 1f;
-                        break;
-                    case "UTC+01:30":
-                        gmtime = 1.5f;
-                        break;
-                    case "UTC+02:00":
-                        gmtime = 2f;
-                        break;
-                    case "UTC+02:30":
-                        gmtime = 2.5f;
-                        break;
-                    case "UTC+03:00":
-                        gmtime = 3f;
-                        break;
-                    case "UTC+03:30":
-                        gmtime = 3.5f;
-                        break;
-                    case "UTC+04:00":
-                        gmtime = 4f;
-                        break;
-                    case "UTC+04:30":
-                        gmtime = 4.5f;
-                        break;
-                    case "UTC+05:00":
-                        gmtime = 5f;
-                        break;
-                    case "UTC+05:30":
-                        gmtime = 5.5f;
-                        break;
-                    case "UTC+06:00":
-                        gmtime = 6f;
-                        break;
-                    case "UTC+06:30":
-                        gmtime = 6.5f;
-                        break;
-                    case "UTC+07:00":
-                        gmtime = 7f;
-                        break;
-                    case "UTC+07:30":
-                        gmtime = 7.5f;
-                        break;
-                    case "UTC+08:00":
-                        gmtime = 8f;
-                        break;
-                    case "UTC+08:30":
-                        gmtime = 8.5f;
-                        break;
-                    case "UTC+09:00":
-                        gmtime = 9.5f;
-                        break;
-                    case "UTC+10:00":
-                        gmtime = 10f;
-                        break;
-                    case "UTC+10:30":
-                        gmtime = 10.5f;
-                        break;
-                    case "UTC+11:00":
-                        gmtime = 11f;
-                        break;
-                    case "UTC+11:30":
-                        gmtime = 11.5f;
-                        break;
-                    case "UTC+12:00":
-                        gmtime = 12f;
-                        break;
+                //switch (str)
+                //{
+                //    case "UTC":
+                //        gmtime = 0;
+                //        break;
+                //    case"UTC+00:30":
+                //        gmtime = 0.5f;
+                //        break;
+                //    case "UTC+01:00":
+                //        gmtime = 1f;
+                //        break;
+                //    case "UTC+01:30":
+                //        gmtime = 1.5f;
+                //        break;
+                //    case "UTC+02:00":
+                //        gmtime = 2f;
+                //        break;
+                //    case "UTC+02:30":
+                //        gmtime = 2.5f;
+                //        break;
+                //    case "UTC+03:00":
+                //        gmtime = 3f;
+                //        break;
+                //    case "UTC+03:30":
+                //        gmtime = 3.5f;
+                //        break;
+                //    case "UTC+04:00":
+                //        gmtime = 4f;
+                //        break;
+                //    case "UTC+04:30":
+                //        gmtime = 4.5f;
+                //        break;
+                //    case "UTC+05:00":
+                //        gmtime = 5f;
+                //        break;
+                //    case "UTC+05:30":
+                //        gmtime = 5.5f;
+                //        break;
+                //    case "UTC+06:00":
+                //        gmtime = 6f;
+                //        break;
+                //    case "UTC+06:30":
+                //        gmtime = 6.5f;
+                //        break;
+                //    case "UTC+07:00":
+                //        gmtime = 7f;
+                //        break;
+                //    case "UTC+07:30":
+                //        gmtime = 7.5f;
+                //        break;
+                //    case "UTC+08:00":
+                //        gmtime = 8f;
+                //        break;
+                //    case "UTC+08:30":
+                //        gmtime = 8.5f;
+                //        break;
+                //    case "UTC+09:00":
+                //        gmtime = 9.5f;
+                //        break;
+                //    case "UTC+10:00":
+                //        gmtime = 10f;
+                //        break;
+                //    case "UTC+10:30":
+                //        gmtime = 10.5f;
+                //        break;
+                //    case "UTC+11:00":
+                //        gmtime = 11f;
+                //        break;
+                //    case "UTC+11:30":
+                //        gmtime = 11.5f;
+                //        break;
+                //    case "UTC+12:00":
+                //        gmtime = 12f;
+                //        break;
 
 
 
-                    case "UTC-00:30":
-                        gmtime = -0.5f;
-                        break;
-                    case "UTC-01:00":
-                        gmtime = -1f;
-                        break;
-                    case "UTC-01:30":
-                        gmtime = -1.5f;
-                        break;
-                    case "UTC-02:00":
-                        gmtime = -2f;
-                        break;
-                    case "UTC-02:30":
-                        gmtime = -2.5f;
-                        break;
-                    case "UTC-03:00":
-                        gmtime = -3f;
-                        break;
-                    case "UTC-03:30":
-                        gmtime = -3.5f;
-                        break;
-                    case "UTC-04:00":
-                        gmtime = -4f;
-                        break;
-                    case "UTC-04:30":
-                        gmtime = -4.5f;
-                        break;
-                    case "UTC-05:00":
-                        gmtime = -5f;
-                        break;
-                    case "UTC-05:30":
-                        gmtime = -5.5f;
-                        break;
-                    case "UTC-06:00":
-                        gmtime = -6f;
-                        break;
-                    case "UTC-06:30":
-                        gmtime = -6.5f;
-                        break;
-                    case "UTC-07:00":
-                        gmtime = -7f;
-                        break;
-                    case "UTC-07:30":
-                        gmtime = -7.5f;
-                        break;
-                    case "UTC-08:00":
-                        gmtime = -8f;
-                        break;
-                    case "UTC-08:30":
-                        gmtime = -8.5f;
-                        break;
-                    case "UTC-09:00":
-                        gmtime = -9.5f;
-                        break;
-                    case "UTC-10:00":
-                        gmtime = -10f;
-                        break;
-                    case "UTC-10:30":
-                        gmtime = -10.5f;
-                        break;
-                    case "UTC-11:00":
-                        gmtime = -11f;
-                        break;
-                    case "UTC-11:30":
-                        gmtime = -11.5f;
-                        break;
-                    case "UTC-12:00":
-                        gmtime = -12f;
-                        break;
+                //    case "UTC-00:30":
+                //        gmtime = -0.5f;
+                //        break;
+                //    case "UTC-01:00":
+                //        gmtime = -1f;
+                //        break;
+                //    case "UTC-01:30":
+                //        gmtime = -1.5f;
+                //        break;
+                //    case "UTC-02:00":
+                //        gmtime = -2f;
+                //        break;
+                //    case "UTC-02:30":
+                //        gmtime = -2.5f;
+                //        break;
+                //    case "UTC-03:00":
+                //        gmtime = -3f;
+                //        break;
+                //    case "UTC-03:30":
+                //        gmtime = -3.5f;
+                //        break;
+                //    case "UTC-04:00":
+                //        gmtime = -4f;
+                //        break;
+                //    case "UTC-04:30":
+                //        gmtime = -4.5f;
+                //        break;
+                //    case "UTC-05:00":
+                //        gmtime = -5f;
+                //        break;
+                //    case "UTC-05:30":
+                //        gmtime = -5.5f;
+                //        break;
+                //    case "UTC-06:00":
+                //        gmtime = -6f;
+                //        break;
+                //    case "UTC-06:30":
+                //        gmtime = -6.5f;
+                //        break;
+                //    case "UTC-07:00":
+                //        gmtime = -7f;
+                //        break;
+                //    case "UTC-07:30":
+                //        gmtime = -7.5f;
+                //        break;
+                //    case "UTC-08:00":
+                //        gmtime = -8f;
+                //        break;
+                //    case "UTC-08:30":
+                //        gmtime = -8.5f;
+                //        break;
+                //    case "UTC-09:00":
+                //        gmtime = -9.5f;
+                //        break;
+                //    case "UTC-10:00":
+                //        gmtime = -10f;
+                //        break;
+                //    case "UTC-10:30":
+                //        gmtime = -10.5f;
+                //        break;
+                //    case "UTC-11:00":
+                //        gmtime = -11f;
+                //        break;
+                //    case "UTC-11:30":
+                //        gmtime = -11.5f;
+                //        break;
+                //    case "UTC-12:00":
+                //        gmtime = -12f;
+                //        break;
                        
                         
-                }
+                //}
                 publicDataSet.weather.AddweatherRow((int)(SystemParameters.PrimaryScreenWidth - 300), 70, in_nameTextBox.Text, (bool)statusCheckBox.IsChecked,gmtime);
                 publicDataSetInitializeTableAdapter.Update(publicDataSet.weather);
                 publicDataSetInitializeTableAdapter.Fill(publicDataSet.weather);
