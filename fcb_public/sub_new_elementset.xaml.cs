@@ -313,5 +313,23 @@ namespace fcb_public
         }
 
 
+
+        public void savechanges()
+        {
+
+
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.element_setTableAdapter publicDataSetelement_setTableAdapter = new fcb_public.publicDataSetTableAdapters.element_setTableAdapter();
+            System.Windows.Data.CollectionViewSource element_setViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("element_setViewSource")));
+
+            //publicDataSetTableAdapters.Fill(publicDataSet.element);
+            element_setViewSource.View.MoveCurrentToNext();
+            publicDataSetelement_setTableAdapter.Update(publicDataSet.element_set);
+            // publicDataSet.element.AcceptChanges();
+
+
+        }
+
+
     }
 }

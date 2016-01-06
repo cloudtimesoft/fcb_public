@@ -62,6 +62,141 @@ namespace fcb_public
             System.Windows.Data.CollectionViewSource background_picViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("background_picViewSource")));
             background_picViewSource.View.MoveCurrentToFirst();
 
+            // 将数据加载到表 element 中。可以根据需要修改此代码。
+            fcb_public.publicDataSetTableAdapters.elementTableAdapter publicDataSetelementTableAdapter = new fcb_public.publicDataSetTableAdapters.elementTableAdapter();
+            publicDataSetelementTableAdapter.Fill(publicDataSet.element);
+            System.Windows.Data.CollectionViewSource elementViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("elementViewSource")));
+            elementViewSource.View.MoveCurrentToFirst();
+
+
+
+            // 将数据加载到表 weather 中。可以根据需要修改此代码。
+            fcb_public.publicDataSetTableAdapters.weatherTableAdapter publicDataSetweatherTableAdapter = new fcb_public.publicDataSetTableAdapters.weatherTableAdapter();
+            publicDataSetweatherTableAdapter.Fill(publicDataSet.weather);
+            System.Windows.Data.CollectionViewSource weatherViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("weatherViewSource")));
+            weatherViewSource.View.MoveCurrentToFirst();
+
+
+            // 将数据加载到表 roll 中。可以根据需要修改此代码。
+            fcb_public.publicDataSetTableAdapters.rollTableAdapter publicDataSetrollTableAdapter = new fcb_public.publicDataSetTableAdapters.rollTableAdapter();
+            publicDataSetrollTableAdapter.Fill(publicDataSet.roll);
+            System.Windows.Data.CollectionViewSource rollViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("rollViewSource")));
+            rollViewSource.View.MoveCurrentToFirst();
+
+
+            foreach (var t in publicDataSet.Initialize)
+            {
+                sub_new_show del_show = main_grid.FindName("s" + t.in_name) as sub_new_show;
+                if (del_show != null)
+                {
+                    main_grid.Children.Remove(del_show);
+                    main_grid.UnregisterName("s" + t.in_name);
+                }
+
+                sub_new_show newshow = new sub_new_show();
+                newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+                newshow.Width = t.mar_weight;
+                newshow.Height = t.mar_hight;
+                newshow.Name = "s" + t.in_name;
+
+                newshow.elset_id = int.Parse(t.in_name);
+                main_grid.Children.Add(newshow);
+                //Panel.SetZIndex(submainwindow1, 3000);
+                main_grid.RegisterName("s" + t.in_name, newshow);
+
+            }
+
+
+         
+            var show_weatherconut = from c in publicDataSet.weather where c.status == true select c;
+            foreach (var t in show_weatherconut)
+            {
+
+                sub_showweather del_show = main_grid.FindName("w" + t.in_name) as sub_showweather;
+                if (del_show != null)
+                {
+                    main_grid.Children.Remove(del_show);
+                    main_grid.UnregisterName("w" + t.in_name);
+                }
+
+                sub_showweather newshow = new sub_showweather();
+                newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+                newshow.Name = "w" + t.in_name;
+                newshow.city_name = t.in_name;
+                newshow.gmt = t.gmt;
+                newshow.Width = 200;
+                newshow.Height = 184;
+                //newshow.Background = Brushes.White;
+                //newshow.Opacity = 0.2;
+                // newshow.elset_id = int.Parse(t.in_name);
+                main_grid.Children.Add(newshow);
+                //Panel.SetZIndex(submainwindow1, 3000);
+                main_grid.RegisterName("w" + t.in_name, newshow);
+
+
+            }
+
+//初始化滚动
+            TextBlock newtextblock = new TextBlock();
+
+            //newtextblock.Text = publicDataSet.roll.FindByID(PublicClass.roll_index).txt;
+            var select = from c in publicDataSet.roll where c.status == true select c;
+            //int s1 = select.Count();
+            //int step = 0;
+            //int temp_step = 0;
+            //if (s1 > 0)
+            //{
+            foreach (var s in select)
+            {
+
+
+                newtextblock.Text += "      " + s.txt;
+
+
+            }
+            //    step++;
+            //}
+            //if (step > s1)
+            //{
+            //    step = 0;
+            //}
+
+            newtextblock.FontSize = 30;
+            newtextblock.Foreground = Brushes.White;
+            // newtextblock.Background = Brushes.AliceBlue;
+            newtextblock.TextWrapping = TextWrapping.NoWrap;
+            StackPanel delpanel = main_grid.FindName("rollstackpanel") as StackPanel;
+            if (delpanel != null)
+            {
+                main_grid.Children.Remove(delpanel);
+                main_grid.UnregisterName("rollstackpanel");
+            }
+
+            StackPanel newstackpanel = new StackPanel();
+            newstackpanel.Name = "rollstackpanel";
+            newstackpanel.Width = main_grid.ActualWidth;
+            newstackpanel.Height = 36;
+            newstackpanel.Margin = new Thickness(0, SystemParameters.PrimaryScreenHeight - 36, 0, 0);
+            // newstackpanel.Background = Brushes.Green;
+            // newstackpanel.Background=new
+            // newstackpanel.VerticalAlignment = VerticalAlignment.Bottom;
+            newstackpanel.Children.Add(newtextblock);
+            main_grid.Children.Add(newstackpanel);
+            main_grid.RegisterName("rollstackpanel", newstackpanel);
+            newtextblock.UpdateLayout();
+            ThicknessAnimation txt_margin_animation = new ThicknessAnimation();
+            txt_margin_animation.From = new Thickness(SystemParameters.PrimaryScreenWidth, 0, 0, 0);
+            txt_margin_animation.To = new Thickness(-newtextblock.ActualWidth, 0, 0, 0);
+            txt_margin_animation.Duration = TimeSpan.FromSeconds(20);
+            txt_margin_animation.RepeatBehavior = RepeatBehavior.Forever;
+            newtextblock.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
+
+
+
+
+
+
+
             var default_background = from c in publicDataSet.background_pic where c._default == "1" select c;
             foreach (var t in default_background)
             {
@@ -87,6 +222,11 @@ namespace fcb_public
             main_canvas.Background = new SolidColorBrush(Color.FromArgb(20, 255, 255, 255));
 
 
+
+
+
+
+        
         }
 
         private void main_grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -142,7 +282,7 @@ namespace fcb_public
                     if (e.GetPosition(main_grid).X > newweather.Margin.Left && e.GetPosition(main_grid).X < newweather.Margin.Left + newweather.Width && e.GetPosition(main_grid).Y > newweather.Margin.Top && e.GetPosition(main_grid).Y < newweather.Margin.Top + 200)
                     {
                         ctrl_name = newweather.Name;
-                        process_type = "move";
+                        process_type = "move1";
                         old_margin = newweather.Margin;
                         //main_grid.Cursor = Cursors.Hand;
                     }
@@ -240,7 +380,7 @@ namespace fcb_public
                     //newshow.Margin = new Thickness(old_margin.Left - (old_margin.Left - e.GetPosition(main_grid).X), old_margin.Top, 0, 0);
                 }
                 sub_showweather newweather = main_grid.FindName(ctrl_name) as sub_showweather;
-                if (newweather != null && process_type == "move")
+                if (newweather != null && process_type == "move1")
                 {
                     newweather.Margin = new Thickness(old_margin.Left + e.GetPosition(main_grid).X - old_point.X, old_margin.Top + e.GetPosition(main_grid).Y - old_point.Y, 0, 0);
                 }
@@ -303,7 +443,6 @@ namespace fcb_public
             process_type = "";
             can_moves = false;
 
-           
         }
 
         private void element_Click(object sender, RoutedEventArgs e)
@@ -318,6 +457,7 @@ namespace fcb_public
             subwindow_content.Children.Add(newelement);
             Panel.SetZIndex(subwindow, 1);
             Panel.SetZIndex(submainwindow, 3000);
+            PublicClass.change_name = "element";
         }
 
         private void main_canvas_MouseLeave(object sender, MouseEventArgs e)
@@ -393,6 +533,47 @@ namespace fcb_public
 
         private void mode_show()
         {
+
+            if (PublicClass.change_name == "element")
+            {
+                try
+                {
+                    sub_new_element newelement = MainWindow.FindChild<sub_new_element>(Application.Current.MainWindow, "newelement");
+                    newelement.savechanges();
+                }
+                catch { }
+
+            }
+            else if (PublicClass.change_name == "newweather")
+            {
+                try
+                {
+                    sub_weather newweather = MainWindow.FindChild<sub_weather>(Application.Current.MainWindow, "newweather");
+                    newweather.savechanges();
+                }
+                catch { }
+            }
+            else if (PublicClass.change_name == "newelementset")
+            {
+                try
+                {
+                    sub_new_elementset newelementset = MainWindow.FindChild<sub_new_elementset>(Application.Current.MainWindow, "newelementset");
+                    newelementset.savechanges();
+                }
+                catch { }
+            }
+            else if (PublicClass.change_name == "newroll") ;
+            {
+                try
+                {
+                    sub_roll newroll = MainWindow.FindChild<sub_roll>(Application.Current.MainWindow, "newroll");
+                    newroll.savechanges();
+                }
+                catch { }
+            }
+            PublicClass.change_name = "";
+
+
             if (PublicClass.show == "showelementset")
             {
                 fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
@@ -440,11 +621,11 @@ namespace fcb_public
                 //{
                 foreach (var s in select)
                 {
-                    
 
-                        newtextblock.Text +="      "+ s.txt;
 
-                    
+                    newtextblock.Text += "      " + s.txt;
+
+
                 }
                 //    step++;
                 //}
@@ -455,7 +636,7 @@ namespace fcb_public
 
                 newtextblock.FontSize = 30;
                 newtextblock.Foreground = Brushes.White;
-               // newtextblock.Background = Brushes.AliceBlue;
+                // newtextblock.Background = Brushes.AliceBlue;
                 newtextblock.TextWrapping = TextWrapping.NoWrap;
                 StackPanel delpanel = main_grid.FindName("rollstackpanel") as StackPanel;
                 if (delpanel != null)
@@ -468,10 +649,10 @@ namespace fcb_public
                 newstackpanel.Name = "rollstackpanel";
                 newstackpanel.Width = main_grid.ActualWidth;
                 newstackpanel.Height = 36;
-                newstackpanel.Margin = new Thickness(0, SystemParameters.PrimaryScreenHeight-36, 0, 0);
-               // newstackpanel.Background = Brushes.Green;
-               // newstackpanel.Background=new
-               // newstackpanel.VerticalAlignment = VerticalAlignment.Bottom;
+                newstackpanel.Margin = new Thickness(0, SystemParameters.PrimaryScreenHeight - 36, 0, 0);
+                // newstackpanel.Background = Brushes.Green;
+                // newstackpanel.Background=new
+                // newstackpanel.VerticalAlignment = VerticalAlignment.Bottom;
                 newstackpanel.Children.Add(newtextblock);
                 main_grid.Children.Add(newstackpanel);
                 main_grid.RegisterName("rollstackpanel", newstackpanel);
@@ -483,7 +664,7 @@ namespace fcb_public
                 txt_margin_animation.RepeatBehavior = RepeatBehavior.Forever;
                 double t = newtextblock.ActualHeight;
                 newtextblock.BeginAnimation(TextBlock.MarginProperty, txt_margin_animation);
-               
+
 
 
 
@@ -497,34 +678,34 @@ namespace fcb_public
                 var show_weatherconut = from c in publicDataSet.weather where c.status == true select c;
                 foreach (var t in show_weatherconut)
                 {
-                   
-                        sub_showweather del_show = main_grid.FindName("w" + t.in_name) as sub_showweather;
-                        if (del_show != null)
-                        {
-                            main_grid.Children.Remove(del_show);
-                            main_grid.UnregisterName("w" + t.in_name);
-                        }
 
-                        sub_showweather newshow = new sub_showweather();
-                        newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
-                        newshow.Name = "w" + t.in_name;
-                        newshow.city_name = t.in_name;
-                        newshow.gmt = t.gmt;
-                        newshow.Width = 200;
-                        newshow.Height = 184;
-                        //newshow.Background = Brushes.White;
-                        //newshow.Opacity = 0.2;
-                        // newshow.elset_id = int.Parse(t.in_name);
-                        main_grid.Children.Add(newshow);
-                        //Panel.SetZIndex(submainwindow1, 3000);
-                        main_grid.RegisterName("w" + t.in_name, newshow);
+                    sub_showweather del_show = main_grid.FindName("w" + t.in_name) as sub_showweather;
+                    if (del_show != null)
+                    {
+                        main_grid.Children.Remove(del_show);
+                        main_grid.UnregisterName("w" + t.in_name);
+                    }
+
+                    sub_showweather newshow = new sub_showweather();
+                    newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+                    newshow.Name = "w" + t.in_name;
+                    newshow.city_name = t.in_name;
+                    newshow.gmt = t.gmt;
+                    newshow.Width = 200;
+                    newshow.Height = 184;
+                    //newshow.Background = Brushes.White;
+                    //newshow.Opacity = 0.2;
+                    // newshow.elset_id = int.Parse(t.in_name);
+                    main_grid.Children.Add(newshow);
+                    //Panel.SetZIndex(submainwindow1, 3000);
+                    main_grid.RegisterName("w" + t.in_name, newshow);
 
 
 
-                    
+
                 }
             }
-            
+
         }
 
      
@@ -539,6 +720,7 @@ namespace fcb_public
             subwindow.Opacity = 0.9;
             subwindow_content.Children.Add(newelementset);
             Panel.SetZIndex(submainwindow, 3000);
+            PublicClass.change_name = "newelementset";
 
 
 
@@ -567,6 +749,7 @@ namespace fcb_public
             subwindow.Opacity = 0.9;
             subwindow_content.Children.Add(newroll);
             Panel.SetZIndex(submainwindow, 3000);
+            PublicClass.change_name = "newroll";
            
         }
 
@@ -775,14 +958,51 @@ namespace fcb_public
 
             subwindow_content.Children.Add(newweather);
             Panel.SetZIndex(submainwindow, 3000);
+            PublicClass.change_name = "newweather";
 
         }
 
-   
 
 
-    
 
+
+        public static T FindChild<T>(DependencyObject parent, string childName)//查找控件
+where T : DependencyObject
+        {
+            if (parent == null) return null;
+            T foundChild = null;
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                // 如果子控件不是需查找的控件类型 
+                T childType = child as T;
+                if (childType == null)
+                {
+                    // 在下一级控件中递归查找 
+                    foundChild = FindChild<T>(child, childName);
+                    // 找到控件就可以中断递归操作  
+                    if (foundChild != null) break;
+                }
+                else if (!string.IsNullOrEmpty(childName))
+                {
+                    var frameworkElement = child as FrameworkElement;
+                    // 如果控件名称符合参数条件 
+                    if (frameworkElement != null && frameworkElement.Name == childName)
+                    {
+                        foundChild = (T)child;
+                        break;
+                    }
+                }
+                else
+                {
+                    // 查找到了控件 
+                    foundChild = (T)child;
+                    break;
+                }
+            }
+            return foundChild;
+        }
 
 
 

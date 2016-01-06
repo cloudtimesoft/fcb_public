@@ -68,6 +68,11 @@ namespace fcb_public
                 titleTextBox.Text = "";
                 typeComboBox.SelectedIndex = 0;
                 //elementViewSource.View.MoveCurrentToLast();
+                publicDataSetTableAdapters.Update(publicDataSet.element);
+                publicDataSet.element.AcceptChanges();
+                publicDataSetTableAdapters.Fill(publicDataSet.element);
+                elementViewSource.View.MoveCurrentToLast();
+                elementViewSource.View.MoveCurrentToNext();
             }
             else
             {
@@ -81,15 +86,15 @@ namespace fcb_public
                 }
                 if (typeComboBox.Text == "文档")
                 {
-                    //MemoryStream stream = new MemoryStream();
-                    //TextRange range = new TextRange(richTextBox1.Document.ContentStart, richTextBox1.Document.ContentEnd);
-                    //if (range.Text != "")
-                    //{
-                    //    range.Save(stream, DataFormats.Xaml);
-                    //    stream.Position = 0;
-                    //    StreamReader r = new StreamReader(stream);
-                    //    contentTextBox.Text = r.ReadToEnd();
-                    //}
+                    MemoryStream stream = new MemoryStream();
+                    TextRange range = new TextRange(richTextBox1.Document.ContentStart, richTextBox1.Document.ContentEnd);
+                    if (range.Text != "")
+                    {
+                        range.Save(stream, DataFormats.Xaml);
+                        stream.Position = 0;
+                        StreamReader r = new StreamReader(stream);
+                        contentTextBox.Text = r.ReadToEnd();
+                    }
 
                     publicDataSet.element.AddelementRow(titleTextBox.Text, contentTextBox.Text, typeComboBox.Text, DateTime.Parse(start_timeDatePicker.Text), DateTime.Parse(end_timeDatePicker.Text), (bool)statusCheckBox.IsChecked, int.Parse(show_timeTextBox.Text));
                 }
@@ -98,17 +103,14 @@ namespace fcb_public
                     TextRange TRB = new TextRange(richTextBox1.Document.ContentStart, richTextBox1.Document.ContentEnd);
                     publicDataSet.element.AddelementRow(titleTextBox.Text, TRB.Text, typeComboBox.Text, DateTime.Parse(start_timeDatePicker.Text), DateTime.Parse(end_timeDatePicker.Text), (bool)statusCheckBox.IsChecked, int.Parse(show_timeTextBox.Text));
                 }
-               
-               
+
                 publicDataSetTableAdapters.Update(publicDataSet.element);
                 publicDataSet.element.AcceptChanges();
-                publicDataSetTableAdapters.Fill(publicDataSet.element);
-                elementViewSource.View.MoveCurrentToLast();
-                elementViewSource.View.MoveCurrentToNext();
+
             }
             System.Windows.Documents.FlowDocument doc = richTextBox1.Document;
             doc.Blocks.Clear();
-
+            //contentTextBox.Clear();
             //publicDataSetTableAdapters.Fill(publicDataSet.element);
             //System.Windows.Data.CollectionViewSource elementViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("elementViewSource"));
             //elementDataGrid.CanUserAddRows = false;
@@ -208,40 +210,41 @@ namespace fcb_public
 
         private void elementDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-
-            id_index = int.Parse(iDTextBox.Text);
-
-            fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
-            fcb_public.publicDataSetTableAdapters.elementTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.elementTableAdapter();
-
-            publicDataSetTableAdapters.Fill(publicDataSet.element);
-
-
-            contentTextBox.Text = publicDataSet.element.FindByID(id_index).content;
-
-            TextRange documentTextRange = new TextRange(richTextBox1.Document.ContentStart, richTextBox1.Document.ContentEnd);
-            MemoryStream stream = new MemoryStream();
-            StreamWriter sw = new StreamWriter(stream);
-            sw.Write(contentTextBox.Text);
-            sw.Flush();
-            stream.Seek(0, SeekOrigin.Begin);
-            if (contentTextBox.Text != "")
+            if (iDTextBox.Text != "")
             {
-                documentTextRange.Load(stream, DataFormats.Xaml);
-            }
-            else
-            {
-                richTextBox1.Document.Blocks.Clear();
-            }
-            titleTextBox.Text = publicDataSet.element.FindByID(id_index).title;
-            typeComboBox.Text = publicDataSet.element.FindByID(id_index).type;
-            show_timeTextBox.Text = publicDataSet.element.FindByID(id_index).show_time.ToString();
-            statusCheckBox.IsChecked = publicDataSet.element.FindByID(id_index).status;
-            start_timeDatePicker.SelectedDate = publicDataSet.element.FindByID(id_index).start_time;
-            end_timeDatePicker.SelectedDate = publicDataSet.element.FindByID(id_index).end_time;
+                richTextBox1.TextChanged-=new TextChangedEventHandler(richTextBox1_TextChanged);
+                //id_index = int.Parse(iDTextBox.Text);
 
+                //fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+                //fcb_public.publicDataSetTableAdapters.elementTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.elementTableAdapter();
 
+                //publicDataSetTableAdapters.Fill(publicDataSet.element);
+
+                //contentTextBox.Text = publicDataSet.element.FindByID(id_index).content;
+
+                TextRange documentTextRange = new TextRange(richTextBox1.Document.ContentStart, richTextBox1.Document.ContentEnd);
+                MemoryStream stream = new MemoryStream();
+                StreamWriter sw = new StreamWriter(stream);
+                sw.Write(contentTextBox.Text);
+                sw.Flush();
+                stream.Seek(0, SeekOrigin.Begin);
+                if (contentTextBox.Text != "")
+                {
+                    documentTextRange.Load(stream, DataFormats.Xaml);
+                }
+                else
+                {
+                    richTextBox1.Document.Blocks.Clear();
+                }
+                //titleTextBox.Text = publicDataSet.element.FindByID(id_index).title;
+                //typeComboBox.Text = publicDataSet.element.FindByID(id_index).type;
+                //show_timeTextBox.Text = publicDataSet.element.FindByID(id_index).show_time.ToString();
+                //statusCheckBox.IsChecked = publicDataSet.element.FindByID(id_index).status;
+                //start_timeDatePicker.SelectedDate = publicDataSet.element.FindByID(id_index).start_time;
+                //end_timeDatePicker.SelectedDate = publicDataSet.element.FindByID(id_index).end_time;
+                richTextBox1.TextChanged += new TextChangedEventHandler(richTextBox1_TextChanged);
+                                      
+            }
 
            
         }
@@ -321,15 +324,17 @@ namespace fcb_public
 
         private void contentTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //id_index = int.Parse(iDTextBox.Text);
+            if (iDTextBox.Text != "")
+            {
+                id_index = int.Parse(iDTextBox.Text);
 
-            //fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
-            //fcb_public.publicDataSetTableAdapters.elementTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.elementTableAdapter();
+                fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+                fcb_public.publicDataSetTableAdapters.elementTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.elementTableAdapter();
 
-            //publicDataSetTableAdapters.Fill(publicDataSet.element);
+                publicDataSetTableAdapters.Fill(publicDataSet.element);
 
 
-            //contentTextBox.Text = publicDataSet.element.FindByID(id_index).content;
+                contentTextBox.Text = publicDataSet.element.FindByID(id_index).content;
 
                 TextRange documentTextRange = new TextRange(richTextBox1.Document.ContentStart, richTextBox1.Document.ContentEnd);
                 MemoryStream stream = new MemoryStream();
@@ -345,14 +350,14 @@ namespace fcb_public
                 {
                     richTextBox1.Document.Blocks.Clear();
                 }
-            
-            //titleTextBox.Text = publicDataSet.element.FindByID(id_index).title;
-            //typeComboBox.Text = publicDataSet.element.FindByID(id_index).type;
-            //show_timeTextBox.Text = publicDataSet.element.FindByID(id_index).show_time.ToString();
-            //statusCheckBox.IsChecked = publicDataSet.element.FindByID(id_index).status;
-            //start_timeDatePicker.SelectedDate = publicDataSet.element.FindByID(id_index).start_time;
-            //end_timeDatePicker.SelectedDate = publicDataSet.element.FindByID(id_index).end_time;
 
+                titleTextBox.Text = publicDataSet.element.FindByID(id_index).title;
+                typeComboBox.Text = publicDataSet.element.FindByID(id_index).type;
+                show_timeTextBox.Text = publicDataSet.element.FindByID(id_index).show_time.ToString();
+                statusCheckBox.IsChecked = publicDataSet.element.FindByID(id_index).status;
+                start_timeDatePicker.SelectedDate = publicDataSet.element.FindByID(id_index).start_time;
+                end_timeDatePicker.SelectedDate = publicDataSet.element.FindByID(id_index).end_time;
+            }
         }
 
         private void titleTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -372,6 +377,28 @@ namespace fcb_public
             //    richTextBox1.Document.Blocks.Clear();
             //}
         }
+
+        public void savechanges()
+        {
+
+
+            fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+            fcb_public.publicDataSetTableAdapters.elementTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.elementTableAdapter();
+            System.Windows.Data.CollectionViewSource elementViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("elementViewSource"));
+
+            //publicDataSetTableAdapters.Fill(publicDataSet.element);
+            elementViewSource.View.MoveCurrentToNext();
+            publicDataSetTableAdapters.Update(publicDataSet.element);
+           // publicDataSet.element.AcceptChanges();
+
+            
+        }
+
+
+
+      
+
+     
 
    
     }

@@ -225,6 +225,38 @@ namespace fcb_public
 
         }
 
+        private void del_weather_Click(object sender, RoutedEventArgs e)
+        {
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.weatherTableAdapter publicDataSetInitializeTableAdapter = new fcb_public.publicDataSetTableAdapters.weatherTableAdapter();
+           // publicDataSetInitializeTableAdapter.Fill(publicDataSet.weather);
+            if (iDTextBox.Text != "")
+            {
+                int index = int.Parse(iDTextBox.Text);
+                publicDataSet.weather.FindByID(index).Delete();
+                publicDataSetInitializeTableAdapter.Update(publicDataSet.weather);
+                publicDataSet.weather.AcceptChanges();
+                publicDataSetInitializeTableAdapter.Fill(publicDataSet.weather);
+            }
+        }
+
+
+        public void savechanges()
+        {
+            fcb_public.publicDataSet publicDataSet = ((fcb_public.publicDataSet)(this.FindResource("publicDataSet")));
+            fcb_public.publicDataSetTableAdapters.weatherTableAdapter publicDataSetweatherTableAdapter = new fcb_public.publicDataSetTableAdapters.weatherTableAdapter();
+
+
+            System.Windows.Data.CollectionViewSource weatherViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("weatherViewSource"));
+
+            //publicDataSetTableAdapters.Fill(publicDataSet.element);
+            weatherViewSource.View.MoveCurrentToNext();
+            publicDataSetweatherTableAdapter.Update(publicDataSet.weather);
+            // publicDataSet.element.AcceptChanges();
+
+
+        }
+
 
 
       

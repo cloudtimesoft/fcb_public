@@ -12,7 +12,7 @@
     <Grid x:Name="element_grid">
         <GroupBox Header="元素" Height="240" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="476">
             <Grid Height="200" DataContext="{StaticResource elementViewSource}">
-                <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200"  HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="5,0,0,0"  Name="elementDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="450" >
+                <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200"  HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="5,0,0,0"  Name="elementDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="450" SelectionChanged="elementDataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" Visibility="Hidden" />
                         <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Path=title}" Header="标题" Width="200" />
@@ -20,20 +20,7 @@
                         <DataGridTextColumn x:Name="typeColumn" Binding="{Binding Path=type}" Header="类型" Width="SizeToHeader" />
                         <DataGridTextColumn x:Name="start_timeColumn" Binding="{Binding Path=start_time}" Header="开始时间" Width="SizeToHeader" />
                         <DataGridTextColumn x:Name="end_timeColumn" Binding="{Binding Path=end_time}" Header="结束时间" Width="SizeToHeader" />
-                        <!--<DataGridTemplateColumn x:Name="start_timeColumn" Header="开始时间" Width="SizeToHeader">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding Path=start_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>-->
-                        <!--<DataGridTemplateColumn x:Name="end_timeColumn" Header="结束时间" Width="SizeToHeader">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding Path=end_time, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>-->
+                       
                         <DataGridCheckBoxColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="状态" Width="SizeToHeader" />
                     </DataGrid.Columns>
                 </DataGrid>
@@ -118,6 +105,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="104*" />
                     </Grid.RowDefinitions>
 
                     <ToolBar Height="30" Margin="0,0,3,0" Name="toolBar1" Grid.Column="2">
@@ -148,8 +136,8 @@
                     </ToolBar>
 
                     <RichTextBox Background="Transparent" AcceptsTab="True" Margin="6,6,0,19" Name="richTextBox1" HorizontalAlignment="Left" Width="440" Grid.Column="2" TextChanged="richTextBox1_TextChanged" Grid.Row="1" />
+                    <TextBox Height="27" HorizontalAlignment="Left" Margin="44,71,0,6" Name="contentTextBox" Text="{Binding Path=content, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="122" MinLines="5" AcceptsReturn="True" TextWrapping="Wrap" Visibility="Visible" Grid.Column="2" Grid.Row="2" />
                 </Grid>
-                <TextBox Height="14" HorizontalAlignment="Left" Margin="9,287,0,6" Name="contentTextBox" Text="{Binding Path=content, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="50" MinLines="5" AcceptsReturn="True" TextWrapping="Wrap" Visibility="Visible"  />
                 <Grid DataContext="{StaticResource elementViewSource}" HorizontalAlignment="Left" Margin="63,318,0,0" Name="grid8" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -159,7 +147,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="17,0,0,9" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" Visibility="Hidden" Grid.Column="1" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="17,0,0,9" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"  Grid.Column="1" />
+                    
                 </Grid>
             </Grid>
         </GroupBox>

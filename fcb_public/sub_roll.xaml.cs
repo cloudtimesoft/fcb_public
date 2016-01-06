@@ -89,6 +89,23 @@ namespace fcb_public
             }
         }
 
+
+        public void savechanges()
+        {
+
+            fcb_public.publicDataSet publicDataSet = (fcb_public.publicDataSet)(this.FindResource("publicDataSet"));
+            fcb_public.publicDataSetTableAdapters.rollTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.rollTableAdapter();
+          
+            System.Windows.Data.CollectionViewSource initializeViewSource = (System.Windows.Data.CollectionViewSource)(this.FindResource("rollViewSource"));
+
+            //publicDataSetTableAdapters.Fill(publicDataSet.element);
+            initializeViewSource.View.MoveCurrentToNext();
+            publicDataSetTableAdapters.Update(publicDataSet.roll);
+            // publicDataSet.element.AcceptChanges();
+
+
+        }
+
         
 
 

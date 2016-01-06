@@ -12,7 +12,7 @@
     <Grid DataContext="{StaticResource weatherViewSource}">
         
         <Button x:Name="show_weather" Margin="262,0,0,31" Width="70" Height="25" Click="show_weather_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom">添加</Button>
-        <Button x:Name="del_weather" Margin="0,294,33,31" Width="60" Height="25" Click="show_weather_Click" HorizontalAlignment="Right">删除</Button>
+        <Button x:Name="del_weather" Margin="0,294,33,31" Width="60" Height="25"  HorizontalAlignment="Right" Click="del_weather_Click">删除</Button>
         <Grid HorizontalAlignment="Left" Margin="348,250,0,0" Name="grid1" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

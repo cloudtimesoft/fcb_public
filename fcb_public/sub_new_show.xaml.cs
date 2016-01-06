@@ -103,7 +103,7 @@ namespace fcb_public
 
             if (element_count > 0)
             {
-                var show_el = from el in publicDataSet.element join el_set in publicDataSet.el_elset on el.ID equals el_set.element_ID where el.status == true where el_set.element_set_ID == elset_id select el;
+                var show_el = from el in publicDataSet.element join el_set in publicDataSet.el_elset on el.ID equals el_set.element_ID where el.status == true && el.start_time<=DateTime.Now && el.end_time>=DateTime.Now  where el_set.element_set_ID == elset_id select el;
                 // int temp_step = 0;
                 foreach (var t in show_el)
                 {

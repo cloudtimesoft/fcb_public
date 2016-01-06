@@ -20,9 +20,9 @@
         </StackPanel>
         <!--<TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,1,0,23" Name="txtDate" Text="TextBlock" Foreground="White" Width="102" />-->
         <TextBlock Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="0,17,0,0" Name="txt_address" Text="TextBlock" VerticalAlignment="Top" Width="102" TextAlignment="Center" />
-        <TextBlock Grid.Row="1" Height="28" HorizontalAlignment="Right" Margin="0,12,0,0" Name="txtWindAndTemperature" TextAlignment="Center" Text="TextBlock" VerticalAlignment="Top" Width="92" />
-        <TextBlock Grid.Row="1" Height="28" HorizontalAlignment="Right" Margin="0,38,0,0" Name="Temperature" TextAlignment="Center" Text="TextBlock" VerticalAlignment="Top" Width="92" FontSize="15" />
-        <TextBlock Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" Margin="10,0,0,0" Name="weather_zhiliang" Text="TextBlock" VerticalAlignment="Top"  Width="86" TextWrapping="Wrap" FontSize="14" />
-        <TextBlock Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" Margin="10,29,0,0" Name="city_time" Text="" VerticalAlignment="Top"  Width="86" TextWrapping="Wrap" FontSize="26" TextAlignment="Center" />
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Height="28" HorizontalAlignment="Left" Margin="0,42,4,0" Name="txtWindAndTemperature" TextAlignment="Center" Text="TextBlock" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="1" Height="28" HorizontalAlignment="Right" Margin="0,7,4,0" Name="Temperature" TextAlignment="Center" Text="TextBlock" VerticalAlignment="Top" Width="92" FontSize="15" />
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" Name="weather_zhiliang" Text="TextBlock" VerticalAlignment="Top"  Width="86" TextWrapping="Wrap" FontSize="14" />
+        <TextBlock Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" Margin="10,6,0,0" Name="city_time" Text="" VerticalAlignment="Top"  Width="86" TextWrapping="Wrap" FontSize="26" TextAlignment="Center" />
     </Grid>
 </UserControl>

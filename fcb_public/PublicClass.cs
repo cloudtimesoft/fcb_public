@@ -16,6 +16,9 @@ namespace fcb_public
         public static string show;
         public static double show_hight;
         public static string city_name;
+        public static string change_name;
     }
+
+    
 
 }

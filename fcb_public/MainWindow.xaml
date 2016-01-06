@@ -9,9 +9,12 @@
         <CollectionViewSource x:Key="element_setViewSource" Source="{Binding Path=element_set, Source={StaticResource publicDataSet}}" />
         <CollectionViewSource x:Key="el_elsetViewSource" Source="{Binding Path=el_elset, Source={StaticResource publicDataSet}}" />
         <CollectionViewSource x:Key="background_picViewSource" Source="{Binding Path=background_pic, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="elementViewSource" Source="{Binding Path=element, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="weatherViewSource" Source="{Binding Path=weather, Source={StaticResource publicDataSet}}" />
+        <CollectionViewSource x:Key="rollViewSource" Source="{Binding Path=roll, Source={StaticResource publicDataSet}}" />
     </Window.Resources>
     <Grid x:Name="big_grid">
-    <Canvas x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove" Background="AliceBlue" AllowDrop="True" Drop="main_grid_Drop" PreviewMouseDown="main_grid_PreviewMouseDown" MouseUp="main_grid_MouseUp" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Canvas x:Name="main_grid" PreviewMouseMove="main_grid_PreviewMouseMove" Background="AliceBlue" AllowDrop="True" Drop="main_grid_Drop" PreviewMouseDown="main_grid_PreviewMouseDown" MouseUp="main_grid_MouseUp" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" DataContext="{StaticResource weatherViewSource}">
         
         <!--2b398b9e-26c8-4905-9799-0571a05d4993.gif-->
         <Canvas  x:Name="main_canvas"  Height="60"   VerticalAlignment="Top" Margin="0,-60,0,0" MouseLeave="main_canvas_MouseLeave">
@@ -72,6 +75,5 @@
 
             <TextBlock x:Name="t1"></TextBlock>
         </Canvas>
-     
     </Grid>
 </Window>
