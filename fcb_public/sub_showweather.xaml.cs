@@ -36,6 +36,7 @@ namespace fcb_public
         public string city_name;
         public float gmt;
         DateTime time;
+        public string status;
 
 
 
@@ -64,7 +65,7 @@ namespace fcb_public
             //    // string city = txt_address.Text;
             //    s = wx.getWeatherbyCityName(city);
 
-            txt_address.Text = city_name;
+            //txt_address.Text = city_name;
             //    string temp = s[13];
             //    txtDate.Text = temp.Substring(6);
             //    string a = temp.Substring(6);
@@ -118,11 +119,17 @@ namespace fcb_public
 
 
             //weather_zhiliang.Text = System.DateTime.Now.ToShortDateString() +"  "+ System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
-                    ss = DateTime.Now.AddHours(-8);
-                    time = ss.AddHours(datas);
-                    weather_zhiliang.Text = time.ToShortDateString();
-                    city_time.Text = time.ToShortTimeString();
-
+                    if (status == "ok")
+                    {
+                        ss = DateTime.Now.AddHours(-8);
+                        time = ss.AddHours(datas);
+                        weather_zhiliang.Text = time.ToShortDateString();
+                        city_time.Text = time.ToShortTimeString();
+                    }
+                    else
+                    {
+ 
+                    }
 
                 }));
 
@@ -170,55 +177,71 @@ namespace fcb_public
             //JArray json4 = (JArray)JsonConvert.DeserializeObject(json3);
 
 
-
             //JObject basic = (JObject)json2[0]["update"];
             JObject basic = (JObject)json2[0]["basic"];
-            JObject update = (JObject)basic["update"];
-            DateTime loc = DateTime.Parse(update["loc"].ToString());
-            DateTime utc =DateTime.Parse( update["utc"].ToString());
-             datas = (loc - utc).Hours;
-             ss = DateTime.Now.AddHours(-8);
-            time = ss.AddHours(datas);
-            JArray daily_forecast = (JArray)json2[0]["daily_forecast"];
-          
-            JObject cond = (JObject)daily_forecast[0]["cond"];
-            string code_d = cond["code_d"].ToString();
-            string code_n = cond["code_n"].ToString();
-            string txt_d = cond["txt_d"].ToString();
-            string txt_n = cond["txt_n"].ToString();
-            JObject tmp = (JObject)daily_forecast[0]["tmp"];
-            string max = tmp["max"].ToString() + " ℃";
-            string min = tmp["min"].ToString() + " ℃";
-            if (max == min)
+             status = json2[0]["status"].ToString();
+            if (status == "ok")
             {
-                Temperature.Text = max;
+                string cnty = basic["cnty"].ToString();
+                txt_address.Text = basic["city"].ToString();
+                JObject update = (JObject)basic["update"];
+                DateTime loc = DateTime.Parse(update["loc"].ToString());
+                DateTime utc = DateTime.Parse(update["utc"].ToString());
+                datas = (loc - utc).Hours;
+                ss = DateTime.Now.AddHours(-8);
+                time = ss.AddHours(datas);
+                JArray daily_forecast = (JArray)json2[0]["daily_forecast"];
+
+                JObject cond = (JObject)daily_forecast[0]["cond"];
+                string code_d = cond["code_d"].ToString();
+                string code_n = cond["code_n"].ToString();
+                string txt_d = cond["txt_d"].ToString();
+                string txt_n = cond["txt_n"].ToString();
+                JObject tmp = (JObject)daily_forecast[0]["tmp"];
+                string max = tmp["max"].ToString() + " ℃";
+                string min = tmp["min"].ToString() + " ℃";
+                if (max == min)
+                {
+                    Temperature.Text = max;
+
+                }
+                else
+                {
+                    Temperature.Text = min + "~" + max;
+                }
+
+                if (txt_d == txt_n)
+                {
+                    txtWindAndTemperature.Text = txt_d;
+                }
+                else
+                {
+                    if (cnty == "中国")
+                    {
+                        txtWindAndTemperature.Text = txt_d + "转" + txt_n;
+                    }
+                    else
+                    {
+                        txtWindAndTemperature.Text = txt_d + " ~ " + txt_n;
+                    }
+                }
+                if (code_d == code_n)
+                {
+                    icon2.Visibility = Visibility.Hidden;
+                    icon1.Source = new BitmapImage(new Uri(@"image\weather\" + code_d + ".png", UriKind.Relative));
+                }
+                else
+                {
+                    icon1.Source = new BitmapImage(new Uri(@"image\weather\" + code_d + ".png", UriKind.Relative));
+                    icon2.Source = new BitmapImage(new Uri(@"image\weather\" + code_n + ".png", UriKind.Relative));
+                }
 
             }
             else
             {
-                Temperature.Text = min + "~" + max;
-            }
+                MessageBox.Show("请输入正确城市名称","错误提示");
 
-            if (txt_d == txt_n)
-            {
-                txtWindAndTemperature.Text = txt_d;
             }
-            else
-            {
-                txtWindAndTemperature.Text = txt_d + "转" + txt_n;
-            }
-            if (code_d == code_n)
-            {
-                icon2.Visibility = Visibility.Hidden;
-                icon1.Source = new BitmapImage(new Uri(@"image\weather\" + code_d + ".png", UriKind.Relative));
-            }
-            else
-            {
-                icon1.Source = new BitmapImage(new Uri(@"image\weather\" + code_d+".png", UriKind.Relative));
-                icon2.Source = new BitmapImage(new Uri(@"image\weather\" + code_n+".png", UriKind.Relative));
-            }
-
-
            // string txt = cond["txt"].ToString();
             //string tmp = now["max"].ToString();
              //var t =json2["HeWeather data service3.0"]["basic"]["city"];

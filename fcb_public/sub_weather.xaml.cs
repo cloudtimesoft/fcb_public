@@ -237,6 +237,7 @@ namespace fcb_public
                 publicDataSetInitializeTableAdapter.Update(publicDataSet.weather);
                 publicDataSet.weather.AcceptChanges();
                 publicDataSetInitializeTableAdapter.Fill(publicDataSet.weather);
+                
             }
         }
 

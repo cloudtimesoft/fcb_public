@@ -20,12 +20,12 @@
         <Canvas  x:Name="main_canvas"  Height="60"   VerticalAlignment="Top" Margin="0,-60,0,0" MouseLeave="main_canvas_MouseLeave">
             <Button x:Name="element" Width="30" Height="50" Margin="10,0,0,0" Click="element_Click">元素</Button>
             <Button x:Name="element_set" Width="50" Height="50" Margin="60,0,0,0" Click="element_set_Click">元素集</Button>
-            <Button x:Name="module" Width="30" Height="50" Margin="130,0,0,0" Click="module_Click">模块</Button>
-            <Button x:Name="Background_pic" Width="30" Height="50" Margin="180,0,0,0" Click="Background_pic_Click">背景</Button>
-            <Button x:Name="roll" Width="30" Height="50" Margin="230,0,0,0" Click="roll_Click" >滚动</Button>
-            <Button x:Name="show_window" Width="30" Height="50" Margin="280,0,0,0" PreviewMouseLeftButtonDown="show_window_PreviewMouseLeftButtonDown">展示</Button>
-            <Button x:Name="test_show" Content="test_show" Click="test_show_Click" Canvas.Left="335" Canvas.Top="28"></Button>
-                <Button x:Name="weather" Width="30" Height="50" Margin="400,0,0,0" Click="weather_Click">天气</Button>
+            <!--<Button x:Name="module" Width="30" Height="50" Margin="130,0,0,0" Click="module_Click">模块</Button>-->
+            <Button x:Name="Background_pic" Width="30" Height="50" Margin="130,0,0,0" Click="Background_pic_Click">背景</Button>
+            <Button x:Name="roll" Width="30" Height="50" Margin="180,0,0,0" Click="roll_Click" >滚动</Button>
+            <!--<Button x:Name="show_window" Width="30" Height="50" Margin="280,0,0,0" PreviewMouseLeftButtonDown="show_window_PreviewMouseLeftButtonDown">展示</Button>-->
+            <!--<Button x:Name="test_show" Content="test_show" Click="test_show_Click" Canvas.Left="335" Canvas.Top="28"></Button>-->
+                <Button x:Name="weather" Width="30" Height="50" Margin="230,0,0,0" Click="weather_Click">天气</Button>
             </Canvas>
 
         <StackPanel x:Name="submainwindow" Panel.ZIndex="-1" Margin="0,0,0,0">

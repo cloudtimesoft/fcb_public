@@ -43,8 +43,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label Content="ID:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="0" Height="23" HorizontalAlignment="Left" Margin="3" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" Width="120" />
+            <TextBox Grid.Column="1" Grid.Row="0" Height="23" HorizontalAlignment="Left" Margin="3" Name="iDTextBox" Text="{Binding Path=ID, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  Visibility="Hidden" Width="120" />
         </Grid>
         <ComboBox Height="23" HorizontalAlignment="Left" Margin="253,253,0,0" Name="gmt" VerticalAlignment="Top" Width="92" SelectionChanged="gmt_SelectionChanged" Visibility="Hidden">
 

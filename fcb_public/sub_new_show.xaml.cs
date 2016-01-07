@@ -142,7 +142,6 @@ namespace fcb_public
                         stream.Seek(0, SeekOrigin.Begin);
                         documentTextRange.Load(stream, DataFormats.Xaml);
                         string xw = XamlWriter.Save(newRTB.Document);
-
                         StringReader sr = new StringReader(xw);
                         System.Xml.XmlReader xr = System.Xml.XmlReader.Create(sr);
                         FlowDocument doc = XamlReader.Load(xr) as FlowDocument;
@@ -350,6 +349,8 @@ namespace fcb_public
                 {
                     if (s.type == "文档")
                     {
+
+
                         //ThicknessAnimation txt_animation = new ThicknessAnimation();
                         FlowDocumentScrollViewer new_fld = content_stackpanel.FindName("newdoc" + s.ID) as FlowDocumentScrollViewer;
                         new_fld.Name = "newdoc" + s.ID;

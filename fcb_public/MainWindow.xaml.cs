@@ -83,27 +83,29 @@ namespace fcb_public
             System.Windows.Data.CollectionViewSource rollViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("rollViewSource")));
             rollViewSource.View.MoveCurrentToFirst();
 
-
-            foreach (var t in publicDataSet.Initialize)
+            if (publicDataSet.element_set.Count > 0)
             {
-                sub_new_show del_show = main_grid.FindName("s" + t.in_name) as sub_new_show;
-                if (del_show != null)
+                foreach (var t in publicDataSet.Initialize)
                 {
-                    main_grid.Children.Remove(del_show);
-                    main_grid.UnregisterName("s" + t.in_name);
+                    sub_new_show del_show = main_grid.FindName("s" + t.in_name) as sub_new_show;
+                    if (del_show != null)
+                    {
+                        main_grid.Children.Remove(del_show);
+                        main_grid.UnregisterName("s" + t.in_name);
+                    }
+
+                    sub_new_show newshow = new sub_new_show();
+                    newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
+                    newshow.Width = t.mar_weight;
+                    newshow.Height = t.mar_hight;
+                    newshow.Name = "s" + t.in_name;
+
+                    newshow.elset_id = int.Parse(t.in_name);
+                    main_grid.Children.Add(newshow);
+                    //Panel.SetZIndex(submainwindow1, 3000);
+                    main_grid.RegisterName("s" + t.in_name, newshow);
+
                 }
-
-                sub_new_show newshow = new sub_new_show();
-                newshow.Margin = new Thickness(t.mar_left, t.mar_top, 0, 0);
-                newshow.Width = t.mar_weight;
-                newshow.Height = t.mar_hight;
-                newshow.Name = "s" + t.in_name;
-
-                newshow.elset_id = int.Parse(t.in_name);
-                main_grid.Children.Add(newshow);
-                //Panel.SetZIndex(submainwindow1, 3000);
-                main_grid.RegisterName("s" + t.in_name, newshow);
-
             }
 
 
@@ -294,7 +296,7 @@ namespace fcb_public
                     if (e.GetPosition(big_grid).Y > newpanel.Margin.Top)
                     {
                         ctrl_name = newpanel.Name;
-                        process_type = "move";
+                        process_type = "moveroll";
                         old_margin = newpanel.Margin;
                         big_grid.Cursor = Cursors.Hand;
                     }
@@ -385,7 +387,7 @@ namespace fcb_public
                     newweather.Margin = new Thickness(old_margin.Left + e.GetPosition(main_grid).X - old_point.X, old_margin.Top + e.GetPosition(main_grid).Y - old_point.Y, 0, 0);
                 }
                 StackPanel newpanel = big_grid.FindName("rollstackpanel") as StackPanel;
-                if (newpanel != null && process_type == "move")
+                if (newpanel != null && process_type == "moveroll")
                 {
                     newpanel.Margin = new Thickness(old_margin.Left, old_margin.Top + e.GetPosition(big_grid).Y - old_point.Y, 0, 0);
                 }

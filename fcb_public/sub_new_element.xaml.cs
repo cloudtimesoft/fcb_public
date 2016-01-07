@@ -122,13 +122,17 @@ namespace fcb_public
             fcb_public.publicDataSetTableAdapters.elementTableAdapter publicDataSetTableAdapters = new publicDataSetTableAdapters.elementTableAdapter();
             if (publicDataSet.element.Count > 0)
             {
-                id_index = int.Parse(iDTextBox.Text);
-                publicDataSet.element.FindByID(id_index).Delete();
-                publicDataSetTableAdapters.Update(publicDataSet.element);
-                publicDataSet.element.AcceptChanges();
-                publicDataSetTableAdapters.Fill(publicDataSet.element);
-                System.Windows.Documents.FlowDocument doc = richTextBox1.Document;
-                doc.Blocks.Clear();
+                try
+                {
+                    id_index = int.Parse(iDTextBox.Text);
+                    publicDataSet.element.FindByID(id_index).Delete();
+                    publicDataSetTableAdapters.Update(publicDataSet.element);
+                    publicDataSet.element.AcceptChanges();
+                    publicDataSetTableAdapters.Fill(publicDataSet.element);
+                    System.Windows.Documents.FlowDocument doc = richTextBox1.Document;
+                    doc.Blocks.Clear();
+                }
+                catch { }
             }
         }
 

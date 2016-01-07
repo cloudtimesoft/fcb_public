@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="135" d:DesignWidth="200" Loaded="UserControl_Loaded">
-    <Grid x:Name="grid" Height="133" Width="200" Background="#50ffffff">
+             d:DesignHeight="135" d:DesignWidth="205" Loaded="UserControl_Loaded">
+    <Grid x:Name="grid" Height="133" Width="205" Background="#50ffffff">
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"></RowDefinition>
             <RowDefinition Height="63*"></RowDefinition>
@@ -19,10 +19,10 @@
         <Image   HorizontalAlignment="Center"  Name="icon2" Stretch="Fill" VerticalAlignment="Top"  Grid.RowSpan="2" />
         </StackPanel>
         <!--<TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,1,0,23" Name="txtDate" Text="TextBlock" Foreground="White" Width="102" />-->
-        <TextBlock Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="0,17,0,0" Name="txt_address" Text="TextBlock" VerticalAlignment="Top" Width="102" TextAlignment="Center" />
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Height="28" HorizontalAlignment="Left" Margin="0,42,4,0" Name="txtWindAndTemperature" TextAlignment="Center" Text="TextBlock" VerticalAlignment="Top" />
-        <TextBlock Grid.Row="1" Height="28" HorizontalAlignment="Right" Margin="0,7,4,0" Name="Temperature" TextAlignment="Center" Text="TextBlock" VerticalAlignment="Top" Width="92" FontSize="15" />
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" Name="weather_zhiliang" Text="TextBlock" VerticalAlignment="Top"  Width="86" TextWrapping="Wrap" FontSize="14" />
+        <TextBlock Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="0,17,0,0" Name="txt_address" Text="无" VerticalAlignment="Top" Width="102" TextAlignment="Center" />
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Height="28" HorizontalAlignment="Left" Margin="0,42,4,0" Name="txtWindAndTemperature" TextAlignment="Center" Text="无" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="1" Height="28" HorizontalAlignment="Right" Margin="0,7,4,0" Name="Temperature" TextAlignment="Center" Text="无" VerticalAlignment="Top" Width="92" FontSize="15" />
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,34,0,0" Name="weather_zhiliang" Text="无" VerticalAlignment="Top"  Width="86" TextWrapping="Wrap" FontSize="14" />
         <TextBlock Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" Margin="10,6,0,0" Name="city_time" Text="" VerticalAlignment="Top"  Width="86" TextWrapping="Wrap" FontSize="26" TextAlignment="Center" />
     </Grid>
 </UserControl>
